@@ -4,7 +4,7 @@ import org.oopvnu.management.DictionaryManagement;
 import org.oopvnu.entities.Word;
 
 public class DictionaryCommandline {
-    private DictionaryManagement dictionaryManagement;
+    private final DictionaryManagement dictionaryManagement;
 
     public DictionaryCommandline() {
         dictionaryManagement = new DictionaryManagement();

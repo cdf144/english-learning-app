@@ -6,9 +6,9 @@ import org.oopvnu.entities.Word;
 import java.util.List;
 import java.util.Scanner;
 public class DictionaryManagement {
-    private Dictionary dictionary;
+    private final Dictionary dictionary;
 
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     public DictionaryManagement() {
         dictionary = new Dictionary();

@@ -3,11 +3,10 @@ package org.oopvnu.entities;
 import org.oopvnu.management.WordComparator;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Dictionary {
-    private List<Word> wordList;
+    private final List<Word> wordList;
 
     public Dictionary() {
         wordList = new ArrayList<>();
@@ -22,7 +21,7 @@ public class Dictionary {
     }
 
     public List<Word> listWord() {
-        Collections.sort(wordList, new WordComparator());
+        wordList.sort(new WordComparator());
         return wordList;
     }
 }
