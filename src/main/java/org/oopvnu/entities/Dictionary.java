@@ -20,6 +20,10 @@ public class Dictionary {
         wordList.remove(word);
     }
 
+    /**
+     * Sắp xếp Word trong wordList rồi trả về wordList
+     * @return wordList đã được sắp xếp
+     */
     public List<Word> listWord() {
         wordList.sort(new WordComparator());
         return wordList;

@@ -15,7 +15,8 @@ public class DictionaryManagement {
     }
 
     /**
-     * Nhập từ mới từ command line vào dictionary.
+     * Nhập từ mới tiếng Anh và nghĩa tiếng Việt
+     * từ command line vào dictionary.
      */
     public void insertFromCommandline() {
         System.out.print("Nhập vào số lượng từ vựng (Word): ");
@@ -37,8 +38,9 @@ public class DictionaryManagement {
     }
 
     /**
-     * Trả về danh sách word.
-     * @return danh sách word
+     * Trả về wordList của Dictionary qua việc
+     * gọi phương thức listWord của Dictionary.
+     * @return wordList của Dictionary
      */
     public List<Word> getListWord() {
         return dictionary.listWord();
