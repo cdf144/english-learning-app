@@ -15,7 +15,7 @@ public class DictionaryCommandline {
     }
 
     /**
-     * In tất cả các từ trong từ điển
+     * In tất cả các từ trong từ điển.
      */
     public void showAllWords() {
         System.out.printf("%-3s | %-15s | %-20s%n", "No", "English", "Vietnamese");
