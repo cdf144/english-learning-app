@@ -1,10 +1,13 @@
 package org.oopvnu.management;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import org.oopvnu.entities.Dictionary;
 import org.oopvnu.entities.Word;
-
 import java.util.List;
 import java.util.Scanner;
+
 public class DictionaryManagement {
     private final Dictionary dictionary;
 
@@ -36,6 +39,29 @@ public class DictionaryManagement {
             System.out.println();
         }
     }
+
+    /**
+     * Mở file txt va doc du lieu tu tep.
+     */
+    public void insertFromFile(String filename) throws IOException {
+        try {
+            FileReader fileReader = new FileReader(filename);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] words = line.split("\t");
+                Word word = new Word(words[0], words[1]);
+                dictionary.addWord(word);
+            }
+
+            bufferedReader.close();
+            fileReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     /**
      * Trả về wordList của Dictionary qua việc
