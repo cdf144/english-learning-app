@@ -24,7 +24,7 @@ public class DictionaryCommandLine {
     }
 
     public static void main(String[] args) throws IOException {
-        String filename = "src\\main\\java\\org\\oopvnu\\management/dictionaries.txt";
+        String filename = "src\\main\\java\\org\\oopvnu\\management\\dictionaries.txt";
 
         DictionaryCommandLine dictionaryCommandLine = new DictionaryCommandLine();
 
