@@ -1,6 +1,7 @@
 package org.oopvnu.management;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import org.oopvnu.entities.Dictionary;
@@ -47,7 +48,7 @@ public class DictionaryManagement {
     /**
      * Mở file txt va doc du lieu tu tep.
      */
-    public void insertFromFile(String filename) throws IOException {
+    public void insertFromFile(String filename) throws FileNotFoundException {
         try {
             FileReader fileReader = new FileReader(filename);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
