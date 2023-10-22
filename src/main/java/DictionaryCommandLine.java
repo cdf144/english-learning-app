@@ -1,6 +1,6 @@
 import org.oopvnu.DictionaryCommandline;
-import org.oopvnu.management.DictionaryManagement;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -14,7 +14,7 @@ public class DictionaryCommandLine {
         dictionaryCommandline.getDictionaryManagement().insertFromCommandline();
         dictionaryCommandline.showAllWords();
     }
-    public void readFromFileTest(String filename) throws IOException, FileNotFoundException {
+    public void readFromFileTest(String filename) throws IOException {
         try {
             dictionaryCommandline.getDictionaryManagement().insertFromFile(filename);
             dictionaryCommandline.showAllWords();
@@ -24,11 +24,19 @@ public class DictionaryCommandLine {
     }
 
     public static void main(String[] args) throws IOException {
-        String filename = "src\\main\\java\\org\\oopvnu\\management/dictionaries.txt";
+        File file;
+        String filename = "src"
+                        + File.separator + "main"
+                        + File.separator + "resources"
+                        + File.separator + "dictionaries.txt"
+        ;
+
+        String workingDir = System.getProperty("user.dir");
+        file = new File(workingDir, filename);
 
         DictionaryCommandLine dictionaryCommandLine = new DictionaryCommandLine();
 
 //        dictionaryCommandLine.dictionaryBasic();
-        dictionaryCommandLine.readFromFileTest(filename);
+        dictionaryCommandLine.readFromFileTest(file.getAbsolutePath());
     }
 }
