@@ -17,6 +17,7 @@ public class DictionaryCommandLine {
     public void readFromFileTest(String filename) throws IOException {
         try {
             dictionaryCommandline.getDictionaryManagement().insertFromFile(filename);
+            dictionaryCommandline.getDictionaryManagement().getDictionary().sortWordList();
             dictionaryCommandline.showAllWords();
         } catch (FileNotFoundException e) {
             e.printStackTrace();

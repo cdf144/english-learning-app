@@ -17,6 +17,10 @@ public class DictionaryManagement {
         dictionary = new Dictionary();
     }
 
+    public Dictionary getDictionary() {
+        return dictionary;
+    }
+
     /**
      * Nhập từ mới tiếng Anh và nghĩa tiếng Việt
      * từ command line vào dictionary.
@@ -69,6 +73,6 @@ public class DictionaryManagement {
      * @return wordList của Dictionary
      */
     public List<Word> getListWord() {
-        return dictionary.listWord();
+        return dictionary.getWordList();
     }
 }

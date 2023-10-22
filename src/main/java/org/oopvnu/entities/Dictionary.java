@@ -21,11 +21,17 @@ public class Dictionary {
     }
 
     /**
-     * Sắp xếp Word trong wordList rồi trả về wordList
-     * @return wordList đã được sắp xếp
+     * Trả về wordList
+     * @return wordList
      */
-    public List<Word> listWord() {
-        wordList.sort(new WordComparator());
+    public List<Word> getWordList() {
         return wordList;
+    }
+
+    /**
+     * Sắp xếp Word trong wordList.
+     */
+    public void sortWordList() {
+        wordList.sort(new WordComparator());
     }
 }
