@@ -47,6 +47,11 @@ public class DictionaryCommandLine {
         }
     }
 
+    /**
+     *
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
         File file;
         String filename = "src"
