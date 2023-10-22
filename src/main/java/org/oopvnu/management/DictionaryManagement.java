@@ -1,16 +1,20 @@
 package org.oopvnu.management;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import org.oopvnu.entities.Dictionary;
-import org.oopvnu.entities.Word;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import org.oopvnu.entities.Dictionary;
+import org.oopvnu.entities.Word;
 
 public class DictionaryManagement {
     private final Dictionary dictionary;
+    private static final Logger LOGGER = Logger.getLogger(DictionaryManagement.class.getName());
 
     private final Scanner scanner = new Scanner(System.in);
 
@@ -48,7 +52,10 @@ public class DictionaryManagement {
     /**
      * Mở file txt va doc du lieu tu tep.
      */
-    public void insertFromFile(String filename) throws FileNotFoundException {
+    public void insertFromFile(String filename) throws IOException {
+        FileHandler fileHandler = new FileHandler("log.txt");
+        fileHandler.setLevel(Level.INFO);
+        LOGGER.addHandler(fileHandler);
         try {
             FileReader fileReader = new FileReader(filename);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -62,8 +69,9 @@ public class DictionaryManagement {
 
             bufferedReader.close();
             fileReader.close();
+            LOGGER.info("Successfully read from file.");
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, e.toString(), e);
         }
     }
 

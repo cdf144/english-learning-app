@@ -1,11 +1,16 @@
 import org.oopvnu.DictionaryCommandline;
+import org.oopvnu.management.DictionaryManagement;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DictionaryCommandLine {
     DictionaryCommandline dictionaryCommandline;
+    private static final Logger LOGGER = Logger.getLogger(DictionaryManagement.class.getName());
 
     public DictionaryCommandLine() {
         dictionaryCommandline = new DictionaryCommandline();
@@ -15,12 +20,16 @@ public class DictionaryCommandLine {
         dictionaryCommandline.showAllWords();
     }
     public void readFromFileTest(String filename) throws IOException {
+        FileHandler fileHandler = new FileHandler("log.txt");
+        fileHandler.setLevel(Level.INFO);
+        LOGGER.addHandler(fileHandler);
         try {
             dictionaryCommandline.getDictionaryManagement().insertFromFile(filename);
             dictionaryCommandline.getDictionaryManagement().getDictionary().sortWordList();
             dictionaryCommandline.showAllWords();
+            LOGGER.info("All operation succeeded.");
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, e.toString(), e);
         }
     }
 
