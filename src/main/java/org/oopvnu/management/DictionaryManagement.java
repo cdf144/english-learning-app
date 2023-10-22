@@ -50,7 +50,12 @@ public class DictionaryManagement {
     }
 
     /**
-     * Mở file txt va doc du lieu tu tep.
+     * Mở file .txt và đọc dữ liệu từ file gồm các
+     * từ tiếng Anh và giải nghĩa tiếng Việt được
+     * phân cách bởi 1 dấu tab.
+     * @param filename String đường dẫn đến file .txt
+     * @throws IOException Ngoại lệ được throw nếu FileHandler
+     *                     hoặc FileReader bị lỗi
      */
     public void insertFromFile(String filename) throws IOException {
         FileHandler fileHandler = new FileHandler("log.txt");

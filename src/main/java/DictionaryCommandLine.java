@@ -15,11 +15,25 @@ public class DictionaryCommandLine {
     public DictionaryCommandLine() {
         dictionaryCommandline = new DictionaryCommandline();
     }
+
+    /**
+     * Bản command line nguyên thuỷ có chức năng nhập
+     * từ và giải nghĩa của nó từ command line và sau
+     * đó in ra những từ được nhập và giải nghĩa Việt.
+     */
     public void dictionaryBasic() {
         dictionaryCommandline.getDictionaryManagement().insertFromCommandline();
         dictionaryCommandline.showAllWords();
     }
-    public void readFromFileTest(String filename) throws IOException {
+
+    /**
+     * Đọc dữ liệu từ file .txt và sau đó in ra danh
+     * sách từ trong từ điển theo thứ tự được sort.
+     * @param filename String path đến file .txt
+     * @throws IOException Ngoại lệ được throw nếu FileHandler
+     *                     bị lỗi.
+     */
+    public void readFromFile(String filename) throws IOException {
         FileHandler fileHandler = new FileHandler("log.txt");
         fileHandler.setLevel(Level.INFO);
         LOGGER.addHandler(fileHandler);
@@ -47,6 +61,6 @@ public class DictionaryCommandLine {
         DictionaryCommandLine dictionaryCommandLine = new DictionaryCommandLine();
 
 //        dictionaryCommandLine.dictionaryBasic();
-        dictionaryCommandLine.readFromFileTest(file.getAbsolutePath());
+        dictionaryCommandLine.readFromFile(file.getAbsolutePath());
     }
 }
