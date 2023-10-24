@@ -142,7 +142,6 @@ public class DictionaryManagement extends Dictionary {
                     String word_explain = parts[1].trim();
 
                     if (word_target.toLowerCase().startsWith(wordTarget.toLowerCase())) {
-//                        System.out.printf("%s    |%s\t\n", word_target, word_explain);
                         System.out.printf("%-3s | %-15s | %-20s%n", i++, word_target, word_explain);
                     }
                 }
