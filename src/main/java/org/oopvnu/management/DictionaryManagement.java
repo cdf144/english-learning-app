@@ -134,14 +134,16 @@ public class DictionaryManagement extends Dictionary {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
             String line;
+            int i = 1;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split("\t");
                 if (parts.length == 2) {
-                    String englishWord = parts[0].trim();
-                    String vietnameseWord = parts[1].trim();
+                    String word_target = parts[0].trim();
+                    String word_explain = parts[1].trim();
 
-                    if (englishWord.toLowerCase().startsWith(wordTarget.toLowerCase())) {
-                        System.out.printf("%s    |%s\t\n", englishWord, vietnameseWord);
+                    if (word_target.toLowerCase().startsWith(wordTarget.toLowerCase())) {
+//                        System.out.printf("%s    |%s\t\n", word_target, word_explain);
+                        System.out.printf("%-3s | %-15s | %-20s%n", i++, word_target, word_explain);
                     }
                 }
             }
