@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import org.oopvnu.entities.Dictionary;
 import org.oopvnu.entities.Word;
 
-public class DictionaryManagement {
+public class DictionaryManagement extends Dictionary {
     private final Dictionary dictionary;
     private static final Logger LOGGER = Logger.getLogger(DictionaryManagement.class.getName());
 
@@ -80,6 +80,76 @@ public class DictionaryManagement {
         }
     }
 
+    /**
+     * Mở file .txt và đọc dữ liệu từ file gồm các
+     * từ tiếng Anh và giải nghĩa tiếng Việt được
+     * phân cách bởi 1 dấu tab.
+     * @param fileName String đường dẫn đến file .txt
+     * @throws IOException Ngoại lệ được throw nếu FileHandler
+     *                     hoặc FileReader bị lỗi
+     */
+    public static void dictionaryLookup(String fileName) throws IOException {
+        int count = 0;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter your word target (in English): ");
+        String wordTarget = sc.nextLine();
+
+        FileHandler fileHandler = new FileHandler("log.txt");
+        fileHandler.setLevel(Level.INFO);
+        LOGGER.addHandler(fileHandler);
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(fileName));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split("\t");
+                if (parts.length == 2) {
+                    String englishWord = parts[0].trim();
+                    String vietnameseWord = parts[1].trim();
+
+                    if (wordTarget.equalsIgnoreCase(englishWord)) {
+                        count++;
+                        System.out.println("The Vietnamese translation is: " + vietnameseWord);
+                    }
+                }
+            }
+            reader.close();
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, e.toString(), e);
+        }
+
+        if (count == 0) {
+            System.out.println("No word exists in the dictionary!");
+        }
+    }
+
+    public static void dictionarySearcher(String fileName) throws IOException {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter your word (in English): ");
+        String wordTarget = sc.nextLine();
+
+        FileHandler fileHandler = new FileHandler("log.txt");
+        fileHandler.setLevel(Level.INFO);
+        LOGGER.addHandler(fileHandler);
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(fileName));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split("\t");
+                if (parts.length == 2) {
+                    String englishWord = parts[0].trim();
+                    String vietnameseWord = parts[1].trim();
+
+                    if (englishWord.toLowerCase().startsWith(wordTarget.toLowerCase())) {
+                        System.out.printf("%s    |%s\t\n", englishWord, vietnameseWord);
+                    }
+                }
+            }
+            reader.close();
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, e.toString(), e);
+        }
+    }
 
     /**
      * Trả về wordList của Dictionary qua việc
