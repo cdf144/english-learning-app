@@ -81,79 +81,50 @@ public class DictionaryManagement extends Dictionary {
     }
 
     /**
-     * Mở file .txt và đọc dữ liệu từ file gồm các
-     * từ tiếng Anh và giải nghĩa tiếng Việt được
-     * phân cách bởi 1 dấu tab.
-     * @param fileName String đường dẫn đến file .txt
-     * @throws IOException Ngoại lệ được throw nếu FileHandler
-     *                     hoặc FileReader bị lỗi
+     * Đọc dữ liệu từ wordList.
+     * Nhập từ cần tìm và in ra word_explain
+     * Thông báo nếu không có từ nào trùng khớp được tìm thấy
      */
-    public static void dictionaryLookup(String fileName) throws IOException {
-        int count = 0;
+    public static void dictionaryLookup() {
+        int wordCounter = 0;
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter your word target (in English): ");
-        String wordTarget = sc.nextLine();
-
-        FileHandler fileHandler = new FileHandler("log.txt");
-        fileHandler.setLevel(Level.INFO);
-        LOGGER.addHandler(fileHandler);
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(fileName));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split("\t");
-                if (parts.length == 2) {
-                    String englishWord = parts[0].trim();
-                    String vietnameseWord = parts[1].trim();
-
-                    if (wordTarget.equalsIgnoreCase(englishWord)) {
-                        count++;
-                        System.out.println("The Vietnamese translation is: " + vietnameseWord);
-                    }
-                }
+        System.out.println("Enter your word target: ");
+        String word_target = sc.nextLine();
+        for (Word word : wordList) {
+            if (word_target.equalsIgnoreCase(word.getWord_target())) {
+                wordCounter++;
+                System.out.println("The word explain is: ");
+                System.out.println(word.getWord_explain());
             }
-            reader.close();
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, e.toString(), e);
         }
-
-        if (count == 0) {
-            System.out.println("No word exists in the dictionary!");
-        }
-    }
-
-    public static void dictionarySearcher(String fileName) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Enter your word (in English): ");
-        String wordTarget = sc.nextLine();
-
-        FileHandler fileHandler = new FileHandler("log.txt");
-        fileHandler.setLevel(Level.INFO);
-        LOGGER.addHandler(fileHandler);
-
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(fileName));
-            String line;
-            int i = 1;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split("\t");
-                if (parts.length == 2) {
-                    String word_target = parts[0].trim();
-                    String word_explain = parts[1].trim();
-
-                    if (word_target.toLowerCase().startsWith(wordTarget.toLowerCase())) {
-                        System.out.printf("%-3s | %-15s | %-20s%n", i++, word_target, word_explain);
-                    }
-                }
-            }
-            reader.close();
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, e.toString(), e);
-        }
+        if (wordCounter == 0) System.out.println("No word exist!");
     }
 
     /**
-     * Trả về wordList của Dictionary qua việc
+     * Đọc dữ liệu từ wordList.
+     * Thêm các Words thỏa mãn vào resWordList
+     * In ra danh sách các Word trong resWordList giống như hàm showAllWord
+     */
+    public static void dictionarySearcher() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter your word: ");
+        String wordTarget = sc.nextLine();
+        resWordList.clear();
+        for (int i = 0; i < wordList.size(); i++) {
+            if (wordList.get(i).getWord_target().toLowerCase().startsWith(wordTarget.toLowerCase())) {
+                resWordList.add(wordList.get(i));
+            }
+        }
+        System.out.printf("%-3s | %-15s | %-20s%n", "No", "English", "Vietnamese");
+        int wordCounter = 1;
+        for (Word word : resWordList) {
+            System.out.printf("%-3s | %-15s | %-20s%n", wordCounter++, word.getWord_target(), word.getWord_explain());
+        }
+
+    }
+
+    /**
+     * Trả về wordList của Dictionary qua việc.
      * gọi phương thức listWord của Dictionary.
      * @return wordList của Dictionary
      */

@@ -29,6 +29,7 @@ public class DictionaryCommandLine {
     /**
      * Đọc dữ liệu từ file .txt và sau đó in ra danh
      * sách từ trong từ điển theo thứ tự được sort.
+     *
      * @param filename String path đến file .txt
      * @throws IOException Ngoại lệ được throw nếu FileHandler
      *                     bị lỗi.
@@ -48,17 +49,15 @@ public class DictionaryCommandLine {
     }
 
     /**
-     *
      * @param args
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
         File file;
         String filename = "src"
-                        + File.separator + "main"
-                        + File.separator + "resources"
-                        + File.separator + "dictionaries.txt"
-        ;
+                + File.separator + "main"
+                + File.separator + "resources"
+                + File.separator + "dictionaries.txt";
 
         String workingDir = System.getProperty("user.dir");
         file = new File(workingDir, filename);
@@ -66,8 +65,8 @@ public class DictionaryCommandLine {
         DictionaryCommandLine dictionaryCommandLine = new DictionaryCommandLine();
 
 //        dictionaryCommandLine.dictionaryBasic();
-//        dictionaryCommandLine.readFromFile(file.getAbsolutePath());
-//        DictionaryManagement.dictionaryLookup(file.getAbsolutePath());
-        DictionaryManagement.dictionarySearcher(file.getAbsolutePath());
+        dictionaryCommandLine.readFromFile(file.getAbsolutePath());
+//        DictionaryManagement.dictionaryLookup();
+        DictionaryManagement.dictionarySearcher();
     }
 }

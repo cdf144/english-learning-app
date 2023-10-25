@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Dictionary {
-    public static List<Word> wordList;
+    protected static List<Word> wordList = new ArrayList<>();
+
+    protected static List<Word> resWordList = new ArrayList<Word>();
 
     public Dictionary() {
         wordList = new ArrayList<>();
