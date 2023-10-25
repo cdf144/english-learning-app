@@ -49,6 +49,7 @@ public class DictionaryCommandLine {
     }
 
     /**
+     * Main method.
      * @param args
      * @throws IOException
      */

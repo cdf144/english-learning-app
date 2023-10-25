@@ -18,7 +18,7 @@ public class DictionaryCommandline {
      * In tất cả các từ trong từ điển.
      */
     public void showAllWords() {
-        System.out.printf("%-3s | %-15s | %-20s%n", "sNo", "English", "Vietnamese");
+        System.out.printf("%-3s | %-15s | %-20s%n", "No", "English", "Vietnamese");
         int i = 1;
 
         dictionaryManagement.getDictionary().sortWordList();
