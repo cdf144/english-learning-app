@@ -6,12 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Dictionary {
-    protected static List<Word> wordList = new ArrayList<>();
+    protected List<Word> wordList;
 
-    protected static List<Word> resWordList = new ArrayList<Word>();
+    protected List<Word> resWordList;
 
     public Dictionary() {
         wordList = new ArrayList<>();
+        resWordList = new ArrayList<>();
     }
 
     public void addWord(Word word) {

@@ -67,7 +67,7 @@ public class DictionaryCommandLine {
 
 //        dictionaryCommandLine.dictionaryBasic();
         dictionaryCommandLine.readFromFile(file.getAbsolutePath());
-//        DictionaryManagement.dictionaryLookup();
-        DictionaryManagement.dictionarySearcher();
+        dictionaryCommandLine.dictionaryCommandline.getDictionaryManagement().dictionaryLookup();
+        dictionaryCommandLine.dictionaryCommandline.getDictionaryManagement().dictionarySearcher();
     }
 }

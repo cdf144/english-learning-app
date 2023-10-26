@@ -80,15 +80,14 @@ public class DictionaryManagement extends Dictionary {
      * Nhập từ cần tìm và in ra word_explain
      * Thông báo nếu không có từ nào trùng khớp được tìm thấy
      */
-    public static void dictionaryLookup() {
+    public void dictionaryLookup() {
         int wordCounter = 0;
-        Scanner sc = new Scanner(System.in);
         System.out.println("Enter your word target: ");
-        String word_target = sc.nextLine();
+        String word_target = scanner.nextLine();
         for (Word word : wordList) {
             if (word_target.equalsIgnoreCase(word.getWord_target())) {
                 wordCounter++;
-                System.out.println("The word explain is: ");
+                System.out.println("The word explanation is: ");
                 System.out.println(word.getWord_explain());
             }
         }
@@ -100,16 +99,21 @@ public class DictionaryManagement extends Dictionary {
      * Thêm các Words thỏa mãn vào resWordList
      * In ra danh sách các Word trong resWordList giống như hàm showAllWord
      */
-    public static void dictionarySearcher() {
-        Scanner sc = new Scanner(System.in);
+    public void dictionarySearcher() {
         System.out.println("Enter your word: ");
-        String wordTarget = sc.nextLine();
+        String wordTarget = scanner.nextLine();
         resWordList.clear();
         for (Word word : wordList) {
             if (word.getWord_target().toLowerCase().startsWith(wordTarget.toLowerCase())) {
                 resWordList.add(word);
             }
         }
+
+        if (resWordList.isEmpty()) {
+            System.out.println("No word exist!");
+            return;
+        }
+
         System.out.printf("%-3s | %-15s | %-20s%n", "No", "English", "Vietnamese");
         int wordCounter = 1;
         for (Word word : resWordList) {
