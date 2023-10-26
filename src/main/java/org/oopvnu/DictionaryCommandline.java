@@ -21,7 +21,7 @@ public class DictionaryCommandline {
         System.out.printf("%-3s | %-15s | %-20s%n", "No", "English", "Vietnamese");
         int i = 1;
 
-        dictionaryManagement.getDictionary().sortWordList();
+        dictionaryManagement.sortWordList();
 
         for (Word word : dictionaryManagement.getListWord()) {
             System.out.printf("%-3s | %-15s | %-20s%n", i++, word.getWord_target(), word.getWord_explain());

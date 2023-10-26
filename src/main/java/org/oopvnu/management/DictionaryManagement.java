@@ -12,18 +12,13 @@ import java.util.logging.Logger;
 import org.oopvnu.entities.Dictionary;
 import org.oopvnu.entities.Word;
 
-public class DictionaryManagement {
-    private final Dictionary dictionary;
+public class DictionaryManagement extends Dictionary {
     private static final Logger LOGGER = Logger.getLogger(DictionaryManagement.class.getName());
 
     private final Scanner scanner = new Scanner(System.in);
 
     public DictionaryManagement() {
-        dictionary = new Dictionary();
-    }
-
-    public Dictionary getDictionary() {
-        return dictionary;
+        super();
     }
 
     /**
@@ -44,7 +39,7 @@ public class DictionaryManagement {
             System.out.println("Nhập nghĩa tiếng Việt:");
             String word_explain = scanner.nextLine();
 
-            dictionary.addWord(new Word(word_target, word_explain));
+            addWord(new Word(word_target, word_explain));
             System.out.println();
         }
     }
@@ -69,7 +64,7 @@ public class DictionaryManagement {
             while ((line = bufferedReader.readLine()) != null) {
                 String[] words = line.split("\t");
                 Word word = new Word(words[0], words[1]);
-                dictionary.addWord(word);
+                addWord(word);
             }
 
             bufferedReader.close();
@@ -80,13 +75,59 @@ public class DictionaryManagement {
         }
     }
 
+    /**
+     * Đọc dữ liệu từ wordList.
+     * Nhập từ cần tìm và in ra word_explain
+     * Thông báo nếu không có từ nào trùng khớp được tìm thấy
+     */
+    public void dictionaryLookup() {
+        int wordCounter = 0;
+        System.out.println("Enter your word target: ");
+        String word_target = scanner.nextLine();
+        for (Word word : wordList) {
+            if (word_target.equalsIgnoreCase(word.getWord_target())) {
+                wordCounter++;
+                System.out.println("The word explanation is: ");
+                System.out.println(word.getWord_explain());
+            }
+        }
+        if (wordCounter == 0) System.out.println("No word exist!");
+    }
 
     /**
-     * Trả về wordList của Dictionary qua việc
+     * Đọc dữ liệu từ wordList.
+     * Thêm các Words thỏa mãn vào resWordList
+     * In ra danh sách các Word trong resWordList giống như hàm showAllWord
+     */
+    public void dictionarySearcher() {
+        System.out.println("Enter your word: ");
+        String wordTarget = scanner.nextLine();
+        resWordList.clear();
+        for (Word word : wordList) {
+            if (word.getWord_target().toLowerCase().startsWith(wordTarget.toLowerCase())) {
+                resWordList.add(word);
+            }
+        }
+
+        if (resWordList.isEmpty()) {
+            System.out.println("No word exist!");
+            return;
+        }
+
+        System.out.printf("%-3s | %-15s | %-20s%n", "No", "English", "Vietnamese");
+        int wordCounter = 1;
+        for (Word word : resWordList) {
+            System.out.printf("%-3s | %-15s | %-20s%n", wordCounter++, word.getWord_target(), word.getWord_explain());
+        }
+
+    }
+
+    /**
+     * Trả về wordList của Dictionary qua việc.
      * gọi phương thức listWord của Dictionary.
      * @return wordList của Dictionary
      */
     public List<Word> getListWord() {
-        return dictionary.getWordList();
+        return super.getWordList();
     }
 }
