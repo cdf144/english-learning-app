@@ -110,9 +110,9 @@ public class DictionaryManagement extends Dictionary {
         System.out.println("Enter your word: ");
         String wordTarget = sc.nextLine();
         resWordList.clear();
-        for (int i = 0; i < wordList.size(); i++) {
-            if (wordList.get(i).getWord_target().toLowerCase().startsWith(wordTarget.toLowerCase())) {
-                resWordList.add(wordList.get(i));
+        for (Word word : wordList) {
+            if (word.getWord_target().toLowerCase().startsWith(wordTarget.toLowerCase())) {
+                resWordList.add(word);
             }
         }
         System.out.printf("%-3s | %-15s | %-20s%n", "No", "English", "Vietnamese");

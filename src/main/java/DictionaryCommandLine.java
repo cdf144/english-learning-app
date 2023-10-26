@@ -41,7 +41,6 @@ public class DictionaryCommandLine {
         try {
             dictionaryCommandline.getDictionaryManagement().insertFromFile(filename);
             dictionaryCommandline.getDictionaryManagement().getDictionary().sortWordList();
-            dictionaryCommandline.showAllWords();
             LOGGER.info("All operation succeeded.");
         } catch (FileNotFoundException e) {
             LOGGER.log(Level.SEVERE, e.toString(), e);
@@ -49,9 +48,10 @@ public class DictionaryCommandLine {
     }
 
     /**
-     * Main method.
-     * @param args
-     * @throws IOException
+     * Driver method.
+     * @param args Thông số đầu vào
+     * @throws IOException Được ném nếu không tìm thấy
+     *                     file tại path được đặt
      */
     public static void main(String[] args) throws IOException {
         File file;
