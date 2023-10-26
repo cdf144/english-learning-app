@@ -13,17 +13,13 @@ import org.oopvnu.entities.Dictionary;
 import org.oopvnu.entities.Word;
 
 public class DictionaryManagement extends Dictionary {
-    private final Dictionary dictionary;
+    // private final Dictionary dictionary;
     private static final Logger LOGGER = Logger.getLogger(DictionaryManagement.class.getName());
 
     private final Scanner scanner = new Scanner(System.in);
 
     public DictionaryManagement() {
-        dictionary = new Dictionary();
-    }
-
-    public Dictionary getDictionary() {
-        return dictionary;
+        super();
     }
 
     /**
@@ -44,7 +40,7 @@ public class DictionaryManagement extends Dictionary {
             System.out.println("Nhập nghĩa tiếng Việt:");
             String word_explain = scanner.nextLine();
 
-            dictionary.addWord(new Word(word_target, word_explain));
+            addWord(new Word(word_target, word_explain));
             System.out.println();
         }
     }
@@ -69,7 +65,7 @@ public class DictionaryManagement extends Dictionary {
             while ((line = bufferedReader.readLine()) != null) {
                 String[] words = line.split("\t");
                 Word word = new Word(words[0], words[1]);
-                dictionary.addWord(word);
+                addWord(word);
             }
 
             bufferedReader.close();
@@ -129,6 +125,6 @@ public class DictionaryManagement extends Dictionary {
      * @return wordList của Dictionary
      */
     public List<Word> getListWord() {
-        return dictionary.getWordList();
+        return super.getWordList();
     }
 }

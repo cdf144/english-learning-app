@@ -40,7 +40,7 @@ public class DictionaryCommandLine {
         LOGGER.addHandler(fileHandler);
         try {
             dictionaryCommandline.getDictionaryManagement().insertFromFile(filename);
-            dictionaryCommandline.getDictionaryManagement().getDictionary().sortWordList();
+            dictionaryCommandline.getDictionaryManagement().sortWordList();
             LOGGER.info("All operation succeeded.");
         } catch (FileNotFoundException e) {
             LOGGER.log(Level.SEVERE, e.toString(), e);
