@@ -82,7 +82,7 @@ public class DictionaryManagement extends Dictionary {
      */
     public void dictionaryLookup() {
         int wordCounter = 0;
-        System.out.println("Enter your word target: ");
+        System.out.println("Lookup: Enter your word target: ");
         String word_target = scanner.nextLine();
         for (Word word : wordList) {
             if (word_target.equalsIgnoreCase(word.getWord_target())) {
@@ -100,7 +100,7 @@ public class DictionaryManagement extends Dictionary {
      * In ra danh sách các Word trong resWordList giống như hàm showAllWord
      */
     public void dictionarySearcher() {
-        System.out.println("Enter your word: ");
+        System.out.println("Searcher: Enter your word: ");
         String wordTarget = scanner.nextLine();
         resWordList.clear();
         for (Word word : wordList) {
@@ -120,6 +120,63 @@ public class DictionaryManagement extends Dictionary {
             System.out.printf("%-3s | %-15s | %-20s%n", wordCounter++, word.getWord_target(), word.getWord_explain());
         }
 
+    }
+
+    /**
+     * Thêm một từ vào wordList.
+     * Nhập word_target và word_explain
+     */
+    public void addFromCommandline() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Add: Enter new word_target: ");
+        String word_target = sc.nextLine();
+        System.out.println("Add: Enter this word_explain: ");
+        String word_explain = sc.nextLine();
+        Word newWord = new Word(word_target, word_explain);
+        wordList.add(newWord);
+        System.out.println("ADDED !");
+    }
+
+    /**
+     * Xóa một từ trong wordList.
+     * Nhập word_target hoặc word_explain của từ cần xóa
+     */
+    public void removeFromCommandline() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter word_target or word_explain you want to remove: ");
+        String word_target = sc.nextLine();
+        boolean check = false;
+        for (int i =0; i <wordList.size(); i++) {
+            if (word_target.equalsIgnoreCase(wordList.get(i).getWord_target())
+            || word_target.equalsIgnoreCase(wordList.get(i).getWord_explain())) {
+                wordList.remove(wordList.get(i));
+                check = true;
+                break;
+            }
+        }
+        if (!check) {
+            System.out.println("No word exist !");
+        } else {
+            System.out.println("REMOVED !");
+        }
+    }
+
+    /**
+     * Sua mot tu trong wordList.
+     * Nhập từ cần sửa nghĩa và nghĩa sau khi sửa
+     */
+    public void updateFromCommandLine() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Update: Enter word you want to update: ");
+        String word_target = sc.nextLine();
+        for (int i = 0; i < wordList.size(); i++) {
+            if (word_target.equalsIgnoreCase(wordList.get(i).getWord_target())) {
+                System.out.println("Update: Enter your changed word_explain: ");
+                String newWordExplain = sc.nextLine();
+                wordList.set(i, new Word(word_target, newWordExplain));
+            }
+        }
+        System.out.println("UPDATED !");
     }
 
     /**

@@ -67,7 +67,13 @@ public class DictionaryCommandLine {
 
 //        dictionaryCommandLine.dictionaryBasic();
         dictionaryCommandLine.readFromFile(file.getAbsolutePath());
-        dictionaryCommandLine.dictionaryCommandline.getDictionaryManagement().dictionaryLookup();
-        dictionaryCommandLine.dictionaryCommandline.getDictionaryManagement().dictionarySearcher();
+//        dictionaryCommandLine.dictionaryCommandline.getDictionaryManagement().dictionaryLookup();
+//        dictionaryCommandLine.dictionaryCommandline.getDictionaryManagement().dictionarySearcher();
+
+//        dictionaryCommandLine.dictionaryCommandline.getDictionaryManagement().addFromCommandline();
+//        dictionaryCommandLine.dictionaryCommandline.getDictionaryManagement().removeFromCommandline();
+//        dictionaryCommandLine.dictionaryCommandline.getDictionaryManagement().updateFromCommandLine();
+//        dictionaryCommandLine.dictionaryCommandline.showAllWords();
+        dictionaryCommandLine.dictionaryCommandline.dictionaryAdvanced();
     }
 }
