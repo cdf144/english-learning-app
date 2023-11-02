@@ -1,10 +1,7 @@
 import org.oopvnu.DictionaryCommandline;
 import org.oopvnu.management.DictionaryManagement;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,13 +26,15 @@ public class DictionaryCommandLine {
     /**
      * Driver method.
      * @param args Thông số đầu vào
-     * @throws IOException Được ném nếu không tìm thấy
-     *                     file tại path được đặt
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         DictionaryCommandLine dictionaryCommandLine = new DictionaryCommandLine();
 
-//        dictionaryCommandLine.dictionaryBasic();
-        dictionaryCommandLine.dictionaryCommandline.dictionaryAdvanced();
+        // dictionaryCommandLine.dictionaryBasic();
+        try {
+            dictionaryCommandLine.dictionaryCommandline.dictionaryAdvanced();
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, e.toString(), e);
+        }
     }
 }

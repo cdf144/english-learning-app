@@ -23,15 +23,19 @@ public class DictionaryCommandline {
     }
 
 
+    private void initLogFile() throws IOException {
+        FileHandler fileHandler = new FileHandler("logSubAdvanced.txt");
+        fileHandler.setLevel(Level.INFO);
+        LOGGER.addHandler(fileHandler);
+    }
+
     /**
      * Menu.
      * Nhập n là số thứ tự của lựa chọn
      * Nếu n không hợp lệ yêu cầu nhập lại
      */
     public void dictionaryAdvanced() throws IOException {
-        FileHandler fileHandler = new FileHandler("logAdvanced.txt");
-        fileHandler.setLevel(Level.INFO);
-        LOGGER.addHandler(fileHandler);
+        initLogFile();
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to My Application!");
@@ -108,10 +112,6 @@ public class DictionaryCommandline {
      * Nếu n không hợp lệ yêu cầu nhập lại
      */
     public void subDictionaryAdvanced() throws IOException {
-        FileHandler fileHandler = new FileHandler("logSubAdvanced.txt");
-        fileHandler.setLevel(Level.INFO);
-        LOGGER.addHandler(fileHandler);
-
         Scanner sc = new Scanner(System.in);
         System.out.println("Your action: ");
         int choice = sc.nextInt();

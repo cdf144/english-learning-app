@@ -1,3 +1,4 @@
+add	thêm/cộng
 change	thay doi
 eight	8
 eleven	11
@@ -5,14 +6,13 @@ five	5
 four	4
 hello	xin chào
 nine	9
-one	1
 remove	xoa
 seven	7
 six	6
 ten	10
 three	3
 transaction	giao dịch
-translate	dich
+translate	dịch
 transparent	trong suot
 twelve	12
 two	2
