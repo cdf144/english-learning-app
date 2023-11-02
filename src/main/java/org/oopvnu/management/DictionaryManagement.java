@@ -25,27 +25,6 @@ public class DictionaryManagement extends Dictionary {
     }
 
     /**
-     * Đọc dữ liệu từ file .txt và sau đó in ra danh
-     * sách từ trong từ điển theo thứ tự được sort.
-     *
-     * @param filename String path đến file .txt
-     * @throws IOException Ngoại lệ được throw nếu FileHandler
-     *                     bị lỗi.
-     */
-    public void readFromFile(String filename) throws IOException {
-        FileHandler fileHandler = new FileHandler("log.txt");
-        fileHandler.setLevel(Level.INFO);
-        LOGGER.addHandler(fileHandler);
-        try {
-            insertFromFile(filename);
-            sortWordList();
-            LOGGER.info("All operation succeeded.");
-        } catch (FileNotFoundException e) {
-            LOGGER.log(Level.SEVERE, e.toString(), e);
-        }
-    }
-
-    /**
      * Nhập từ mới tiếng Anh và nghĩa tiếng Việt
      * từ command line vào dictionary.
      */
@@ -69,6 +48,28 @@ public class DictionaryManagement extends Dictionary {
     }
 
     /**
+     * Đọc dữ liệu từ file .txt và sau đó in ra danh
+     * sách từ trong từ điển theo thứ tự được sort.
+     *
+     * @param filename String path đến file .txt
+     * @throws IOException Ngoại lệ được throw nếu FileHandler
+     *                     bị lỗi.
+     */
+    public void readFromFile(String filename) throws IOException {
+        FileHandler fileHandler = new FileHandler("logReadFromFile.txt");
+        fileHandler.setLevel(Level.INFO);
+        LOGGER.addHandler(fileHandler);
+
+        try {
+            insertFromFile(filename);
+            sortWordList();
+            LOGGER.info("All operation succeeded.");
+        } catch (FileNotFoundException e) {
+            LOGGER.log(Level.SEVERE, e.toString(), e);
+        }
+    }
+
+    /**
      * Mở file .txt và đọc dữ liệu từ file gồm các
      * từ tiếng Anh và giải nghĩa tiếng Việt được
      * phân cách bởi 1 dấu tab.
@@ -77,9 +78,10 @@ public class DictionaryManagement extends Dictionary {
      *                     hoặc FileReader bị lỗi
      */
     public void insertFromFile(String filename) throws IOException {
-        FileHandler fileHandler = new FileHandler("log.txt");
+        FileHandler fileHandler = new FileHandler("logInsertFromFile.txt");
         fileHandler.setLevel(Level.INFO);
         LOGGER.addHandler(fileHandler);
+
         try {
             FileReader fileReader = new FileReader(filename);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -175,19 +177,23 @@ public class DictionaryManagement extends Dictionary {
      */
     public void removeFromCommandline() {
         Scanner sc = new Scanner(System.in);
+
         System.out.println("Enter word_target or word_explain you want to remove: ");
         String word_target = sc.nextLine();
+
         boolean check = false;
-        for (int i =0; i <wordList.size(); i++) {
+        for (int i = 0; i < wordList.size(); i++) {
             if (word_target.equalsIgnoreCase(wordList.get(i).getWord_target())
-            || word_target.equalsIgnoreCase(wordList.get(i).getWord_explain())) {
+                || word_target.equalsIgnoreCase(wordList.get(i).getWord_explain())
+            ) {
                 wordList.remove(wordList.get(i));
                 check = true;
                 break;
             }
         }
+
         if (!check) {
-            System.out.println("No word exist !");
+            System.out.println("No word exist!");
         } else {
             System.out.println("REMOVED!");
         }
@@ -199,8 +205,10 @@ public class DictionaryManagement extends Dictionary {
      */
     public void updateFromCommandLine() {
         Scanner sc = new Scanner(System.in);
+
         System.out.println("Update: Enter word you want to update: ");
         String word_target = sc.nextLine();
+
         for (int i = 0; i < wordList.size(); i++) {
             if (word_target.equalsIgnoreCase(wordList.get(i).getWord_target())) {
                 System.out.println("Update: Enter your changed word_explain: ");
@@ -216,13 +224,15 @@ public class DictionaryManagement extends Dictionary {
      * @throws IOException Được ném nếu có lỗi xảy ra với FileWriter
      */
     public void dictionaryExportToFile() throws IOException {
-        FileHandler fileHandler = new FileHandler("log.txt");
+        FileHandler fileHandler = new FileHandler("logExportToFile.txt");
         fileHandler.setLevel(Level.INFO);
         LOGGER.addHandler(fileHandler);
 
         FileWriter fileWriter;
         try {
             fileWriter = new FileWriter(DictionaryManagement.PATH_TO_DICTIONARY_FILE);
+
+            super.sortWordList();
             for (Word word : wordList) {
                 fileWriter.write(word.getWord_target() + "\t");
                 fileWriter.write(word.getWord_explain() + "\n");

@@ -1,10 +1,9 @@
-add	them
 change	thay doi
 eight	8
 eleven	11
 five	5
 four	4
-hello	xin chao
+hello	xin chào
 nine	9
 one	1
 remove	xoa

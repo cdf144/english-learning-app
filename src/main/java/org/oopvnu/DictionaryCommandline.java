@@ -5,8 +5,13 @@ import org.oopvnu.management.DictionaryManagement;
 
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DictionaryCommandline {
+    private static final Logger LOGGER = Logger.getLogger(DictionaryManagement.class.getName());
+
     private final DictionaryManagement dictionaryManagement;
 
     public DictionaryCommandline() {
@@ -23,7 +28,11 @@ public class DictionaryCommandline {
      * Nhập n là số thứ tự của lựa chọn
      * Nếu n không hợp lệ yêu cầu nhập lại
      */
-    public void dictionaryAdvanced() {
+    public void dictionaryAdvanced() throws IOException {
+        FileHandler fileHandler = new FileHandler("logAdvanced.txt");
+        fileHandler.setLevel(Level.INFO);
+        LOGGER.addHandler(fileHandler);
+
         Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to My Application!");
         System.out.println("  [0] Exit");
@@ -73,16 +82,18 @@ public class DictionaryCommandline {
                 try {
                     dictionaryManagement.readFromFile(DictionaryManagement.PATH_TO_DICTIONARY_FILE);
                     subDictionaryAdvanced();
+                    LOGGER.info("No I/O error occured.");
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LOGGER.log(Level.SEVERE, e.toString(), e);
                 }
                 break;
             case 9:
                 try {
                     dictionaryManagement.dictionaryExportToFile();
                     subDictionaryAdvanced();
+                    LOGGER.info("No I/O error occured.");
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LOGGER.log(Level.SEVERE, e.toString(), e);
                 }
                 break;
             default:
@@ -96,7 +107,11 @@ public class DictionaryCommandline {
      * Nhập n là số thứ tự của lựa chọn
      * Nếu n không hợp lệ yêu cầu nhập lại
      */
-    public void subDictionaryAdvanced() {
+    public void subDictionaryAdvanced() throws IOException {
+        FileHandler fileHandler = new FileHandler("logSubAdvanced.txt");
+        fileHandler.setLevel(Level.INFO);
+        LOGGER.addHandler(fileHandler);
+
         Scanner sc = new Scanner(System.in);
         System.out.println("Your action: ");
         int choice = sc.nextInt();
@@ -133,18 +148,20 @@ public class DictionaryCommandline {
                 break;
             case 8:
                 try {
-                    dictionaryManagement.readFromFile("src//main//resources//dictionaries.txt");
+                    dictionaryManagement.readFromFile(DictionaryManagement.PATH_TO_DICTIONARY_FILE);
+                    LOGGER.info("No I/O error occured.");
                     subDictionaryAdvanced();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LOGGER.log(Level.SEVERE, e.toString(), e);
                 }
                 break;
             case 9:
                 try {
                     dictionaryManagement.dictionaryExportToFile();
+                    LOGGER.info("No I/O error occured.");
                     subDictionaryAdvanced();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LOGGER.log(Level.SEVERE, e.toString(), e);
                 }
                 break;
             default:
@@ -163,7 +180,12 @@ public class DictionaryCommandline {
         dictionaryManagement.sortWordList();
 
         for (Word word : dictionaryManagement.getListWord()) {
-            System.out.printf("%-3s | %-15s | %-20s%n", i++, word.getWord_target(), word.getWord_explain());
+            System.out.printf(
+                    "%-3s | %-15s | %-20s%n",
+                    i++,
+                    word.getWord_target(),
+                    word.getWord_explain()
+            );
         }
     }
 }
