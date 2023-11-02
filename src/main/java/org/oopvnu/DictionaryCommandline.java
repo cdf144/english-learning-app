@@ -3,7 +3,6 @@ package org.oopvnu;
 import org.oopvnu.management.DictionaryManagement;
 import org.oopvnu.entities.Word;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -75,7 +74,7 @@ public class DictionaryCommandline {
                     dictionaryManagement.readFromFile("src//main//resources//dictionaries.txt");
                     subDictionaryAdvanced();
                 } catch (IOException e) {
-                        e.printStackTrace();
+                    e.printStackTrace();
                 }
                 break;
             case 9:

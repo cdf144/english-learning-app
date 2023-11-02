@@ -17,3 +17,4 @@ translate	dich
 transparent	trong suot
 twelve	12
 two	2
+transaction	giao dịch

@@ -140,7 +140,12 @@ public class DictionaryManagement extends Dictionary {
         System.out.printf("%-3s | %-15s | %-20s%n", "No", "English", "Vietnamese");
         int wordCounter = 1;
         for (Word word : resWordList) {
-            System.out.printf("%-3s | %-15s | %-20s%n", wordCounter++, word.getWord_target(), word.getWord_explain());
+            System.out.printf(
+                    "%-3s | %-15s | %-20s%n",
+                    wordCounter++,
+                    word.getWord_target(),
+                    word.getWord_explain()
+            );
         }
 
     }
@@ -151,13 +156,16 @@ public class DictionaryManagement extends Dictionary {
      */
     public void addFromCommandline() {
         Scanner sc = new Scanner(System.in);
+
         System.out.println("Add: Enter new word_target: ");
         String word_target = sc.nextLine();
+
         System.out.println("Add: Enter this word_explain: ");
         String word_explain = sc.nextLine();
+
         Word newWord = new Word(word_target, word_explain);
         wordList.add(newWord);
-        System.out.println("ADDED !");
+        System.out.println("ADDED!");
     }
 
     /**
@@ -204,7 +212,7 @@ public class DictionaryManagement extends Dictionary {
 
     /**
      * Xuất wordList ra file.
-     * @throws IOException
+     * @throws IOException Được ném nếu có lỗi xảy ra với FileWriter
      */
     public void dictionaryExportToFile() throws IOException {
         FileHandler fileHandler = new FileHandler("log.txt");
@@ -214,12 +222,12 @@ public class DictionaryManagement extends Dictionary {
         FileWriter fileWriter;
         try {
             fileWriter = new FileWriter("src//main//resources//dictionaries.txt");
-            for (int i = 0; i < wordList.size(); i++) {
-                fileWriter.write(wordList.get(i).getWord_target() + "\t");
-                fileWriter.write(wordList.get(i).getWord_explain() + "\n");
+            for (Word word : wordList) {
+                fileWriter.write(word.getWord_target() + "\t");
+                fileWriter.write(word.getWord_explain() + "\n");
             }
             fileWriter.close();
-            System.out.println("Completed !");
+            System.out.println("Completed!");
         } catch (IOException e) {
             LOGGER.log(Level.SEVERE, e.toString(), e);
         }
