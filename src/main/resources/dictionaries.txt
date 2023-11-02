@@ -12,9 +12,8 @@ seven	7
 six	6
 ten	10
 three	3
-transfer	chuyen khoan
+transaction	giao dịch
 translate	dich
 transparent	trong suot
 twelve	12
 two	2
-transaction	giao dịch

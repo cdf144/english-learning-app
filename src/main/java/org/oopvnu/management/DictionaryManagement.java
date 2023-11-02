@@ -1,10 +1,6 @@
 package org.oopvnu.management;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.FileHandler;
@@ -17,7 +13,12 @@ import org.oopvnu.entities.Word;
 public class DictionaryManagement extends Dictionary {
     private static final Logger LOGGER = Logger.getLogger(DictionaryManagement.class.getName());
 
-    private final Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static final String PATH_TO_DICTIONARY_FILE = "src"
+            + File.separator + "main"
+            + File.separator + "resources"
+            + File.separator + "dictionaries.txt";
 
     public DictionaryManagement() {
         super();
@@ -188,7 +189,7 @@ public class DictionaryManagement extends Dictionary {
         if (!check) {
             System.out.println("No word exist !");
         } else {
-            System.out.println("REMOVED !");
+            System.out.println("REMOVED!");
         }
     }
 
@@ -207,7 +208,7 @@ public class DictionaryManagement extends Dictionary {
                 wordList.set(i, new Word(word_target, newWordExplain));
             }
         }
-        System.out.println("UPDATED !");
+        System.out.println("UPDATED!");
     }
 
     /**
@@ -221,7 +222,7 @@ public class DictionaryManagement extends Dictionary {
 
         FileWriter fileWriter;
         try {
-            fileWriter = new FileWriter("src//main//resources//dictionaries.txt");
+            fileWriter = new FileWriter(DictionaryManagement.PATH_TO_DICTIONARY_FILE);
             for (Word word : wordList) {
                 fileWriter.write(word.getWord_target() + "\t");
                 fileWriter.write(word.getWord_explain() + "\n");

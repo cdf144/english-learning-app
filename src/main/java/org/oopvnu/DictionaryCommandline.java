@@ -1,7 +1,7 @@
 package org.oopvnu;
 
-import org.oopvnu.management.DictionaryManagement;
 import org.oopvnu.entities.Word;
+import org.oopvnu.management.DictionaryManagement;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -70,8 +70,8 @@ public class DictionaryCommandline {
                 subDictionaryAdvanced();
                 break;
             case 8:
-                try{
-                    dictionaryManagement.readFromFile("src//main//resources//dictionaries.txt");
+                try {
+                    dictionaryManagement.readFromFile(DictionaryManagement.PATH_TO_DICTIONARY_FILE);
                     subDictionaryAdvanced();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -132,7 +132,7 @@ public class DictionaryCommandline {
                 subDictionaryAdvanced();
                 break;
             case 8:
-                try{
+                try {
                     dictionaryManagement.readFromFile("src//main//resources//dictionaries.txt");
                     subDictionaryAdvanced();
                 } catch (IOException e) {
