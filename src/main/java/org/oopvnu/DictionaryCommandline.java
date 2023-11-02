@@ -3,6 +3,8 @@ package org.oopvnu;
 import org.oopvnu.management.DictionaryManagement;
 import org.oopvnu.entities.Word;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class DictionaryCommandline {
@@ -16,12 +18,11 @@ public class DictionaryCommandline {
         return dictionaryManagement;
     }
 
-    /**
-     * In tất cả các từ trong từ điển.
-     */
 
     /**
-     * .
+     * Menu.
+     * Nhập n là số thứ tự của lựa chọn
+     * Nếu n không hợp lệ yêu cầu nhập lại
      */
     public void dictionaryAdvanced() {
         Scanner sc = new Scanner(System.in);
@@ -43,30 +44,43 @@ public class DictionaryCommandline {
                 break;
             case 1:
                 dictionaryManagement.addFromCommandline();
+                subDictionaryAdvanced();
                 break;
             case 2:
                 dictionaryManagement.removeFromCommandline();
+                subDictionaryAdvanced();
                 break;
             case 3:
                 dictionaryManagement.updateFromCommandLine();
+                subDictionaryAdvanced();
                 break;
             case 4:
                 showAllWords();
+                subDictionaryAdvanced();
                 break;
             case 5:
                 dictionaryManagement.dictionaryLookup();
+                subDictionaryAdvanced();
                 break;
             case 6:
                 dictionaryManagement.dictionarySearcher();
+                subDictionaryAdvanced();
                 break;
             case 7:
                 System.out.println("lam gi đa co game ma choi :)))");
+                subDictionaryAdvanced();
                 break;
             case 8:
-//                dictionaryManagement.insertFromFile();
+                try{
+                    dictionaryManagement.readFromFile("src//main//resources//dictionaries.txt");
+                    subDictionaryAdvanced();
+                } catch (IOException e) {
+                        e.printStackTrace();
+                }
                 break;
             case 9:
                 System.out.println("Chua viet ham này heheh :)))");
+                subDictionaryAdvanced();
                 break;
             default:
                 System.out.println("ENTER A NUMBER FROM 1 TO 9, PLEASE!");
@@ -74,38 +88,55 @@ public class DictionaryCommandline {
         }
     }
 
+    /**
+     * In tất cả các từ trong từ điển.
+     */
     public void subDictionaryAdvanced() {
         Scanner sc = new Scanner(System.in);
+        System.out.println("Your action: ");
         int choice = sc.nextInt();
         switch (choice) {
             case 0:
                 break;
             case 1:
                 dictionaryManagement.addFromCommandline();
+                subDictionaryAdvanced();
                 break;
             case 2:
                 dictionaryManagement.removeFromCommandline();
+                subDictionaryAdvanced();
                 break;
             case 3:
                 dictionaryManagement.updateFromCommandLine();
+                subDictionaryAdvanced();
                 break;
             case 4:
                 showAllWords();
+                subDictionaryAdvanced();
                 break;
             case 5:
                 dictionaryManagement.dictionaryLookup();
+                subDictionaryAdvanced();
                 break;
             case 6:
                 dictionaryManagement.dictionarySearcher();
+                subDictionaryAdvanced();
                 break;
             case 7:
                 System.out.println("lam gi đa co game ma choi :)))");
+                subDictionaryAdvanced();
                 break;
             case 8:
-//                dictionaryManagement.insertFromFile();
+                try{
+                    dictionaryManagement.readFromFile("src//main//resources//dictionaries.txt");
+                    subDictionaryAdvanced();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
             case 9:
                 System.out.println("Chua viet ham này heheh :)))");
+                subDictionaryAdvanced();
                 break;
             default:
                 System.out.println("ENTER A NUMBER FROM 1 TO 9, PLEASE!");

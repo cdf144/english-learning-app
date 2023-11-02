@@ -1,6 +1,7 @@
 package org.oopvnu.management;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
@@ -19,6 +20,27 @@ public class DictionaryManagement extends Dictionary {
 
     public DictionaryManagement() {
         super();
+    }
+
+    /**
+     * Đọc dữ liệu từ file .txt và sau đó in ra danh
+     * sách từ trong từ điển theo thứ tự được sort.
+     *
+     * @param filename String path đến file .txt
+     * @throws IOException Ngoại lệ được throw nếu FileHandler
+     *                     bị lỗi.
+     */
+    public void readFromFile(String filename) throws IOException {
+        FileHandler fileHandler = new FileHandler("log.txt");
+        fileHandler.setLevel(Level.INFO);
+        LOGGER.addHandler(fileHandler);
+        try {
+            insertFromFile(filename);
+            sortWordList();
+            LOGGER.info("All operation succeeded.");
+        } catch (FileNotFoundException e) {
+            LOGGER.log(Level.SEVERE, e.toString(), e);
+        }
     }
 
     /**

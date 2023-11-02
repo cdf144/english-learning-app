@@ -27,53 +27,15 @@ public class DictionaryCommandLine {
     }
 
     /**
-     * Đọc dữ liệu từ file .txt và sau đó in ra danh
-     * sách từ trong từ điển theo thứ tự được sort.
-     *
-     * @param filename String path đến file .txt
-     * @throws IOException Ngoại lệ được throw nếu FileHandler
-     *                     bị lỗi.
-     */
-    public void readFromFile(String filename) throws IOException {
-        FileHandler fileHandler = new FileHandler("log.txt");
-        fileHandler.setLevel(Level.INFO);
-        LOGGER.addHandler(fileHandler);
-        try {
-            dictionaryCommandline.getDictionaryManagement().insertFromFile(filename);
-            dictionaryCommandline.getDictionaryManagement().sortWordList();
-            LOGGER.info("All operation succeeded.");
-        } catch (FileNotFoundException e) {
-            LOGGER.log(Level.SEVERE, e.toString(), e);
-        }
-    }
-
-    /**
      * Driver method.
      * @param args Thông số đầu vào
      * @throws IOException Được ném nếu không tìm thấy
      *                     file tại path được đặt
      */
     public static void main(String[] args) throws IOException {
-        File file;
-        String filename = "src"
-                + File.separator + "main"
-                + File.separator + "resources"
-                + File.separator + "dictionaries.txt";
-
-        String workingDir = System.getProperty("user.dir");
-        file = new File(workingDir, filename);
-
         DictionaryCommandLine dictionaryCommandLine = new DictionaryCommandLine();
 
 //        dictionaryCommandLine.dictionaryBasic();
-        dictionaryCommandLine.readFromFile(file.getAbsolutePath());
-//        dictionaryCommandLine.dictionaryCommandline.getDictionaryManagement().dictionaryLookup();
-//        dictionaryCommandLine.dictionaryCommandline.getDictionaryManagement().dictionarySearcher();
-
-//        dictionaryCommandLine.dictionaryCommandline.getDictionaryManagement().addFromCommandline();
-//        dictionaryCommandLine.dictionaryCommandline.getDictionaryManagement().removeFromCommandline();
-//        dictionaryCommandLine.dictionaryCommandline.getDictionaryManagement().updateFromCommandLine();
-//        dictionaryCommandLine.dictionaryCommandline.showAllWords();
         dictionaryCommandLine.dictionaryCommandline.dictionaryAdvanced();
     }
 }
