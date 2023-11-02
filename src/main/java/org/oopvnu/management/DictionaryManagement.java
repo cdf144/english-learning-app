@@ -3,6 +3,7 @@ package org.oopvnu.management;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
@@ -199,6 +200,25 @@ public class DictionaryManagement extends Dictionary {
             }
         }
         System.out.println("UPDATED !");
+    }
+
+    public void dictionaryExportToFile() throws IOException {
+        FileHandler fileHandler = new FileHandler("log.txt");
+        fileHandler.setLevel(Level.INFO);
+        LOGGER.addHandler(fileHandler);
+
+        FileWriter fileWriter;
+        try {
+            fileWriter = new FileWriter("src//main//resources//dictionaries.txt");
+            for (int i = 0; i < wordList.size(); i++) {
+                fileWriter.write(wordList.get(i).getWord_target() + "\t");
+                fileWriter.write(wordList.get(i).getWord_explain() + "\n");
+            }
+            fileWriter.close();
+            System.out.println("Completed !");
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, e.toString(), e);
+        }
     }
 
     /**

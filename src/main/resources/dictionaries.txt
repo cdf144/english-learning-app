@@ -1,16 +1,19 @@
-hello	xin chao
-one	1
-two	2
-three	3
-four	4
-five	5
-six	6
-seven	7
+add	them
+change	thay doi
 eight	8
-nine	9
-ten	10
 eleven	11
-twelve	12
-translate	dich
+five	5
+four	4
+hello	xin chao
+nine	9
+one	1
+remove	xoa
+seven	7
+six	6
+ten	10
+three	3
 transfer	chuyen khoan
+translate	dich
 transparent	trong suot
+twelve	12
+two	2

@@ -79,8 +79,12 @@ public class DictionaryCommandline {
                 }
                 break;
             case 9:
-                System.out.println("Chua viet ham này heheh :)))");
-                subDictionaryAdvanced();
+                try {
+                    dictionaryManagement.dictionaryExportToFile();
+                    subDictionaryAdvanced();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
             default:
                 System.out.println("ENTER A NUMBER FROM 1 TO 9, PLEASE!");
@@ -135,8 +139,12 @@ public class DictionaryCommandline {
                 }
                 break;
             case 9:
-                System.out.println("Chua viet ham này heheh :)))");
-                subDictionaryAdvanced();
+                try {
+                    dictionaryManagement.dictionaryExportToFile();
+                    subDictionaryAdvanced();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
             default:
                 System.out.println("ENTER A NUMBER FROM 1 TO 9, PLEASE!");
