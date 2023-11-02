@@ -202,6 +202,10 @@ public class DictionaryManagement extends Dictionary {
         System.out.println("UPDATED !");
     }
 
+    /**
+     * Xuất wordList ra file.
+     * @throws IOException
+     */
     public void dictionaryExportToFile() throws IOException {
         FileHandler fileHandler = new FileHandler("log.txt");
         fileHandler.setLevel(Level.INFO);

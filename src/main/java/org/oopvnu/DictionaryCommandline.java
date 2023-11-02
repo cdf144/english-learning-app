@@ -93,7 +93,9 @@ public class DictionaryCommandline {
     }
 
     /**
-     * In tất cả các từ trong từ điển.
+     * Menu.
+     * Nhập n là số thứ tự của lựa chọn
+     * Nếu n không hợp lệ yêu cầu nhập lại
      */
     public void subDictionaryAdvanced() {
         Scanner sc = new Scanner(System.in);
@@ -152,6 +154,9 @@ public class DictionaryCommandline {
         }
     }
 
+    /**
+     * In tất cả các từ trong từ điển.
+     */
     public void showAllWords() {
         System.out.printf("%-3s | %-15s | %-20s%n", "No", "English", "Vietnamese");
         int i = 1;
