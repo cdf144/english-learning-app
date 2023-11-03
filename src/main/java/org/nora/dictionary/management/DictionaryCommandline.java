@@ -1,7 +1,6 @@
-package org.oopvnu;
+package org.nora.dictionary.management;
 
-import org.oopvnu.entities.Word;
-import org.oopvnu.management.DictionaryManagement;
+import org.nora.dictionary.entities.Word;
 
 import java.io.IOException;
 import java.util.Scanner;

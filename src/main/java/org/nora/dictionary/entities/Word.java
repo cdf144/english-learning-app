@@ -1,4 +1,4 @@
-package org.oopvnu.entities;
+package org.nora.dictionary.entities;
 
 public class Word {
     private String word_target;

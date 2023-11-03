@@ -1,6 +1,6 @@
-package org.oopvnu.entities;
+package org.nora.dictionary.entities;
 
-import org.oopvnu.management.WordComparator;
+import org.nora.dictionary.management.WordComparator;
 
 import java.util.ArrayList;
 import java.util.List;

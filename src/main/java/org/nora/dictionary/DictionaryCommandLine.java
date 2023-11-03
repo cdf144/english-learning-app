@@ -1,5 +1,7 @@
-import org.oopvnu.DictionaryCommandline;
-import org.oopvnu.management.DictionaryManagement;
+package org.nora.dictionary;
+
+import org.nora.dictionary.management.DictionaryCommandline;
+import org.nora.dictionary.management.DictionaryManagement;
 
 import java.io.IOException;
 import java.util.logging.Level;

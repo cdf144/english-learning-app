@@ -1,4 +1,4 @@
-package org.oopvnu.management;
+package org.nora.dictionary.management;
 
 import java.io.*;
 import java.util.List;
@@ -7,8 +7,8 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.oopvnu.entities.Dictionary;
-import org.oopvnu.entities.Word;
+import org.nora.dictionary.entities.Word;
+import org.nora.dictionary.entities.Dictionary;
 
 public class DictionaryManagement extends Dictionary {
     private static final Logger LOGGER = Logger.getLogger(DictionaryManagement.class.getName());
