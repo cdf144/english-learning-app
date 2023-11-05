@@ -20,7 +20,7 @@ public class DictionaryCommandline extends DictionaryManagement {
     }
 
     private void initLogFile() throws IOException {
-        FileHandler fileHandler = new FileHandler(PATH_DICTIONARY_ADVANCED_LOG);
+        FileHandler fileHandler = new FileHandler(PATH_DICTIONARY_ADVANCED_LOG, false);
         fileHandler.setLevel(Level.INFO);
         LOGGER.addHandler(fileHandler);
     }
@@ -89,7 +89,7 @@ public class DictionaryCommandline extends DictionaryManagement {
                 break;
             case 9:
                 try {
-                    dictionaryExportToFile();
+                    exportToFile();
                     subDictionaryAdvanced();
                     LOGGER.info("No I/O error occured.");
                 } catch (IOException e) {
@@ -153,7 +153,7 @@ public class DictionaryCommandline extends DictionaryManagement {
                 break;
             case 9:
                 try {
-                    dictionaryExportToFile();
+                    exportToFile();
                     LOGGER.info("No I/O error occured.");
                     subDictionaryAdvanced();
                 } catch (IOException e) {

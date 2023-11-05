@@ -1,6 +1,7 @@
 package org.nora.dictionary.management;
 
 import java.io.*;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.FileHandler;
@@ -53,10 +54,10 @@ public class DictionaryManagement {
         for (int i = 1; i <= wordNumber; i++) {
             System.out.println("Từ thứ " + i);
 
-            System.out.println("Nhập từ tiếng Anh:");
+            System.out.print("Nhập từ tiếng Anh: ");
             String word_target = scanner.nextLine();
 
-            System.out.println("Nhập nghĩa tiếng Việt:");
+            System.out.print("Nhập nghĩa tiếng Việt: ");
             String word_explain = scanner.nextLine();
 
             dictionary.addWord(new Word(word_target, word_explain));
@@ -68,19 +69,19 @@ public class DictionaryManagement {
      * Đọc dữ liệu từ file .txt và sau đó in ra danh
      * sách từ trong từ điển theo thứ tự được sort.
      *
-     * @param filename String path đến file .txt
+     * @param filePath String path đến file .txt
      * @throws IOException Ngoại lệ được throw nếu FileHandler
      *                     bị lỗi.
      */
-    public void readFromFile(String filename) throws IOException {
-        FileHandler fileHandler = new FileHandler(PATH_READFROMFILE_LOG);
+    public void readFromFile(String filePath) throws IOException {
+        FileHandler fileHandler = new FileHandler(PATH_READFROMFILE_LOG, false);
         fileHandler.setLevel(Level.INFO);
         LOGGER.addHandler(fileHandler);
 
         try {
-            insertFromFile(filename);
+            insertFromFile(filePath);
             dictionary.sortWordList();
-            LOGGER.info("All operation succeeded.");
+            LOGGER.info("Dictionary read and sorted.");
         } catch (FileNotFoundException e) {
             LOGGER.log(Level.SEVERE, e.toString(), e);
         }
@@ -90,16 +91,16 @@ public class DictionaryManagement {
      * Mở file .txt và đọc dữ liệu từ file gồm các
      * từ tiếng Anh và giải nghĩa tiếng Việt được
      * phân cách bởi 1 dấu tab.
-     * @param filename String đường dẫn đến file .txt
+     * @param filePath String đường dẫn đến file .txt
      * @throws IOException Ngoại lệ được throw nếu FileHandler
      *                     hoặc FileReader bị lỗi
      */
-    public void insertFromFile(String filename) throws IOException {
-        FileHandler fileHandler = new FileHandler(PATH_INSERTFROMFILE_LOG);
+    public void insertFromFile(String filePath) throws IOException {
+        FileHandler fileHandler = new FileHandler(PATH_INSERTFROMFILE_LOG, false);
         fileHandler.setLevel(Level.INFO);
         LOGGER.addHandler(fileHandler);
 
-        FileReader fileReader = new FileReader(filename);
+        FileReader fileReader = new FileReader(filePath);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
 
         String line;
@@ -115,26 +116,26 @@ public class DictionaryManagement {
     }
 
     /**
-     * Đọc dữ liệu từ wordList.
-     * Nhập từ cần tìm và in ra word_explain
+     * Nhập một từ chính xác cần tìm và in ra word_explain.
      * Thông báo nếu không có từ nào trùng khớp được tìm thấy
      */
     public void dictionaryLookup() {
-        int wordCounter = 0;
+        System.out.print("Lookup: Enter your word target: ");
+        String word_target = scanner.next();
+        Word wordFind = new Word(word_target, null);
 
-        System.out.println("Lookup: Enter your word target: ");
-        String word_target = scanner.nextLine();
+        int index = Collections.binarySearch(
+                dictionary.getWordList(),
+                wordFind,
+                new WordComparator()
+        );
 
-        for (Word word : dictionary.getWordList()) {
-            if (word_target.equalsIgnoreCase(word.getWord_target())) {
-                wordCounter++;
-                System.out.println("The word explanation is: ");
-                System.out.println(word.getWord_explain());
-            }
-        }
-
-        if (wordCounter == 0) {
+        if (index < 0) {
             System.out.println("No word exist!");
+        } else {
+            System.out.println(
+                    dictionary.getWordList().get(index).getWord_explain()
+            );
         }
     }
 
@@ -144,24 +145,24 @@ public class DictionaryManagement {
      * In ra danh sách các Word trong resWordList giống như hàm showAllWord
      */
     public void dictionarySearcher() {
-        System.out.println("Searcher: Enter your word: ");
-        String wordTarget = scanner.nextLine();
+        System.out.print("Searcher: Enter your word: ");
+        String wordTarget = scanner.nextLine().toLowerCase();
 
-        dictionary.getResWordList().clear();
+        dictionary.getSearchResultList().clear();
         for (Word word : dictionary.getWordList()) {
-            if (word.getWord_target().toLowerCase().startsWith(wordTarget.toLowerCase())) {
-                dictionary.getResWordList().add(word);
+            if (word.getWord_target().toLowerCase().startsWith(wordTarget)) {
+                dictionary.getSearchResultList().add(word);
             }
         }
 
-        if (dictionary.getResWordList().isEmpty()) {
+        if (dictionary.getSearchResultList().isEmpty()) {
             System.out.println("No word exist!");
             return;
         }
 
         System.out.printf("%-3s | %-15s | %-20s%n", "No", "English", "Vietnamese");
         int wordCounter = 1;
-        for (Word word : dictionary.getResWordList()) {
+        for (Word word : dictionary.getSearchResultList()) {
             System.out.printf(
                     "%-3s | %-15s | %-20s%n",
                     wordCounter++,
@@ -242,8 +243,8 @@ public class DictionaryManagement {
      * Xuất wordList ra file.
      * @throws IOException Được ném nếu có lỗi xảy ra với FileWriter
      */
-    public void dictionaryExportToFile() throws IOException {
-        FileHandler fileHandler = new FileHandler(PATH_EXPORTTOFILE_LOG);
+    public void exportToFile() throws IOException {
+        FileHandler fileHandler = new FileHandler(PATH_EXPORTTOFILE_LOG, false);
         fileHandler.setLevel(Level.INFO);
         LOGGER.addHandler(fileHandler);
 
@@ -252,10 +253,13 @@ public class DictionaryManagement {
             fileWriter = new FileWriter(DictionaryManagement.PATH_DICTIONARY_FILE);
 
             dictionary.sortWordList();
+            StringBuilder content = new StringBuilder();
             for (Word word : dictionary.getWordList()) {
-                fileWriter.write(word.getWord_target() + "\t");
-                fileWriter.write(word.getWord_explain() + "\n");
+                content.append(word.getWord_target()).append("\t");
+                content.append(word.getWord_explain()).append("\n");
             }
+
+            fileWriter.write(content.toString());
             fileWriter.close();
             System.out.println("Completed!");
         } catch (IOException e) {

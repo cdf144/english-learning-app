@@ -1,23 +1,41 @@
 package org.nora.dictionary.entities;
 
-import org.nora.dictionary.management.WordComparator;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Dictionary {
     protected List<Word> wordList;
-
-    protected List<Word> resWordList;
+    protected List<Word> searchResultList;
 
     public Dictionary() {
         wordList = new ArrayList<>();
-        resWordList = new ArrayList<>();
+        searchResultList = new ArrayList<>();
     }
 
-    public Dictionary(List<Word> wordList) {
+    public Dictionary(ArrayList<Word> wordList) {
         this.wordList = wordList;
-        resWordList = new ArrayList<>();
+        searchResultList = new ArrayList<>();
+    }
+
+    public List<Word> getWordList() {
+        return wordList;
+    }
+
+    public void setWordList(List<Word> wordList) {
+        this.wordList = wordList;
+    }
+
+    public void setSearchResultList(List<Word> searchResultList) {
+        this.searchResultList = searchResultList;
+    }
+
+    public List<Word> getSearchResultList() {
+        return searchResultList;
+    }
+
+    public void setSearchResultList(ArrayList<Word> searchResultList) {
+        this.searchResultList = searchResultList;
     }
 
     public void addWord(Word word) {
@@ -28,19 +46,7 @@ public class Dictionary {
         wordList.remove(word);
     }
 
-    public List<Word> getResWordList() {
-        return resWordList;
-    }
-
-    public void setResWordList(List<Word> resWordList) {
-        this.resWordList = resWordList;
-    }
-
-    public List<Word> getWordList() {
-        return wordList;
-    }
-
     public void sortWordList() {
-        wordList.sort(new WordComparator());
+        Collections.sort(wordList);
     }
 }
