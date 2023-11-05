@@ -8,8 +8,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DictionaryCommandLine {
-    DictionaryCommandline dictionaryCommandline;
     private static final Logger LOGGER = Logger.getLogger(DictionaryManagement.class.getName());
+    DictionaryCommandline dictionaryCommandline;
 
     public DictionaryCommandLine() {
         dictionaryCommandline = new DictionaryCommandline();
@@ -21,7 +21,7 @@ public class DictionaryCommandLine {
      * đó in ra những từ được nhập và giải nghĩa Việt.
      */
     public void dictionaryBasic() {
-        dictionaryCommandline.getDictionaryManagement().insertFromCommandline();
+        dictionaryCommandline.insertFromCommandline();
         dictionaryCommandline.showAllWords();
     }
 

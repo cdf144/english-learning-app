@@ -8,19 +8,12 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DictionaryCommandline {
+public class DictionaryCommandline extends DictionaryManagement {
     private static final Logger LOGGER = Logger.getLogger(DictionaryManagement.class.getName());
 
-    private final DictionaryManagement dictionaryManagement;
-
     public DictionaryCommandline() {
-        dictionaryManagement = new DictionaryManagement();
+        super();
     }
-
-    public DictionaryManagement getDictionaryManagement() {
-        return dictionaryManagement;
-    }
-
 
     private void initLogFile() throws IOException {
         FileHandler fileHandler = new FileHandler("logSubAdvanced.txt");
@@ -54,15 +47,15 @@ public class DictionaryCommandline {
             case 0:
                 break;
             case 1:
-                dictionaryManagement.addFromCommandline();
+                addFromCommandline();
                 subDictionaryAdvanced();
                 break;
             case 2:
-                dictionaryManagement.removeFromCommandline();
+                removeFromCommandline();
                 subDictionaryAdvanced();
                 break;
             case 3:
-                dictionaryManagement.updateFromCommandLine();
+                updateFromCommandLine();
                 subDictionaryAdvanced();
                 break;
             case 4:
@@ -70,11 +63,11 @@ public class DictionaryCommandline {
                 subDictionaryAdvanced();
                 break;
             case 5:
-                dictionaryManagement.dictionaryLookup();
+                dictionaryLookup();
                 subDictionaryAdvanced();
                 break;
             case 6:
-                dictionaryManagement.dictionarySearcher();
+                dictionarySearcher();
                 subDictionaryAdvanced();
                 break;
             case 7:
@@ -83,7 +76,7 @@ public class DictionaryCommandline {
                 break;
             case 8:
                 try {
-                    dictionaryManagement.readFromFile(DictionaryManagement.PATH_TO_DICTIONARY_FILE);
+                    readFromFile(DictionaryManagement.PATH_TO_DICTIONARY_FILE);
                     subDictionaryAdvanced();
                     LOGGER.info("No I/O error occured.");
                 } catch (IOException e) {
@@ -92,7 +85,7 @@ public class DictionaryCommandline {
                 break;
             case 9:
                 try {
-                    dictionaryManagement.dictionaryExportToFile();
+                    dictionaryExportToFile();
                     subDictionaryAdvanced();
                     LOGGER.info("No I/O error occured.");
                 } catch (IOException e) {
@@ -118,15 +111,15 @@ public class DictionaryCommandline {
             case 0:
                 break;
             case 1:
-                dictionaryManagement.addFromCommandline();
+                addFromCommandline();
                 subDictionaryAdvanced();
                 break;
             case 2:
-                dictionaryManagement.removeFromCommandline();
+                removeFromCommandline();
                 subDictionaryAdvanced();
                 break;
             case 3:
-                dictionaryManagement.updateFromCommandLine();
+                updateFromCommandLine();
                 subDictionaryAdvanced();
                 break;
             case 4:
@@ -134,11 +127,11 @@ public class DictionaryCommandline {
                 subDictionaryAdvanced();
                 break;
             case 5:
-                dictionaryManagement.dictionaryLookup();
+                dictionaryLookup();
                 subDictionaryAdvanced();
                 break;
             case 6:
-                dictionaryManagement.dictionarySearcher();
+                dictionarySearcher();
                 subDictionaryAdvanced();
                 break;
             case 7:
@@ -147,7 +140,7 @@ public class DictionaryCommandline {
                 break;
             case 8:
                 try {
-                    dictionaryManagement.readFromFile(DictionaryManagement.PATH_TO_DICTIONARY_FILE);
+                    readFromFile(DictionaryManagement.PATH_TO_DICTIONARY_FILE);
                     LOGGER.info("No I/O error occured.");
                     subDictionaryAdvanced();
                 } catch (IOException e) {
@@ -156,7 +149,7 @@ public class DictionaryCommandline {
                 break;
             case 9:
                 try {
-                    dictionaryManagement.dictionaryExportToFile();
+                    dictionaryExportToFile();
                     LOGGER.info("No I/O error occured.");
                     subDictionaryAdvanced();
                 } catch (IOException e) {
@@ -176,9 +169,9 @@ public class DictionaryCommandline {
         System.out.printf("%-3s | %-15s | %-20s%n", "No", "English", "Vietnamese");
         int i = 1;
 
-        dictionaryManagement.sortWordList();
+        dictionary.sortWordList();
 
-        for (Word word : dictionaryManagement.getListWord()) {
+        for (Word word : dictionary.getWordList()) {
             System.out.printf(
                     "%-3s | %-15s | %-20s%n",
                     i++,
