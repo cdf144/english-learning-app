@@ -1,6 +1,7 @@
 package org.nora.dictionary.entities;
 
 import org.nora.dictionary.management.WordComparator;
+import org.nora.dictionary.management.WordPrefixComparator;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -28,15 +29,11 @@ public class Dictionary {
         this.wordList = wordList;
     }
 
-    public void setSearchResultList(List<Word> searchResultList) {
-        this.searchResultList = searchResultList;
-    }
-
     public List<Word> getSearchResultList() {
         return searchResultList;
     }
 
-    public void setSearchResultList(ArrayList<Word> searchResultList) {
+    public void setSearchResultList(List<Word> searchResultList) {
         this.searchResultList = searchResultList;
     }
 
@@ -58,6 +55,14 @@ public class Dictionary {
                 wordList,
                 word,
                 new WordComparator()
+        );
+    }
+
+    public int findWordWithPrefix(Word word) {
+        return Collections.binarySearch(
+                wordList,
+                word,
+                new WordPrefixComparator()
         );
     }
 

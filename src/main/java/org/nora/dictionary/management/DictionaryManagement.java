@@ -117,8 +117,8 @@ public class DictionaryManagement {
      */
     public void dictionaryLookup() {
         System.out.print("Lookup: Enter your word target: ");
-        String word_target = scanner.next();
-        Word wordFind = new Word(word_target.toLowerCase(), null);
+        String wordTarget = scanner.next();
+        Word wordFind = new Word(wordTarget.toLowerCase(), null);
 
         int index = dictionary.findWord(wordFind);
 
@@ -139,17 +139,32 @@ public class DictionaryManagement {
     public void dictionarySearcher() {
         System.out.print("Searcher: Enter your word: ");
         String wordTarget = scanner.nextLine().toLowerCase();
+        Word wordFind = new Word(wordTarget, null);
 
-        dictionary.getSearchResultList().clear();
-        for (Word word : dictionary.getWordList()) {
-            if (word.getWord_target().startsWith(wordTarget)) {
-                dictionary.getSearchResultList().add(word);
-            }
-        }
-
-        if (dictionary.getSearchResultList().isEmpty()) {
+        int index = dictionary.findWordWithPrefix(wordFind);
+        if (index < 0) {
             System.out.println("No word exist!");
             return;
+        }
+
+        int startIndex = index;
+        int endIndex = index;
+
+        while (startIndex > 0
+                && dictionary.getWordList().get(startIndex - 1).getWord_target().startsWith(wordTarget)
+        ) {
+            startIndex--;
+        }
+
+        while (endIndex < dictionary.getWordList().size()
+                && dictionary.getWordList().get(endIndex + 1).getWord_target().startsWith(wordTarget)
+        ) {
+            endIndex++;
+        }
+
+        dictionary.getSearchResultList().clear();
+        for (int i = startIndex; i <= endIndex; i++) {
+            dictionary.getSearchResultList().add(dictionary.getWordList().get(i));
         }
 
         System.out.printf("%-3s | %-15s | %-20s%n", "No", "English", "Vietnamese");
@@ -194,7 +209,7 @@ public class DictionaryManagement {
             if (word_target.equals(dictionary.getWordList().get(i).getWord_target())
                 || word_target.equals(dictionary.getWordList().get(i).getWord_explain())
             ) {
-                dictionary.getWordList().remove(dictionary.getWordList().get(i));
+                dictionary.removeWord(dictionary.getWordList().get(i));
                 check = true;
                 break;
             }

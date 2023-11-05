@@ -12,6 +12,7 @@ plug	cắm vào
 seven	7
 six	6
 ten	10
+trace	lần dấu vết
 transaction	giao dịch
 translate	dịch
 transparent	trong suot
