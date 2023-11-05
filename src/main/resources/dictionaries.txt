@@ -1,5 +1,6 @@
 add	thêm/cộng
-change	thay doi
+change	thay đổi
+criterion	tiêu chuẩn
 eight	8
 eleven	11
 five	5
@@ -7,10 +8,10 @@ four	4
 hello	xin chào
 nine	9
 pale	nhợt nhạt
+plug	cắm vào
 seven	7
 six	6
 ten	10
-three	3
 transaction	giao dịch
 translate	dịch
 transparent	trong suot

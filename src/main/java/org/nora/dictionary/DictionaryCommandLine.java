@@ -33,6 +33,7 @@ public class DictionaryCommandLine {
         DictionaryCommandLine dictionaryCommandLine = new DictionaryCommandLine();
 
         // dictionaryCommandLine.dictionaryBasic();
+        System.out.println("Welcome to My Application!");
         try {
             dictionaryCommandLine.dictionaryCommandline.dictionaryAdvanced();
         } catch (IOException e) {

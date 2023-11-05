@@ -64,7 +64,7 @@ public class DictionaryManagement {
             System.out.print("Nhập nghĩa tiếng Việt: ");
             String word_explain = scanner.nextLine();
 
-            dictionary.addWord(new Word(word_target, word_explain));
+            dictionary.addWord(new Word(word_target.toLowerCase(), word_explain));
             System.out.println();
         }
     }
@@ -92,8 +92,8 @@ public class DictionaryManagement {
      * từ tiếng Anh và giải nghĩa tiếng Việt được
      * phân cách bởi 1 dấu tab.
      * @param filePath String đường dẫn đến file .txt
-     * @throws IOException Ngoại lệ được throw nếu FileHandler
-     *                     hoặc FileReader bị lỗi
+     * @throws IOException Ngoại lệ được throw nếu fileReader
+     *                     hoặc bufferedReader bị lỗi
      */
     public void insertFromFile(String filePath) throws IOException {
         FileReader fileReader = new FileReader(filePath);
@@ -102,7 +102,7 @@ public class DictionaryManagement {
         String line;
         while ((line = bufferedReader.readLine()) != null) {
             String[] words = line.split("\t");
-            Word word = new Word(words[0], words[1]);
+            Word word = new Word(words[0].toLowerCase(), words[1]);
             dictionary.addWord(word);
         }
 
@@ -118,7 +118,7 @@ public class DictionaryManagement {
     public void dictionaryLookup() {
         System.out.print("Lookup: Enter your word target: ");
         String word_target = scanner.next();
-        Word wordFind = new Word(word_target, null);
+        Word wordFind = new Word(word_target.toLowerCase(), null);
 
         int index = dictionary.findWord(wordFind);
 
@@ -133,8 +133,8 @@ public class DictionaryManagement {
 
     /**
      * Đọc dữ liệu từ wordList.
-     * Thêm các Words thỏa mãn vào resWordList
-     * In ra danh sách các Word trong resWordList giống như hàm showAllWord
+     * Thêm các Words thỏa mãn vào searchResultList
+     * In ra danh sách các Word trong searchResultList giống như hàm showAllWord
      */
     public void dictionarySearcher() {
         System.out.print("Searcher: Enter your word: ");
@@ -142,7 +142,7 @@ public class DictionaryManagement {
 
         dictionary.getSearchResultList().clear();
         for (Word word : dictionary.getWordList()) {
-            if (word.getWord_target().toLowerCase().startsWith(wordTarget)) {
+            if (word.getWord_target().startsWith(wordTarget)) {
                 dictionary.getSearchResultList().add(word);
             }
         }
@@ -176,7 +176,7 @@ public class DictionaryManagement {
         System.out.println("Add: Enter this word_explain: ");
         String word_explain = scanner.nextLine();
 
-        Word newWord = new Word(word_target, word_explain);
+        Word newWord = new Word(word_target.toLowerCase(), word_explain);
         dictionary.getWordList().add(newWord);
         System.out.println("ADDED!");
     }
@@ -187,12 +187,12 @@ public class DictionaryManagement {
      */
     public void removeFromCommandline() {
         System.out.println("Enter word_target or word_explain you want to remove: ");
-        String word_target = scanner.nextLine();
+        String word_target = scanner.nextLine().toLowerCase();
 
         boolean check = false;
         for (int i = 0; i < dictionary.getWordList().size(); i++) {
-            if (word_target.equalsIgnoreCase(dictionary.getWordList().get(i).getWord_target())
-                || word_target.equalsIgnoreCase(dictionary.getWordList().get(i).getWord_explain())
+            if (word_target.equals(dictionary.getWordList().get(i).getWord_target())
+                || word_target.equals(dictionary.getWordList().get(i).getWord_explain())
             ) {
                 dictionary.getWordList().remove(dictionary.getWordList().get(i));
                 check = true;
@@ -213,10 +213,10 @@ public class DictionaryManagement {
      */
     public void updateFromCommandLine() {
         System.out.println("Update: Enter word you want to update: ");
-        String word_target = scanner.nextLine();
+        String word_target = scanner.nextLine().toLowerCase();
 
         for (int i = 0; i < dictionary.getWordList().size(); i++) {
-            if (word_target.equalsIgnoreCase(dictionary.getWordList().get(i).getWord_target())) {
+            if (word_target.equals(dictionary.getWordList().get(i).getWord_target())) {
                 System.out.println("Update: Enter your changed word_explain: ");
                 String newWordExplain = scanner.nextLine();
                 dictionary.getWordList().set(i, new Word(word_target, newWordExplain));
@@ -231,22 +231,18 @@ public class DictionaryManagement {
      */
     public void exportToFile() throws IOException {
         FileWriter fileWriter;
-        try {
-            fileWriter = new FileWriter(DictionaryManagement.PATH_DICTIONARY_FILE);
+        fileWriter = new FileWriter(DictionaryManagement.PATH_DICTIONARY_FILE);
 
-            dictionary.sortWordList();
-            StringBuilder content = new StringBuilder();
-            for (Word word : dictionary.getWordList()) {
-                content.append(word.getWord_target()).append("\t");
-                content.append(word.getWord_explain()).append("\n");
-            }
-
-            fileWriter.write(content.toString());
-            fileWriter.close();
-            System.out.println("Completed!");
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, e.toString(), e);
+        dictionary.sortWordList();
+        StringBuilder content = new StringBuilder();
+        for (Word word : dictionary.getWordList()) {
+            content.append(word.getWord_target()).append("\t");
+            content.append(word.getWord_explain()).append("\n");
         }
+
+        fileWriter.write(content.toString());
+        fileWriter.close();
+        System.out.println("Completed!");
     }
 
 }

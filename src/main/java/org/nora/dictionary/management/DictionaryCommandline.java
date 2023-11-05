@@ -31,13 +31,7 @@ public class DictionaryCommandline extends DictionaryManagement {
         super();
     }
 
-    /**
-     * Menu.
-     * Nhập n là số thứ tự của lựa chọn
-     * Nếu n không hợp lệ yêu cầu nhập lại
-     */
-    public void dictionaryAdvanced() throws IOException {
-        System.out.println("Welcome to My Application!");
+    private void printMenu() {
         System.out.println("  [0] Exit");
         System.out.println("  [1] Add");
         System.out.println("  [2] Remove");
@@ -48,123 +42,59 @@ public class DictionaryCommandline extends DictionaryManagement {
         System.out.println("  [7] Game");
         System.out.println("  [8] Import from file");
         System.out.println("  [9] Export to file");
-        System.out.println("Your action: ");
-        int choice = scanner.nextInt();
-        switch (choice) {
-            case 0:
-                break;
-            case 1:
-                addFromCommandline();
-                subDictionaryAdvanced();
-                break;
-            case 2:
-                removeFromCommandline();
-                subDictionaryAdvanced();
-                break;
-            case 3:
-                updateFromCommandLine();
-                subDictionaryAdvanced();
-                break;
-            case 4:
-                showAllWords();
-                subDictionaryAdvanced();
-                break;
-            case 5:
-                dictionaryLookup();
-                subDictionaryAdvanced();
-                break;
-            case 6:
-                dictionarySearcher();
-                subDictionaryAdvanced();
-                break;
-            case 7:
-                System.out.println("lam gi đa co game ma choi :)))");
-                subDictionaryAdvanced();
-                break;
-            case 8:
-                try {
-                    readFromFile(DictionaryManagement.PATH_DICTIONARY_FILE);
-                    subDictionaryAdvanced();
-                    LOGGER.info("No I/O error occured.");
-                } catch (IOException e) {
-                    LOGGER.log(Level.SEVERE, e.toString(), e);
-                }
-                break;
-            case 9:
-                try {
-                    exportToFile();
-                    subDictionaryAdvanced();
-                    LOGGER.info("No I/O error occured.");
-                } catch (IOException e) {
-                    LOGGER.log(Level.SEVERE, e.toString(), e);
-                }
-                break;
-            default:
-                System.out.println("ENTER A NUMBER FROM 1 TO 9, PLEASE!");
-                subDictionaryAdvanced();
-        }
     }
 
-    /**
-     * Menu.
-     * Nhập n là số thứ tự của lựa chọn
-     * Nếu n không hợp lệ yêu cầu nhập lại
-     */
-    public void subDictionaryAdvanced() throws IOException {
-        System.out.println("Your action: ");
-        int choice = scanner.nextInt();
-        switch (choice) {
-            case 0:
-                break;
-            case 1:
-                addFromCommandline();
-                subDictionaryAdvanced();
-                break;
-            case 2:
-                removeFromCommandline();
-                subDictionaryAdvanced();
-                break;
-            case 3:
-                updateFromCommandLine();
-                subDictionaryAdvanced();
-                break;
-            case 4:
-                showAllWords();
-                subDictionaryAdvanced();
-                break;
-            case 5:
-                dictionaryLookup();
-                subDictionaryAdvanced();
-                break;
-            case 6:
-                dictionarySearcher();
-                subDictionaryAdvanced();
-                break;
-            case 7:
-                System.out.println("lam gi đa co game ma choi :)))");
-                subDictionaryAdvanced();
-                break;
-            case 8:
-                try {
-                    readFromFile(DictionaryManagement.PATH_DICTIONARY_FILE);
-                    LOGGER.info("No I/O error occured.");
-                    subDictionaryAdvanced();
-                } catch (IOException e) {
-                    LOGGER.log(Level.SEVERE, e.toString(), e);
-                }
-                break;
-            case 9:
-                try {
-                    exportToFile();
-                    LOGGER.info("No I/O error occured.");
-                    subDictionaryAdvanced();
-                } catch (IOException e) {
-                    LOGGER.log(Level.SEVERE, e.toString(), e);
-                }
-                break;
-            default:
-                System.out.println("ENTER A NUMBER FROM 1 TO 9, PLEASE!");
-                subDictionaryAdvanced();
+    public void dictionaryAdvanced() throws IOException {
+        printMenu();
+        boolean exit = false;
+        while (!exit) {
+            System.out.print("Your action: ");
+            int choice = scanner.nextInt();
+            switch (choice) {
+                case 0:
+                    exit = true;
+                    break;
+                case 1:
+                    addFromCommandline();
+                    break;
+                case 2:
+                    removeFromCommandline();
+                    break;
+                case 3:
+                    updateFromCommandLine();
+                    break;
+                case 4:
+                    showAllWords();
+                    break;
+                case 5:
+                    dictionaryLookup();
+                    break;
+                case 6:
+                    dictionarySearcher();
+                    break;
+                case 7:
+                    System.out.println("lam gi đa co game ma choi :)))");
+                    break;
+                case 8:
+                    try {
+                        readFromFile(DictionaryManagement.PATH_DICTIONARY_FILE);
+                        LOGGER.info("No I/O error occured.");
+                    } catch (IOException e) {
+                        LOGGER.log(Level.SEVERE, e.toString(), e);
+                    }
+                    break;
+                case 9:
+                    try {
+                        exportToFile();
+                        LOGGER.info("No I/O error occured.");
+                    } catch (IOException e) {
+                        LOGGER.log(Level.SEVERE, e.toString(), e);
+                    }
+                    break;
+                default:
+                    System.out.println("ENTER A NUMBER FROM 1 TO 9, PLEASE!");
+                    break;
+            }
         }
     }
 
