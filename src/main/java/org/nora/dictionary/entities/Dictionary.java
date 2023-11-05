@@ -36,17 +36,10 @@ public class Dictionary {
         this.resWordList = resWordList;
     }
 
-    /**
-     * Trả về wordList
-     * @return wordList
-     */
     public List<Word> getWordList() {
         return wordList;
     }
 
-    /**
-     * Sắp xếp Word trong wordList.
-     */
     public void sortWordList() {
         wordList.sort(new WordComparator());
     }
