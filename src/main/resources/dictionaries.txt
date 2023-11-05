@@ -6,6 +6,7 @@ five	5
 four	4
 hello	xin chào
 nine	9
+pale	nhợt nhạt
 remove	xoa
 seven	7
 six	6

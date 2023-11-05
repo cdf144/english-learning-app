@@ -2,6 +2,7 @@ package org.nora.dictionary.management;
 
 import org.nora.dictionary.entities.Word;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.FileHandler;
@@ -11,12 +12,15 @@ import java.util.logging.Logger;
 public class DictionaryCommandline extends DictionaryManagement {
     private static final Logger LOGGER = Logger.getLogger(DictionaryManagement.class.getName());
 
+    public static final String PATH_DICTIONARY_ADVANCED_LOG = "log"
+            + File.separator + "logDictionaryAdvanced.log";
+
     public DictionaryCommandline() {
         super();
     }
 
     private void initLogFile() throws IOException {
-        FileHandler fileHandler = new FileHandler("logSubAdvanced.txt");
+        FileHandler fileHandler = new FileHandler(PATH_DICTIONARY_ADVANCED_LOG);
         fileHandler.setLevel(Level.INFO);
         LOGGER.addHandler(fileHandler);
     }
@@ -76,7 +80,7 @@ public class DictionaryCommandline extends DictionaryManagement {
                 break;
             case 8:
                 try {
-                    readFromFile(DictionaryManagement.PATH_TO_DICTIONARY_FILE);
+                    readFromFile(DictionaryManagement.PATH_DICTIONARY_FILE);
                     subDictionaryAdvanced();
                     LOGGER.info("No I/O error occured.");
                 } catch (IOException e) {
@@ -140,7 +144,7 @@ public class DictionaryCommandline extends DictionaryManagement {
                 break;
             case 8:
                 try {
-                    readFromFile(DictionaryManagement.PATH_TO_DICTIONARY_FILE);
+                    readFromFile(DictionaryManagement.PATH_DICTIONARY_FILE);
                     LOGGER.info("No I/O error occured.");
                     subDictionaryAdvanced();
                 } catch (IOException e) {

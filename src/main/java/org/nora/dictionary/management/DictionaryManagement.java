@@ -13,13 +13,21 @@ import org.nora.dictionary.entities.Word;
 public class DictionaryManagement {
     Dictionary dictionary;
     private static final Logger LOGGER = Logger.getLogger(DictionaryManagement.class.getName());
-
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static final String PATH_TO_DICTIONARY_FILE = "src"
+    public static final String PATH_DICTIONARY_FILE = "src"
             + File.separator + "main"
             + File.separator + "resources"
             + File.separator + "dictionaries.txt";
+
+    public static final String PATH_READFROMFILE_LOG = "log"
+            + File.separator + "logReadFromFile.log";
+
+    public static final String PATH_INSERTFROMFILE_LOG = "log"
+            + File.separator + "logInsertFromFile.log";
+
+    public static final String PATH_EXPORTTOFILE_LOG = "log"
+            + File.separator + "logExportToFile.log";
 
     public DictionaryManagement() {
         dictionary = new Dictionary();
@@ -65,7 +73,7 @@ public class DictionaryManagement {
      *                     bị lỗi.
      */
     public void readFromFile(String filename) throws IOException {
-        FileHandler fileHandler = new FileHandler("logReadFromFile.txt");
+        FileHandler fileHandler = new FileHandler(PATH_READFROMFILE_LOG);
         fileHandler.setLevel(Level.INFO);
         LOGGER.addHandler(fileHandler);
 
@@ -87,7 +95,7 @@ public class DictionaryManagement {
      *                     hoặc FileReader bị lỗi
      */
     public void insertFromFile(String filename) throws IOException {
-        FileHandler fileHandler = new FileHandler("logInsertFromFile.txt");
+        FileHandler fileHandler = new FileHandler(PATH_INSERTFROMFILE_LOG);
         fileHandler.setLevel(Level.INFO);
         LOGGER.addHandler(fileHandler);
 
@@ -113,8 +121,10 @@ public class DictionaryManagement {
      */
     public void dictionaryLookup() {
         int wordCounter = 0;
+
         System.out.println("Lookup: Enter your word target: ");
         String word_target = scanner.nextLine();
+
         for (Word word : dictionary.getWordList()) {
             if (word_target.equalsIgnoreCase(word.getWord_target())) {
                 wordCounter++;
@@ -122,7 +132,10 @@ public class DictionaryManagement {
                 System.out.println(word.getWord_explain());
             }
         }
-        if (wordCounter == 0) System.out.println("No word exist!");
+
+        if (wordCounter == 0) {
+            System.out.println("No word exist!");
+        }
     }
 
     /**
@@ -133,6 +146,7 @@ public class DictionaryManagement {
     public void dictionarySearcher() {
         System.out.println("Searcher: Enter your word: ");
         String wordTarget = scanner.nextLine();
+
         dictionary.getResWordList().clear();
         for (Word word : dictionary.getWordList()) {
             if (word.getWord_target().toLowerCase().startsWith(wordTarget.toLowerCase())) {
@@ -229,13 +243,13 @@ public class DictionaryManagement {
      * @throws IOException Được ném nếu có lỗi xảy ra với FileWriter
      */
     public void dictionaryExportToFile() throws IOException {
-        FileHandler fileHandler = new FileHandler("logExportToFile.txt");
+        FileHandler fileHandler = new FileHandler(PATH_EXPORTTOFILE_LOG);
         fileHandler.setLevel(Level.INFO);
         LOGGER.addHandler(fileHandler);
 
         FileWriter fileWriter;
         try {
-            fileWriter = new FileWriter(DictionaryManagement.PATH_TO_DICTIONARY_FILE);
+            fileWriter = new FileWriter(DictionaryManagement.PATH_DICTIONARY_FILE);
 
             dictionary.sortWordList();
             for (Word word : dictionary.getWordList()) {
