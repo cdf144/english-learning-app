@@ -13,17 +13,22 @@ public class DictionaryCommandline extends DictionaryManagement {
     private static final Logger LOGGER = Logger.getLogger(DictionaryManagement.class.getName());
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static final String PATH_DICTIONARY_ADVANCED_LOG = "log"
+    public static final String PATH_DICTIONARYCOMMANDLINE_LOG = "log"
             + File.separator + "logDictionaryAdvanced.log";
+
+    private static final FileHandler logFileHandler;
+    static {
+        try {
+            logFileHandler = new FileHandler(PATH_DICTIONARYCOMMANDLINE_LOG, false);
+            logFileHandler.setLevel(Level.INFO);
+            LOGGER.addHandler(logFileHandler);
+        } catch (IOException e) {
+            throw new RuntimeException("Could not initalize DictionaryCommandline log FileHandler!", e);
+        }
+    }
 
     public DictionaryCommandline() {
         super();
-    }
-
-    private void initLogFile() throws IOException {
-        FileHandler fileHandler = new FileHandler(PATH_DICTIONARY_ADVANCED_LOG, false);
-        fileHandler.setLevel(Level.INFO);
-        LOGGER.addHandler(fileHandler);
     }
 
     /**
@@ -32,8 +37,6 @@ public class DictionaryCommandline extends DictionaryManagement {
      * Nếu n không hợp lệ yêu cầu nhập lại
      */
     public void dictionaryAdvanced() throws IOException {
-        initLogFile();
-
         System.out.println("Welcome to My Application!");
         System.out.println("  [0] Exit");
         System.out.println("  [1] Add");

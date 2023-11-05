@@ -1,5 +1,7 @@
 package org.nora.dictionary.entities;
 
+import org.nora.dictionary.management.WordComparator;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -44,6 +46,19 @@ public class Dictionary {
 
     public void removeWord(Word word) {
         wordList.remove(word);
+    }
+
+    /**
+     * Tìm và trả lại index của Word cần tìm.
+     * @param word Word để tìm
+     * @return index của Word cần tìm
+     */
+    public int findWord(Word word) {
+        return Collections.binarySearch(
+                wordList,
+                word,
+                new WordComparator()
+        );
     }
 
     public void sortWordList() {

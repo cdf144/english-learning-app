@@ -1,7 +1,6 @@
 package org.nora.dictionary.management;
 
 import java.io.*;
-import java.util.Collections;
 import java.util.Scanner;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -11,23 +10,29 @@ import org.nora.dictionary.entities.Dictionary;
 import org.nora.dictionary.entities.Word;
 
 public class DictionaryManagement {
-    Dictionary dictionary;
+    protected Dictionary dictionary;
+
     private static final Logger LOGGER = Logger.getLogger(DictionaryManagement.class.getName());
     private static final Scanner scanner = new Scanner(System.in);
+
+    public static final String PATH_DICTIONARYMANAGEMENT_LOG = "log"
+            + File.separator + "logDictionaryManagement.log";
 
     public static final String PATH_DICTIONARY_FILE = "src"
             + File.separator + "main"
             + File.separator + "resources"
             + File.separator + "dictionaries.txt";
 
-    public static final String PATH_READFROMFILE_LOG = "log"
-            + File.separator + "logReadFromFile.log";
-
-    public static final String PATH_INSERTFROMFILE_LOG = "log"
-            + File.separator + "logInsertFromFile.log";
-
-    public static final String PATH_EXPORTTOFILE_LOG = "log"
-            + File.separator + "logExportToFile.log";
+    private static final FileHandler logFileHandler;
+    static {
+        try {
+            logFileHandler = new FileHandler(PATH_DICTIONARYMANAGEMENT_LOG, false);
+            logFileHandler.setLevel(Level.INFO);
+            LOGGER.addHandler(logFileHandler);
+        } catch (IOException e) {
+            throw new RuntimeException("Could not initalize DictionaryManagement log FileHandler!", e);
+        }
+    }
 
     public DictionaryManagement() {
         dictionary = new Dictionary();
@@ -73,10 +78,6 @@ public class DictionaryManagement {
      *                     bị lỗi.
      */
     public void readFromFile(String filePath) throws IOException {
-        FileHandler fileHandler = new FileHandler(PATH_READFROMFILE_LOG, false);
-        fileHandler.setLevel(Level.INFO);
-        LOGGER.addHandler(fileHandler);
-
         try {
             insertFromFile(filePath);
             dictionary.sortWordList();
@@ -95,10 +96,6 @@ public class DictionaryManagement {
      *                     hoặc FileReader bị lỗi
      */
     public void insertFromFile(String filePath) throws IOException {
-        FileHandler fileHandler = new FileHandler(PATH_INSERTFROMFILE_LOG, false);
-        fileHandler.setLevel(Level.INFO);
-        LOGGER.addHandler(fileHandler);
-
         FileReader fileReader = new FileReader(filePath);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
 
@@ -123,11 +120,7 @@ public class DictionaryManagement {
         String word_target = scanner.next();
         Word wordFind = new Word(word_target, null);
 
-        int index = Collections.binarySearch(
-                dictionary.getWordList(),
-                wordFind,
-                new WordComparator()
-        );
+        int index = dictionary.findWord(wordFind);
 
         if (index < 0) {
             System.out.println("No word exist!");
@@ -237,10 +230,6 @@ public class DictionaryManagement {
      * @throws IOException Được ném nếu có lỗi xảy ra với FileWriter
      */
     public void exportToFile() throws IOException {
-        FileHandler fileHandler = new FileHandler(PATH_EXPORTTOFILE_LOG, false);
-        fileHandler.setLevel(Level.INFO);
-        LOGGER.addHandler(fileHandler);
-
         FileWriter fileWriter;
         try {
             fileWriter = new FileWriter(DictionaryManagement.PATH_DICTIONARY_FILE);
