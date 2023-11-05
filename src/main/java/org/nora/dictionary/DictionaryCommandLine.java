@@ -1,13 +1,15 @@
-import org.oopvnu.DictionaryCommandline;
-import org.oopvnu.management.DictionaryManagement;
+package org.nora.dictionary;
+
+import org.nora.dictionary.management.DictionaryCommandline;
+import org.nora.dictionary.management.DictionaryManagement;
 
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DictionaryCommandLine {
-    DictionaryCommandline dictionaryCommandline;
     private static final Logger LOGGER = Logger.getLogger(DictionaryManagement.class.getName());
+    DictionaryCommandline dictionaryCommandline;
 
     public DictionaryCommandLine() {
         dictionaryCommandline = new DictionaryCommandline();
@@ -19,7 +21,7 @@ public class DictionaryCommandLine {
      * đó in ra những từ được nhập và giải nghĩa Việt.
      */
     public void dictionaryBasic() {
-        dictionaryCommandline.getDictionaryManagement().insertFromCommandline();
+        dictionaryCommandline.insertFromCommandline();
         dictionaryCommandline.showAllWords();
     }
 
@@ -31,6 +33,7 @@ public class DictionaryCommandLine {
         DictionaryCommandLine dictionaryCommandLine = new DictionaryCommandLine();
 
         // dictionaryCommandLine.dictionaryBasic();
+        System.out.println("Welcome to My Application!");
         try {
             dictionaryCommandLine.dictionaryCommandline.dictionaryAdvanced();
         } catch (IOException e) {
