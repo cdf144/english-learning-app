@@ -2,7 +2,6 @@ package org.nora.dictionary.management;
 
 import java.io.*;
 import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -178,13 +177,11 @@ public class DictionaryManagement {
      * Nhập word_target và word_explain
      */
     public void addFromCommandline() {
-        Scanner sc = new Scanner(System.in);
-
         System.out.println("Add: Enter new word_target: ");
-        String word_target = sc.nextLine();
+        String word_target = scanner.nextLine();
 
         System.out.println("Add: Enter this word_explain: ");
-        String word_explain = sc.nextLine();
+        String word_explain = scanner.nextLine();
 
         Word newWord = new Word(word_target, word_explain);
         dictionary.getWordList().add(newWord);
@@ -196,10 +193,8 @@ public class DictionaryManagement {
      * Nhập word_target hoặc word_explain của từ cần xóa
      */
     public void removeFromCommandline() {
-        Scanner sc = new Scanner(System.in);
-
         System.out.println("Enter word_target or word_explain you want to remove: ");
-        String word_target = sc.nextLine();
+        String word_target = scanner.nextLine();
 
         boolean check = false;
         for (int i = 0; i < dictionary.getWordList().size(); i++) {
@@ -224,15 +219,13 @@ public class DictionaryManagement {
      * Nhập từ cần sửa nghĩa và nghĩa sau khi sửa
      */
     public void updateFromCommandLine() {
-        Scanner sc = new Scanner(System.in);
-
         System.out.println("Update: Enter word you want to update: ");
-        String word_target = sc.nextLine();
+        String word_target = scanner.nextLine();
 
         for (int i = 0; i < dictionary.getWordList().size(); i++) {
             if (word_target.equalsIgnoreCase(dictionary.getWordList().get(i).getWord_target())) {
                 System.out.println("Update: Enter your changed word_explain: ");
-                String newWordExplain = sc.nextLine();
+                String newWordExplain = scanner.nextLine();
                 dictionary.getWordList().set(i, new Word(word_target, newWordExplain));
             }
         }
@@ -267,12 +260,4 @@ public class DictionaryManagement {
         }
     }
 
-    /**
-     * Trả về wordList của Dictionary qua việc.
-     * gọi phương thức listWord của Dictionary.
-     * @return wordList của Dictionary
-     */
-    public List<Word> getListWord() {
-        return dictionary.getWordList();
-    }
 }

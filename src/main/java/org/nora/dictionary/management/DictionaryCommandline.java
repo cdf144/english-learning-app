@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 public class DictionaryCommandline extends DictionaryManagement {
     private static final Logger LOGGER = Logger.getLogger(DictionaryManagement.class.getName());
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static final String PATH_DICTIONARY_ADVANCED_LOG = "log"
             + File.separator + "logDictionaryAdvanced.log";
@@ -33,7 +34,6 @@ public class DictionaryCommandline extends DictionaryManagement {
     public void dictionaryAdvanced() throws IOException {
         initLogFile();
 
-        Scanner sc = new Scanner(System.in);
         System.out.println("Welcome to My Application!");
         System.out.println("  [0] Exit");
         System.out.println("  [1] Add");
@@ -46,7 +46,7 @@ public class DictionaryCommandline extends DictionaryManagement {
         System.out.println("  [8] Import from file");
         System.out.println("  [9] Export to file");
         System.out.println("Your action: ");
-        int choice = sc.nextInt();
+        int choice = scanner.nextInt();
         switch (choice) {
             case 0:
                 break;
@@ -108,9 +108,8 @@ public class DictionaryCommandline extends DictionaryManagement {
      * Nếu n không hợp lệ yêu cầu nhập lại
      */
     public void subDictionaryAdvanced() throws IOException {
-        Scanner sc = new Scanner(System.in);
         System.out.println("Your action: ");
-        int choice = sc.nextInt();
+        int choice = scanner.nextInt();
         switch (choice) {
             case 0:
                 break;
