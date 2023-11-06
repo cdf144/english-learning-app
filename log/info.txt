@@ -1,0 +1,2 @@
+This folder is just for log files created by the program, if this does not exist the program will throw an exception.
+This is to make it so that when other people pull this repo to their local this log folder is also pulled.
