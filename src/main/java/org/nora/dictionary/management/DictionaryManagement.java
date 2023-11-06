@@ -15,10 +15,12 @@ public class DictionaryManagement {
     private static final Logger LOGGER = Logger.getLogger(DictionaryManagement.class.getName());
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static final String PATH_DICTIONARYMANAGEMENT_LOG = "log"
+    public static final String PATH_DICTIONARYMANAGEMENT_LOG = System.getProperty("user.dir")
+            + File.separator + "log"
             + File.separator + "logDictionaryManagement.log";
 
-    public static final String PATH_DICTIONARY_FILE = "src"
+    public static final String PATH_DICTIONARY_FILE = System.getProperty("user.dir")
+            + File.separator + "src"
             + File.separator + "main"
             + File.separator + "resources"
             + File.separator + "dictionaries.txt";

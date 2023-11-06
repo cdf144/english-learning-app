@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="JavaFX JAR" type="JarApplication">
+    <option name="JAR_PATH" value="$PROJECT_DIR$/target/english-learning-app-1.1-SNAPSHOT-jar-with-dependencies.jar" />
+    <option name="VM_PARAMETERS" value="--module-path C:\Java\javafx-sdk-21.0.1\lib --add-modules=javafx.controls,javafx.fxml" />
+    <option name="WORKING_DIRECTORY" value="C:\Users\Darkroom\IdeaProjects\english-learning-app" />
+    <option name="ALTERNATIVE_JRE_PATH" />
+    <module name="english-learning-app" />
+    <method v="2" />
+  </configuration>
+</component>
