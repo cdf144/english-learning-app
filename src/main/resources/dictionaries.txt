@@ -2707,6 +2707,7 @@ traditionally	(thuộc) truyền thống, là truyền thống
 traffic	sự đi lại, sự giao thông, sự chuyển động
 train	xe lửa, tàu hỏa; dạy, rèn luyện, đào tạo
 training	sự dạy dỗ, sự huấn luyện, sự đào tạo
+transaction	sự thực hiện, sự giải quyết; sự buôn bán, sự giao dịch
 transfer	dời, di chuyển; sự di chuyển, sự dời chỗ
 transform	thay đổi, biến đổi
 translate	dịch, biên dịch, phiên dịch
