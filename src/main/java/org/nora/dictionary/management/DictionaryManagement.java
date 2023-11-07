@@ -82,26 +82,16 @@ public class DictionaryManagement {
      *                     bị lỗi.
      */
     public void readFromFile(String filePath) throws IOException {
+        FileReader fileReader;
+        BufferedReader bufferedReader;
+
         try {
-            insertFromFile(filePath);
-            dictionary.sortWordList();
-            LOGGER.info("Dictionary read and sorted.");
+            fileReader = new FileReader(filePath);
+            bufferedReader = new BufferedReader(fileReader);
         } catch (FileNotFoundException e) {
             LOGGER.log(Level.SEVERE, e.toString(), e);
+            throw e;
         }
-    }
-
-    /**
-     * Mở file .txt và đọc dữ liệu từ file gồm các
-     * từ tiếng Anh và giải nghĩa tiếng Việt được
-     * phân cách bởi 1 dấu tab.
-     * @param filePath String đường dẫn đến file .txt
-     * @throws IOException Ngoại lệ được throw nếu fileReader
-     *                     hoặc bufferedReader bị lỗi
-     */
-    public void insertFromFile(String filePath) throws IOException {
-        FileReader fileReader = new FileReader(filePath);
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
 
         String line;
         while ((line = bufferedReader.readLine()) != null) {
@@ -112,7 +102,8 @@ public class DictionaryManagement {
 
         bufferedReader.close();
         fileReader.close();
-        LOGGER.info("Successfully read from file.");
+        dictionary.sortWordList();
+        LOGGER.info("Dictionary read and sorted.");
     }
 
     /**
