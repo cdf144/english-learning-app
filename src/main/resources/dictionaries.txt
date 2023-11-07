@@ -8,6 +8,7 @@ four	4
 hello	xin chào
 nine	9
 pale	nhợt nhạt
+place	nơi chốn
 plug	cắm vào
 seven	7
 six	6
