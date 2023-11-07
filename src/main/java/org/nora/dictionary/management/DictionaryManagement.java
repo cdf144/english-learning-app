@@ -69,6 +69,8 @@ public class DictionaryManagement {
             dictionary.addWord(new Word(word_target.toLowerCase(), word_explain));
             System.out.println();
         }
+
+        dictionary.sortWordList();
     }
 
     /**
@@ -194,7 +196,7 @@ public class DictionaryManagement {
         String word_explain = scanner.nextLine();
 
         Word newWord = new Word(word_target.toLowerCase(), word_explain);
-        dictionary.getWordList().add(newWord);
+        dictionary.insertWord(newWord);
         System.out.println("ADDED!");
     }
 
@@ -231,14 +233,16 @@ public class DictionaryManagement {
     public void updateFromCommandLine() {
         System.out.println("Update: Enter word you want to update: ");
         String word_target = scanner.nextLine().toLowerCase();
+        Word wordFind = new Word(word_target, null);
 
-        for (int i = 0; i < dictionary.getWordList().size(); i++) {
-            if (word_target.equals(dictionary.getWordList().get(i).getWord_target())) {
-                System.out.println("Update: Enter your changed word_explain: ");
-                String newWordExplain = scanner.nextLine();
-                dictionary.getWordList().set(i, new Word(word_target, newWordExplain));
-            }
+        int index = dictionary.findWord(wordFind);
+
+        if (index >= 0) {
+            System.out.println("Update: Enter your changed word_explain: ");
+            String newWordExplain = scanner.nextLine();
+            dictionary.getWordList().set(index, new Word(word_target, newWordExplain));
         }
+
         System.out.println("UPDATED!");
     }
 
@@ -250,7 +254,6 @@ public class DictionaryManagement {
         FileWriter fileWriter;
         fileWriter = new FileWriter(DictionaryManagement.PATH_DICTIONARY_FILE);
 
-        dictionary.sortWordList();
         StringBuilder content = new StringBuilder();
         for (Word word : dictionary.getWordList()) {
             content.append(word.getWord_target()).append("\t");

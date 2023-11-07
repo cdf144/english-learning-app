@@ -41,6 +41,23 @@ public class Dictionary {
         wordList.add(word);
     }
 
+    /**
+     * Thay vì chỉ thêm Word vào cuối List như addWord,
+     * insert Word chèn Word vào vị trí thích hợp trong List.
+     * @param word Word để chèn vào
+     */
+    public void insertWord(Word word) {
+        wordList.add(word);
+
+        int i = wordList.size() - 2;
+        while (i >= 0 && wordList.get(i).compareTo(word) > 0) {
+            wordList.set(i + 1, wordList.get(i));
+            i--;
+        }
+
+        wordList.set(i + 1, word);
+    }
+
     public void removeWord(Word word) {
         wordList.remove(word);
     }

@@ -13,8 +13,9 @@ seven	7
 six	6
 ten	10
 trace	lần dấu vết
+tractor	máy kéo
 transaction	giao dịch
 translate	dịch
-transparent	trong suot
+transparent	trong suốt
 twelve	12
 two	2

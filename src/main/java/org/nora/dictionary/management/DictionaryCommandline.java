@@ -103,10 +103,8 @@ public class DictionaryCommandline extends DictionaryManagement {
      */
     public void showAllWords() {
         System.out.printf("%-3s | %-15s | %-20s%n", "No", "English", "Vietnamese");
+
         int i = 1;
-
-        dictionary.sortWordList();
-
         for (Word word : dictionary.getWordList()) {
             System.out.printf(
                     "%-3s | %-15s | %-20s%n",
