@@ -58,10 +58,6 @@ public class Dictionary {
         wordList.set(i + 1, word);
     }
 
-    public void removeWord(Word word) {
-        wordList.remove(word);
-    }
-
     /**
      * Tìm và trả lại index của Word cần tìm.
      * @param word Word để tìm

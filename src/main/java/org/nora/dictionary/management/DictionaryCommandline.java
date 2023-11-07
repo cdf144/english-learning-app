@@ -4,6 +4,7 @@ import org.nora.dictionary.entities.Word;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -49,7 +50,16 @@ public class DictionaryCommandline extends DictionaryManagement {
         boolean exit = false;
         while (!exit) {
             System.out.print("Your action: ");
-            int choice = scanner.nextInt();
+
+            int choice;
+            try {
+                choice = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.err.println("PLEASE ENTER AN INTEGER!");
+                scanner.next();
+                continue;
+            }
+
             switch (choice) {
                 case 0:
                     exit = true;
@@ -92,7 +102,7 @@ public class DictionaryCommandline extends DictionaryManagement {
                     }
                     break;
                 default:
-                    System.out.println("ENTER A NUMBER FROM 1 TO 9, PLEASE!");
+                    System.err.println("PLEASE ENTER A NUMBER FROM 1 TO 9!");
                     break;
             }
         }
