@@ -8,13 +8,15 @@ four	4
 hello	xin chào
 nine	9
 pale	nhợt nhạt
+place	nơi chốn
 plug	cắm vào
 seven	7
 six	6
 ten	10
 trace	lần dấu vết
+tractor	máy kéo
 transaction	giao dịch
 translate	dịch
-transparent	trong suot
+transparent	trong suốt
 twelve	12
 two	2

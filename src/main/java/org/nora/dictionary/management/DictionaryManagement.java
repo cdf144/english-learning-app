@@ -69,37 +69,32 @@ public class DictionaryManagement {
             dictionary.addWord(new Word(word_target.toLowerCase(), word_explain));
             System.out.println();
         }
+
+        dictionary.sortWordList();
     }
 
     /**
      * Đọc dữ liệu từ file .txt và sau đó in ra danh
      * sách từ trong từ điển theo thứ tự được sort.
+     * Mỗi lần đọc dữ liệu, wordList sẽ được ghi đè.
      *
      * @param filePath String path đến file .txt
      * @throws IOException Ngoại lệ được throw nếu FileHandler
      *                     bị lỗi.
      */
     public void readFromFile(String filePath) throws IOException {
+        FileReader fileReader;
+        BufferedReader bufferedReader;
+
         try {
-            insertFromFile(filePath);
-            dictionary.sortWordList();
-            LOGGER.info("Dictionary read and sorted.");
+            fileReader = new FileReader(filePath);
+            bufferedReader = new BufferedReader(fileReader);
         } catch (FileNotFoundException e) {
             LOGGER.log(Level.SEVERE, e.toString(), e);
+            throw e;
         }
-    }
 
-    /**
-     * Mở file .txt và đọc dữ liệu từ file gồm các
-     * từ tiếng Anh và giải nghĩa tiếng Việt được
-     * phân cách bởi 1 dấu tab.
-     * @param filePath String đường dẫn đến file .txt
-     * @throws IOException Ngoại lệ được throw nếu fileReader
-     *                     hoặc bufferedReader bị lỗi
-     */
-    public void insertFromFile(String filePath) throws IOException {
-        FileReader fileReader = new FileReader(filePath);
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        dictionary.getWordList().clear();
 
         String line;
         while ((line = bufferedReader.readLine()) != null) {
@@ -108,9 +103,11 @@ public class DictionaryManagement {
             dictionary.addWord(word);
         }
 
+        dictionary.sortWordList();
+
         bufferedReader.close();
         fileReader.close();
-        LOGGER.info("Successfully read from file.");
+        LOGGER.info("Dictionary read and sorted.");
     }
 
     /**
@@ -140,8 +137,8 @@ public class DictionaryManagement {
      */
     public void dictionarySearcher() {
         System.out.print("Searcher: Enter your word: ");
-        String wordTarget = scanner.nextLine().toLowerCase();
-        Word wordFind = new Word(wordTarget, null);
+        String wordTarget = scanner.nextLine();
+        Word wordFind = new Word(wordTarget.toLowerCase(), null);
 
         int index = dictionary.findWordWithPrefix(wordFind);
         if (index < 0) {
@@ -183,18 +180,25 @@ public class DictionaryManagement {
     }
 
     /**
-     * Thêm một từ vào wordList.
+     * Thêm một từ vào nếu từ đó chưa có trong wordList.
      * Nhập word_target và word_explain
      */
     public void addFromCommandline() {
         System.out.println("Add: Enter new word_target: ");
         String word_target = scanner.nextLine();
 
+        Word newWord = new Word(word_target.toLowerCase(), null);
+        int index = dictionary.findWord(newWord);
+        if (index >= 0) {
+            System.out.println("Word already exists!");
+            return;
+        }
+
         System.out.println("Add: Enter this word_explain: ");
         String word_explain = scanner.nextLine();
 
-        Word newWord = new Word(word_target.toLowerCase(), word_explain);
-        dictionary.getWordList().add(newWord);
+        newWord.setWord_explain(word_explain);
+        dictionary.insertWord(newWord);
         System.out.println("ADDED!");
     }
 
@@ -204,41 +208,42 @@ public class DictionaryManagement {
      */
     public void removeFromCommandline() {
         System.out.println("Enter word_target or word_explain you want to remove: ");
-        String word_target = scanner.nextLine().toLowerCase();
+        String find = scanner.nextLine();
+        Word wordFindTarget = new Word(find.toLowerCase(), null);
+        Word wordFindExplain = new Word(null, find);
 
-        boolean check = false;
-        for (int i = 0; i < dictionary.getWordList().size(); i++) {
-            if (word_target.equals(dictionary.getWordList().get(i).getWord_target())
-                || word_target.equals(dictionary.getWordList().get(i).getWord_explain())
-            ) {
-                dictionary.removeWord(dictionary.getWordList().get(i));
-                check = true;
-                break;
-            }
-        }
+        int targetIndex = dictionary.findWord(wordFindTarget);
+        int explainIndex = dictionary.findWordExplain(wordFindExplain);
 
-        if (!check) {
+        if (targetIndex < 0 && explainIndex < 0) {
             System.out.println("No word exist!");
         } else {
+            dictionary.getWordList().remove(explainIndex < 0 ? targetIndex : explainIndex);
             System.out.println("REMOVED!");
         }
     }
 
     /**
-     * Sua mot tu trong wordList.
+     * Sửa một từ trong wordList.
      * Nhập từ cần sửa nghĩa và nghĩa sau khi sửa
      */
     public void updateFromCommandLine() {
         System.out.println("Update: Enter word you want to update: ");
-        String word_target = scanner.nextLine().toLowerCase();
+        String wordTarget = scanner.nextLine();
+        Word newWord = new Word(wordTarget.toLowerCase(), null);
 
-        for (int i = 0; i < dictionary.getWordList().size(); i++) {
-            if (word_target.equals(dictionary.getWordList().get(i).getWord_target())) {
-                System.out.println("Update: Enter your changed word_explain: ");
-                String newWordExplain = scanner.nextLine();
-                dictionary.getWordList().set(i, new Word(word_target, newWordExplain));
-            }
+        int index = dictionary.findWord(newWord);
+
+        if (index < 0) {
+            System.out.println("No word exist!");
+            return;
+        } else {
+            System.out.println("Update: Enter your changed word_explain: ");
+            String newWordExplain = scanner.nextLine();
+            newWord.setWord_explain(newWordExplain);
+            dictionary.getWordList().set(index, newWord);
         }
+
         System.out.println("UPDATED!");
     }
 
@@ -250,7 +255,6 @@ public class DictionaryManagement {
         FileWriter fileWriter;
         fileWriter = new FileWriter(DictionaryManagement.PATH_DICTIONARY_FILE);
 
-        dictionary.sortWordList();
         StringBuilder content = new StringBuilder();
         for (Word word : dictionary.getWordList()) {
             content.append(word.getWord_target()).append("\t");
