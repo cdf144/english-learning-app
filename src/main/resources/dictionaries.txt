@@ -1,5 +1,4 @@
-'hʌri	làm bị thương, gây thiệt hại
-a few	pro(n) ít,vài; một ít, một vài
+a few	ít, vài; một ít, một vài
 a little	/ˈlɪtərətʃər/ văn chương, văn học
 ability	khả năng, năng lực
 able	có năng lực, có tài
@@ -1169,6 +1168,7 @@ hungry	đói
 hunt	săn, đi săn
 hunting	sự đi săn
 hurry	sự vội vàng, sự gấp rút
+hurt	làm bị thương, gây thiệt hại
 husband	người chồng
 ice	băng, nước đá
 idea	ý tưởng, quan niệm

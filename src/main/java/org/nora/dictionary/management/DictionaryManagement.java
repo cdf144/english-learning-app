@@ -115,8 +115,8 @@ public class DictionaryManagement {
      * Thông báo nếu không có từ nào trùng khớp được tìm thấy
      */
     public void dictionaryLookup() {
-        System.out.print("Lookup: Enter your word target: ");
-        String wordTarget = scanner.next();
+        System.out.println("Lookup: Enter your word target:");
+        String wordTarget = scanner.nextLine();
         Word wordFind = new Word(wordTarget.toLowerCase(), null);
 
         int index = dictionary.findWord(wordFind);
@@ -136,7 +136,7 @@ public class DictionaryManagement {
      * In ra danh sách các Word trong searchResultList giống như hàm showAllWord
      */
     public void dictionarySearcher() {
-        System.out.print("Searcher: Enter your word: ");
+        System.out.println("Searcher: Enter your (partial) word:");
         String wordTarget = scanner.nextLine();
         Word wordFind = new Word(wordTarget.toLowerCase(), null);
 
@@ -166,11 +166,11 @@ public class DictionaryManagement {
             dictionary.getSearchResultList().add(dictionary.getWordList().get(i));
         }
 
-        System.out.printf("%-3s | %-15s | %-20s%n", "No", "English", "Vietnamese");
+        System.out.printf("%-4s | %-18s | %-20s%n", "No", "English", "Vietnamese");
         int wordCounter = 1;
         for (Word word : dictionary.getSearchResultList()) {
             System.out.printf(
-                    "%-3s | %-15s | %-20s%n",
+                    "%-4s | %-18s | %-20s%n",
                     wordCounter++,
                     word.getWord_target(),
                     word.getWord_explain()
@@ -184,7 +184,7 @@ public class DictionaryManagement {
      * Nhập word_target và word_explain
      */
     public void addFromCommandline() {
-        System.out.println("Add: Enter new word_target: ");
+        System.out.println("Add: Enter new word_target:");
         String word_target = scanner.nextLine();
 
         Word newWord = new Word(word_target.toLowerCase(), null);
@@ -207,7 +207,7 @@ public class DictionaryManagement {
      * Nhập word_target hoặc word_explain của từ cần xóa
      */
     public void removeFromCommandline() {
-        System.out.println("Enter word_target or word_explain you want to remove: ");
+        System.out.println("Enter word_target or word_explain you want to remove:");
         String find = scanner.nextLine();
         Word wordFindTarget = new Word(find.toLowerCase(), null);
         Word wordFindExplain = new Word(null, find);
@@ -228,7 +228,7 @@ public class DictionaryManagement {
      * Nhập từ cần sửa nghĩa và nghĩa sau khi sửa
      */
     public void updateFromCommandLine() {
-        System.out.println("Update: Enter word you want to update: ");
+        System.out.println("Update: Enter word you want to update:");
         String wordTarget = scanner.nextLine();
         Word newWord = new Word(wordTarget.toLowerCase(), null);
 

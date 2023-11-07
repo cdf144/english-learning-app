@@ -112,12 +112,12 @@ public class DictionaryCommandline extends DictionaryManagement {
      * In tất cả các từ trong từ điển.
      */
     public void showAllWords() {
-        System.out.printf("%-3s | %-15s | %-20s%n", "No", "English", "Vietnamese");
+        System.out.printf("%-4s | %-18s | %-20s%n", "No", "English", "Vietnamese");
 
         int i = 1;
         for (Word word : dictionary.getWordList()) {
             System.out.printf(
-                    "%-3s | %-15s | %-20s%n",
+                    "%-4s | %-18s | %-20s%n",
                     i++,
                     word.getWord_target(),
                     word.getWord_explain()
