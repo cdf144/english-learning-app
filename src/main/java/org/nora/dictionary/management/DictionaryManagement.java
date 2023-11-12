@@ -122,7 +122,7 @@ public class DictionaryManagement {
             startIndex--;
         }
 
-        while (endIndex < dictionary.getWordList().size()
+        while (endIndex < dictionary.getWordList().size() - 1
                 && dictionary.getWordList().get(endIndex + 1).getWord_target().startsWith(wordTarget)
         ) {
             endIndex++;
