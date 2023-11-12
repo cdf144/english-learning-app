@@ -60,27 +60,33 @@ public class DictionaryCommandline extends DictionaryManagement {
                 continue;
             }
 
+            String wordTarget = "";
             switch (choice) {
                 case 0:
                     exit = true;
                     break;
                 case 1:
-                    addFromCommandline();
+                    addToDictionary();
                     break;
                 case 2:
-                    removeFromCommandline();
+                    removeFromDictionary();
                     break;
                 case 3:
-                    updateFromCommandLine();
+                    updateInDictionary();
                     break;
                 case 4:
                     showAllWords();
                     break;
                 case 5:
-                    dictionaryLookup();
+                    System.out.println("Lookup: Enter your word target:");
+                    wordTarget = scanWord(wordTarget);
+                    System.out.println(dictionaryLookup(wordTarget));
                     break;
                 case 6:
-                    dictionarySearcher();
+                    System.out.println("Searcher: Enter your (partial) word:");
+                    wordTarget = scanWord(wordTarget);
+                    dictionarySearcher(wordTarget);
+                    printSearchResult();
                     break;
                 case 7:
                     System.out.println("lam gi đa co game ma choi :)))");
@@ -105,6 +111,32 @@ public class DictionaryCommandline extends DictionaryManagement {
                     System.err.println("PLEASE ENTER A NUMBER FROM 1 TO 9!");
                     break;
             }
+        }
+    }
+
+    private String scanWord(String word) {
+        while (word.isEmpty()) {
+            word = scanner.nextLine();
+        }
+
+        return word;
+    }
+
+    private void printSearchResult() {
+        if (dictionary.getSearchResultList().isEmpty()) {
+            System.out.println("No word exist!");
+            return;
+        }
+
+        System.out.printf("%-4s | %-18s | %-20s%n", "No", "English", "Vietnamese");
+        int wordCounter = 1;
+        for (Word word : dictionary.getSearchResultList()) {
+            System.out.printf(
+                    "%-4s | %-18s | %-20s%n",
+                    wordCounter++,
+                    word.getWord_target(),
+                    word.getWord_explain()
+            );
         }
     }
 
