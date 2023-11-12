@@ -86,12 +86,24 @@ public class DictionaryCommandline extends DictionaryManagement {
             }
 
             String wordTarget = "";
+            String wordExplain = "";
             switch (choice) {
                 case 0:
                     exit = true;
                     break;
                 case 1:
-                    addToDictionary();
+                    System.out.println("Add: Enter new word_target:");
+                    wordTarget = scanWord(wordTarget);
+
+                    if (wordExist(wordTarget)) {
+                        System.out.println("Word already exists!");
+                    } else {
+                        System.out.println("Add: Enter word_explain: ");
+                        wordExplain = scanWord(wordExplain);
+                        addToDictionary(wordTarget, wordExplain);
+                        System.out.println("ADDED!");
+                    }
+
                     break;
                 case 2:
                     removeFromDictionary();

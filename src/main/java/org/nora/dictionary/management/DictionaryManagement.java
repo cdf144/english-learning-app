@@ -136,26 +136,22 @@ public class DictionaryManagement {
     }
 
     /**
-     * Thêm một từ vào nếu từ đó chưa có trong wordList.
+     * Kiểm tra xem đầu vào là wordTarget đã có trong wordList chưa.
+     * @param word wordTarget để tìm
+     * @return Word chứa wordTarget có trong wordList hay không.
+     */
+    public boolean wordExist(String word) {
+        int index = dictionary.findWord(new Word(word.toLowerCase(), null));
+        return index >= 0;
+    }
+
+    /**
+     * Thêm một từ vào wordList.
      * Nhập word_target và word_explain
      */
-    public void addToDictionary() {
-        System.out.println("Add: Enter new word_target:");
-        String word_target = scanner.nextLine();
-
-        Word newWord = new Word(word_target.toLowerCase(), null);
-        int index = dictionary.findWord(newWord);
-        if (index >= 0) {
-            System.out.println("Word already exists!");
-            return;
-        }
-
-        System.out.println("Add: Enter this word_explain: ");
-        String word_explain = scanner.nextLine();
-
-        newWord.setWord_explain(word_explain);
+    public void addToDictionary(String wordTarget, String wordExplain) {
+        Word newWord = new Word(wordTarget.toLowerCase(), wordExplain);
         dictionary.insertWord(newWord);
-        System.out.println("ADDED!");
     }
 
     /**
