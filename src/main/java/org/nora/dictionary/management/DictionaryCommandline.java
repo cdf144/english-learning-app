@@ -32,6 +32,31 @@ public class DictionaryCommandline extends DictionaryManagement {
         super();
     }
 
+    /**
+     * Nhập từ mới tiếng Anh và nghĩa tiếng Việt
+     * từ command line vào dictionary.
+     */
+    public void insertFromCommandline() {
+        System.out.print("Nhập vào số lượng từ vựng (Word): ");
+        int wordNumber = scanner.nextInt();
+        scanner.nextLine(); // sang dòng tiếp theo
+
+        for (int i = 1; i <= wordNumber; i++) {
+            System.out.println("Từ thứ " + i);
+
+            System.out.print("Nhập từ tiếng Anh: ");
+            String word_target = scanner.nextLine();
+
+            System.out.print("Nhập nghĩa tiếng Việt: ");
+            String word_explain = scanner.nextLine();
+
+            dictionary.addWord(new Word(word_target.toLowerCase(), word_explain));
+            System.out.println();
+        }
+
+        dictionary.sortWordList();
+    }
+
     private void printMenu() {
         System.out.println("  [0] Exit");
         System.out.println("  [1] Add");
@@ -60,27 +85,62 @@ public class DictionaryCommandline extends DictionaryManagement {
                 continue;
             }
 
+            String wordTarget = "";
+            String wordExplain = "";
             switch (choice) {
                 case 0:
                     exit = true;
                     break;
                 case 1:
-                    addFromCommandline();
+                    System.out.println("Add: Enter new word target:");
+                    wordTarget = scanWord(wordTarget);
+
+                    if (wordExist(wordTarget)) {
+                        System.out.println("Word already exists!");
+                    } else {
+                        System.out.println("Add: Enter word explain:");
+                        wordExplain = scanWord(wordExplain);
+                        addToDictionary(wordTarget, wordExplain);
+                        System.out.println("ADDED!");
+                    }
+
                     break;
                 case 2:
-                    removeFromCommandline();
+                    System.out.println("Enter word target you want to remove:");
+                    wordTarget = scanWord(wordTarget);
+                    System.out.println(
+                            removeFromDictionary(wordTarget)
+                            ? "REMOVED!"
+                            : "No word exists!"
+                    );
                     break;
                 case 3:
-                    updateFromCommandLine();
+                    System.out.println("Update: Enter word target you want to update:");
+                    wordTarget = scanWord(wordTarget);
+
+                    if (!wordExist(wordTarget)) {
+                        System.out.println("No word exists!");
+                    } else {
+                        System.out.println("Update: Enter your changed word explain:");
+                        wordExplain = scanWord(wordExplain);
+                        updateInDictionary(wordTarget, wordExplain);
+                        System.out.println("UPDATED!");
+                    }
+
                     break;
                 case 4:
                     showAllWords();
                     break;
                 case 5:
-                    dictionaryLookup();
+                    System.out.println("Lookup: Enter your word target:");
+                    wordTarget = scanWord(wordTarget);
+                    System.out.println(dictionaryLookup(wordTarget));
                     break;
                 case 6:
-                    dictionarySearcher();
+                    System.out.println("Searcher: Enter your (partial) word:");
+                    wordTarget = scanWord(wordTarget);
+                    dictionarySearcher(wordTarget);
+                    printSearchResult();
                     break;
                 case 7:
                     System.out.println("lam gi đa co game ma choi :)))");
@@ -105,6 +165,32 @@ public class DictionaryCommandline extends DictionaryManagement {
                     System.err.println("PLEASE ENTER A NUMBER FROM 1 TO 9!");
                     break;
             }
+        }
+    }
+
+    private String scanWord(String word) {
+        while (word.isEmpty()) {
+            word = scanner.nextLine();
+        }
+
+        return word;
+    }
+
+    private void printSearchResult() {
+        if (dictionary.getSearchResultList().isEmpty()) {
+            System.out.println("No word exist!");
+            return;
+        }
+
+        System.out.printf("%-4s | %-18s | %-20s%n", "No", "English", "Vietnamese");
+        int wordCounter = 1;
+        for (Word word : dictionary.getSearchResultList()) {
+            System.out.printf(
+                    "%-4s | %-18s | %-20s%n",
+                    wordCounter++,
+                    word.getWord_target(),
+                    word.getWord_explain()
+            );
         }
     }
 

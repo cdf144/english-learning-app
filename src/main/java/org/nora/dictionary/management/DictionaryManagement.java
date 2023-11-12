@@ -1,7 +1,6 @@
 package org.nora.dictionary.management;
 
 import java.io.*;
-import java.util.Scanner;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,7 +12,6 @@ public class DictionaryManagement {
     protected Dictionary dictionary;
 
     private static final Logger LOGGER = Logger.getLogger(DictionaryManagement.class.getName());
-    private static final Scanner scanner = new Scanner(System.in);
 
     public static final String PATH_DICTIONARYMANAGEMENT_LOG = System.getProperty("user.dir")
             + File.separator + "log"
@@ -46,31 +44,6 @@ public class DictionaryManagement {
 
     public void setDictionary(Dictionary dictionary) {
         this.dictionary = dictionary;
-    }
-
-    /**
-     * Nhập từ mới tiếng Anh và nghĩa tiếng Việt
-     * từ command line vào dictionary.
-     */
-    public void insertFromCommandline() {
-        System.out.print("Nhập vào số lượng từ vựng (Word): ");
-        int wordNumber = scanner.nextInt();
-        scanner.nextLine(); // sang dòng tiếp theo
-
-        for (int i = 1; i <= wordNumber; i++) {
-            System.out.println("Từ thứ " + i);
-
-            System.out.print("Nhập từ tiếng Anh: ");
-            String word_target = scanner.nextLine();
-
-            System.out.print("Nhập nghĩa tiếng Việt: ");
-            String word_explain = scanner.nextLine();
-
-            dictionary.addWord(new Word(word_target.toLowerCase(), word_explain));
-            System.out.println();
-        }
-
-        dictionary.sortWordList();
     }
 
     /**
@@ -111,22 +84,18 @@ public class DictionaryManagement {
     }
 
     /**
-     * Nhập một từ chính xác cần tìm và in ra word_explain.
+     * In ra word_explain của wordTarget đầu vào.
      * Thông báo nếu không có từ nào trùng khớp được tìm thấy
      */
-    public void dictionaryLookup() {
-        System.out.println("Lookup: Enter your word target:");
-        String wordTarget = scanner.nextLine();
+    public String dictionaryLookup(String wordTarget) {
         Word wordFind = new Word(wordTarget.toLowerCase(), null);
 
         int index = dictionary.findWord(wordFind);
 
         if (index < 0) {
-            System.out.println("No word exist!");
+            return "No word exist!";
         } else {
-            System.out.println(
-                    dictionary.getWordList().get(index).getWord_explain()
-            );
+            return dictionary.getWordList().get(index).getWord_explain();
         }
     }
 
@@ -135,14 +104,12 @@ public class DictionaryManagement {
      * Thêm các Words thỏa mãn vào searchResultList
      * In ra danh sách các Word trong searchResultList giống như hàm showAllWord
      */
-    public void dictionarySearcher() {
-        System.out.println("Searcher: Enter your (partial) word:");
-        String wordTarget = scanner.nextLine();
+    public void dictionarySearcher(String wordTarget) {
+        dictionary.getSearchResultList().clear();
         Word wordFind = new Word(wordTarget.toLowerCase(), null);
 
         int index = dictionary.findWordWithPrefix(wordFind);
         if (index < 0) {
-            System.out.println("No word exist!");
             return;
         }
 
@@ -161,65 +128,42 @@ public class DictionaryManagement {
             endIndex++;
         }
 
-        dictionary.getSearchResultList().clear();
         for (int i = startIndex; i <= endIndex; i++) {
             dictionary.getSearchResultList().add(dictionary.getWordList().get(i));
         }
-
-        System.out.printf("%-4s | %-18s | %-20s%n", "No", "English", "Vietnamese");
-        int wordCounter = 1;
-        for (Word word : dictionary.getSearchResultList()) {
-            System.out.printf(
-                    "%-4s | %-18s | %-20s%n",
-                    wordCounter++,
-                    word.getWord_target(),
-                    word.getWord_explain()
-            );
-        }
-
     }
 
     /**
-     * Thêm một từ vào nếu từ đó chưa có trong wordList.
+     * Kiểm tra xem đầu vào là wordTarget đã có trong wordList chưa.
+     * @param wordTarget wordTarget để tìm
+     * @return Word chứa wordTarget có trong wordList hay không.
+     */
+    public boolean wordExist(String wordTarget) {
+        int index = dictionary.findWord(new Word(wordTarget.toLowerCase(), null));
+        return index >= 0;
+    }
+
+    /**
+     * Thêm một từ vào wordList.
      * Nhập word_target và word_explain
      */
-    public void addFromCommandline() {
-        System.out.println("Add: Enter new word_target:");
-        String word_target = scanner.nextLine();
-
-        Word newWord = new Word(word_target.toLowerCase(), null);
-        int index = dictionary.findWord(newWord);
-        if (index >= 0) {
-            System.out.println("Word already exists!");
-            return;
-        }
-
-        System.out.println("Add: Enter this word_explain: ");
-        String word_explain = scanner.nextLine();
-
-        newWord.setWord_explain(word_explain);
+    public void addToDictionary(String wordTarget, String wordExplain) {
+        Word newWord = new Word(wordTarget.toLowerCase(), wordExplain);
         dictionary.insertWord(newWord);
-        System.out.println("ADDED!");
     }
 
     /**
      * Xóa một từ trong wordList.
-     * Nhập word_target hoặc word_explain của từ cần xóa
+     * Nhập word_target của từ cần xóa
      */
-    public void removeFromCommandline() {
-        System.out.println("Enter word_target or word_explain you want to remove:");
-        String find = scanner.nextLine();
-        Word wordFindTarget = new Word(find.toLowerCase(), null);
-        Word wordFindExplain = new Word(null, find);
+    public boolean removeFromDictionary(String wordTarget) {
+        int index = dictionary.findWord(new Word(wordTarget.toLowerCase(), null));
 
-        int targetIndex = dictionary.findWord(wordFindTarget);
-        int explainIndex = dictionary.findWordExplain(wordFindExplain);
-
-        if (targetIndex < 0 && explainIndex < 0) {
-            System.out.println("No word exist!");
+        if (index < 0) {
+            return false;
         } else {
-            dictionary.getWordList().remove(explainIndex < 0 ? targetIndex : explainIndex);
-            System.out.println("REMOVED!");
+            dictionary.getWordList().remove(index);
+            return true;
         }
     }
 
@@ -227,24 +171,10 @@ public class DictionaryManagement {
      * Sửa một từ trong wordList.
      * Nhập từ cần sửa nghĩa và nghĩa sau khi sửa
      */
-    public void updateFromCommandLine() {
-        System.out.println("Update: Enter word you want to update:");
-        String wordTarget = scanner.nextLine();
-        Word newWord = new Word(wordTarget.toLowerCase(), null);
-
+    public void updateInDictionary(String wordTarget, String wordExplain) {
+        Word newWord = new Word(wordTarget.toLowerCase(), wordExplain);
         int index = dictionary.findWord(newWord);
-
-        if (index < 0) {
-            System.out.println("No word exist!");
-            return;
-        } else {
-            System.out.println("Update: Enter your changed word_explain: ");
-            String newWordExplain = scanner.nextLine();
-            newWord.setWord_explain(newWordExplain);
-            dictionary.getWordList().set(index, newWord);
-        }
-
-        System.out.println("UPDATED!");
+        dictionary.getWordList().set(index, newWord);
     }
 
     /**
