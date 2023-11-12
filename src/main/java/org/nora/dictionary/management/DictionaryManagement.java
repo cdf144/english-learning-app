@@ -1,7 +1,6 @@
 package org.nora.dictionary.management;
 
 import java.io.*;
-import java.util.Scanner;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,7 +12,6 @@ public class DictionaryManagement {
     protected Dictionary dictionary;
 
     private static final Logger LOGGER = Logger.getLogger(DictionaryManagement.class.getName());
-    private static final Scanner scanner = new Scanner(System.in);
 
     public static final String PATH_DICTIONARYMANAGEMENT_LOG = System.getProperty("user.dir")
             + File.separator + "log"
@@ -173,24 +171,10 @@ public class DictionaryManagement {
      * Sửa một từ trong wordList.
      * Nhập từ cần sửa nghĩa và nghĩa sau khi sửa
      */
-    public void updateInDictionary() {
-        System.out.println("Update: Enter word you want to update:");
-        String wordTarget = scanner.nextLine();
-        Word newWord = new Word(wordTarget.toLowerCase(), null);
-
+    public void updateInDictionary(String wordTarget, String wordExplain) {
+        Word newWord = new Word(wordTarget.toLowerCase(), wordExplain);
         int index = dictionary.findWord(newWord);
-
-        if (index < 0) {
-            System.out.println("No word exist!");
-            return;
-        } else {
-            System.out.println("Update: Enter your changed word_explain: ");
-            String newWordExplain = scanner.nextLine();
-            newWord.setWord_explain(newWordExplain);
-            dictionary.getWordList().set(index, newWord);
-        }
-
-        System.out.println("UPDATED!");
+        dictionary.getWordList().set(index, newWord);
     }
 
     /**

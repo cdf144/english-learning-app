@@ -115,7 +115,18 @@ public class DictionaryCommandline extends DictionaryManagement {
                     );
                     break;
                 case 3:
-                    updateInDictionary();
+                    System.out.println("Update: Enter word target you want to update:");
+                    wordTarget = scanWord(wordTarget);
+
+                    if (!wordExist(wordTarget)) {
+                        System.out.println("No word exists!");
+                    } else {
+                        System.out.println("Update: Enter your changed word explain:");
+                        wordExplain = scanWord(wordExplain);
+                        updateInDictionary(wordTarget, wordExplain);
+                        System.out.println("UPDATED!");
+                    }
+
                     break;
                 case 4:
                     showAllWords();
