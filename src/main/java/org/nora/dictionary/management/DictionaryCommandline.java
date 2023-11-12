@@ -32,6 +32,31 @@ public class DictionaryCommandline extends DictionaryManagement {
         super();
     }
 
+    /**
+     * Nhập từ mới tiếng Anh và nghĩa tiếng Việt
+     * từ command line vào dictionary.
+     */
+    public void insertFromCommandline() {
+        System.out.print("Nhập vào số lượng từ vựng (Word): ");
+        int wordNumber = scanner.nextInt();
+        scanner.nextLine(); // sang dòng tiếp theo
+
+        for (int i = 1; i <= wordNumber; i++) {
+            System.out.println("Từ thứ " + i);
+
+            System.out.print("Nhập từ tiếng Anh: ");
+            String word_target = scanner.nextLine();
+
+            System.out.print("Nhập nghĩa tiếng Việt: ");
+            String word_explain = scanner.nextLine();
+
+            dictionary.addWord(new Word(word_target.toLowerCase(), word_explain));
+            System.out.println();
+        }
+
+        dictionary.sortWordList();
+    }
+
     private void printMenu() {
         System.out.println("  [0] Exit");
         System.out.println("  [1] Add");
