@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.nora.dictionary.controllers.ApplicationController">
+   <children>
+      <BorderPane prefHeight="650.0" prefWidth="1100.0">
+         <top>
+            <HBox prefHeight="65.0" prefWidth="1100.0" style="-fx-background-color: #272f4f;" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="65.0" fitWidth="457.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@icons/title.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets top="8.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+            </HBox>
+         </top>
+         <left>
+            <VBox prefHeight="585.0" prefWidth="215.0" style="-fx-background-color: #1c223d;" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="searchTab" alignment="BASELINE_LEFT" graphicTextGap="25.0" mnemonicParsing="false" onAction="#loadSearcher" prefHeight="50.0" prefWidth="215.0" stylesheets="@css/styling.css" text="Search Word" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/search.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="25.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="gameTab" alignment="BASELINE_LEFT" graphicTextGap="25.0" mnemonicParsing="false" onAction="#loadGame" prefHeight="50.0" prefWidth="215.0" stylesheets="@css/styling.css" text="Game" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/game.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="25.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+         </left>
+         <center>
+            <BorderPane fx:id="mainBorderPane" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
