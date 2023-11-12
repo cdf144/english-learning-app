@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 
 <BorderPane prefHeight="526.0" prefWidth="709.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.nora.dictionary.controllers.SearcherController">
@@ -13,13 +14,25 @@
             <VBox prefHeight="560.0" prefWidth="230.0" BorderPane.alignment="CENTER" />
    </left>
    <center>
-            <Label fx:id="wordExplainLabel" alignment="TOP_LEFT" prefHeight="560.0" prefWidth="646.0" BorderPane.alignment="CENTER" />
+            <Label fx:id="wordExplainLabel" alignment="TOP_LEFT" prefHeight="560.0" prefWidth="646.0" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
    </center>
    <top>
             <HBox alignment="CENTER" BorderPane.alignment="CENTER">
                 <children>
-                    <TextField fx:id="wordSearchField" prefHeight="35.0" prefWidth="446.0" promptText="Enter your search word here" />
-                    <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchWord" prefHeight="35.0" prefWidth="87.0" text="Search" />
+                    <TextField fx:id="wordSearchField" prefHeight="35.0" prefWidth="446.0" promptText="Enter your search word here">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+                    <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchWord" prefHeight="35.0" prefWidth="87.0" text="Search">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
                 </children>
             </HBox>
    </top>

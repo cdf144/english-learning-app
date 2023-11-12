@@ -51,6 +51,8 @@ public class ApplicationController implements Initializable {
         mainBorderPane.setTop(searcherPane.getTop());
         mainBorderPane.setLeft(searcherPane.getLeft());
         mainBorderPane.setCenter(searcherPane.getCenter());
+        mainBorderPane.setRight(searcherPane.getRight());
+        mainBorderPane.setBottom(searcherPane.getBottom());
     }
 
     public void loadGame() throws IOException {

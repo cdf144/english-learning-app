@@ -32,7 +32,7 @@
                <children>
                   <Button fx:id="searchTab" alignment="BASELINE_LEFT" graphicTextGap="25.0" mnemonicParsing="false" onAction="#loadSearcher" prefHeight="50.0" prefWidth="215.0" stylesheets="@css/styling.css" text="Search Word" textFill="WHITE">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="16.0" />
                      </font>
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
@@ -50,7 +50,7 @@
                   </Button>
                   <Button fx:id="gameTab" alignment="BASELINE_LEFT" graphicTextGap="25.0" mnemonicParsing="false" onAction="#loadGame" prefHeight="50.0" prefWidth="215.0" stylesheets="@css/styling.css" text="Game" textFill="WHITE">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="16.0" />
                      </font>
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
