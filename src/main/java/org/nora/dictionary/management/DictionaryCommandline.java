@@ -92,13 +92,13 @@ public class DictionaryCommandline extends DictionaryManagement {
                     exit = true;
                     break;
                 case 1:
-                    System.out.println("Add: Enter new word_target:");
+                    System.out.println("Add: Enter new word target:");
                     wordTarget = scanWord(wordTarget);
 
                     if (wordExist(wordTarget)) {
                         System.out.println("Word already exists!");
                     } else {
-                        System.out.println("Add: Enter word_explain: ");
+                        System.out.println("Add: Enter word explain:");
                         wordExplain = scanWord(wordExplain);
                         addToDictionary(wordTarget, wordExplain);
                         System.out.println("ADDED!");
@@ -106,7 +106,13 @@ public class DictionaryCommandline extends DictionaryManagement {
 
                     break;
                 case 2:
-                    removeFromDictionary();
+                    System.out.println("Enter word target you want to remove:");
+                    wordTarget = scanWord(wordTarget);
+                    System.out.println(
+                            removeFromDictionary(wordTarget)
+                            ? "REMOVED!"
+                            : "No word exists!"
+                    );
                     break;
                 case 3:
                     updateInDictionary();

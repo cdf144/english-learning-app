@@ -137,11 +137,11 @@ public class DictionaryManagement {
 
     /**
      * Kiểm tra xem đầu vào là wordTarget đã có trong wordList chưa.
-     * @param word wordTarget để tìm
+     * @param wordTarget wordTarget để tìm
      * @return Word chứa wordTarget có trong wordList hay không.
      */
-    public boolean wordExist(String word) {
-        int index = dictionary.findWord(new Word(word.toLowerCase(), null));
+    public boolean wordExist(String wordTarget) {
+        int index = dictionary.findWord(new Word(wordTarget.toLowerCase(), null));
         return index >= 0;
     }
 
@@ -156,22 +156,16 @@ public class DictionaryManagement {
 
     /**
      * Xóa một từ trong wordList.
-     * Nhập word_target hoặc word_explain của từ cần xóa
+     * Nhập word_target của từ cần xóa
      */
-    public void removeFromDictionary() {
-        System.out.println("Enter word_target or word_explain you want to remove:");
-        String find = scanner.nextLine();
-        Word wordFindTarget = new Word(find.toLowerCase(), null);
-        Word wordFindExplain = new Word(null, find);
+    public boolean removeFromDictionary(String wordTarget) {
+        int index = dictionary.findWord(new Word(wordTarget.toLowerCase(), null));
 
-        int targetIndex = dictionary.findWord(wordFindTarget);
-        int explainIndex = dictionary.findWordExplain(wordFindExplain);
-
-        if (targetIndex < 0 && explainIndex < 0) {
-            System.out.println("No word exist!");
+        if (index < 0) {
+            return false;
         } else {
-            dictionary.getWordList().remove(explainIndex < 0 ? targetIndex : explainIndex);
-            System.out.println("REMOVED!");
+            dictionary.getWordList().remove(index);
+            return true;
         }
     }
 
