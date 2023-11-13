@@ -15,7 +15,7 @@
    <left>
             <VBox prefHeight="560.0" prefWidth="230.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="searchField" promptText="Type your search word here">
+            <TextField fx:id="searchField" onKeyReleased="#searchFieldOnKeyReleased" promptText="Type your search word here">
                <font>
                   <Font size="16.0" />
                </font>

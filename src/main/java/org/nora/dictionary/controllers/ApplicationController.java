@@ -53,7 +53,7 @@ public class ApplicationController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            DictionaryApplication.dictionary.readFromFile(DictionaryManagement.PATH_DICTIONARY_FILE);
+            DictionaryApplication.dictionary.readFromFile(DictionaryManagement.PATH_DICTIONARY_HTML_FILE);
             loadSearcher();
         } catch (IOException e) {
             throw new RuntimeException(e);

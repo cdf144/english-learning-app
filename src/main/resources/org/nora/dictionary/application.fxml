@@ -144,7 +144,7 @@
             </VBox>
          </left>
          <center>
-            <BorderPane fx:id="mainBorderPane" BorderPane.alignment="CENTER" />
+            <BorderPane fx:id="mainBorderPane" prefWidth="917.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </children>

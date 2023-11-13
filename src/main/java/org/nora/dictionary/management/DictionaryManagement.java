@@ -23,6 +23,12 @@ public class DictionaryManagement {
             + File.separator + "resources"
             + File.separator + "dictionaryCmdLine.txt";
 
+    public static final String PATH_DICTIONARY_HTML_FILE = System.getProperty("user.dir")
+            + File.separator + "src"
+            + File.separator + "main"
+            + File.separator + "resources"
+            + File.separator + "dictionaryEV.txt";
+
     private static final FileHandler logFileHandler;
     static {
         try {
@@ -69,10 +75,25 @@ public class DictionaryManagement {
 
         dictionary.getWordList().clear();
 
+        String splitPattern;
+        String htmlStart;
+        if (filePath.equals(PATH_DICTIONARY_FILE)) {
+            splitPattern = "\t";
+            htmlStart = "";
+        } else if (filePath.equals(PATH_DICTIONARY_HTML_FILE)) {
+            splitPattern = "<html>";
+            htmlStart = "<html>";
+        } else {
+            System.out.println("Invalid file");
+            return;
+        }
+
         String line;
         while ((line = bufferedReader.readLine()) != null) {
-            String[] words = line.split("\t");
-            Word word = new Word(words[0].toLowerCase(), words[1]);
+            String[] wordParts = line.split(splitPattern);
+            String target = wordParts[0];
+            String explain = htmlStart + wordParts[1];
+            Word word = new Word(target.toLowerCase(), explain);
             dictionary.addWord(word);
         }
 
