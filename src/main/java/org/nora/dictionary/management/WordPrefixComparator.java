@@ -7,7 +7,7 @@ import java.util.Comparator;
 public class WordPrefixComparator implements Comparator<Word> {
     @Override
     public int compare(Word w1, Word w2) {
-        int prefixLength = Math.min(w2.getWord_target().length(), w1.getWord_target().length());
-        return w1.getWord_target().substring(0, prefixLength).compareTo(w2.getWord_target());
+        int prefixLength = Math.min(w2.getTarget().length(), w1.getTarget().length());
+        return w1.getTarget().substring(0, prefixLength).compareTo(w2.getTarget());
     }
 }

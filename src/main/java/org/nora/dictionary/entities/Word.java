@@ -1,28 +1,28 @@
 package org.nora.dictionary.entities;
 
 public class Word implements Comparable<Word> {
-    private String word_target;
-    private String word_explain;
+    private String target;
+    private String explain;
 
-    public Word(String word_target, String word_explain) {
-        this.word_target = word_target;
-        this.word_explain = word_explain;
+    public Word(String target, String explain) {
+        this.target = target;
+        this.explain = explain;
     }
 
-    public String getWord_target() {
-        return word_target;
+    public String getTarget() {
+        return target;
     }
 
-    public void setWord_target(String word_target) {
-        this.word_target = word_target;
+    public void setTarget(String target) {
+        this.target = target;
     }
 
-    public String getWord_explain() {
-        return word_explain;
+    public String getExplain() {
+        return explain;
     }
 
-    public void setWord_explain(String word_explain) {
-        this.word_explain = word_explain;
+    public void setExplain(String explain) {
+        this.explain = explain;
     }
 
     /**
@@ -32,6 +32,6 @@ public class Word implements Comparable<Word> {
      */
     @Override
     public int compareTo(Word o) {
-        return this.word_target.compareTo(o.getWord_target());
+        return this.target.compareTo(o.getTarget());
     }
 }

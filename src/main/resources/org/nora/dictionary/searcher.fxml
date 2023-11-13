@@ -1,39 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
 
-
-<BorderPane prefHeight="526.0" prefWidth="709.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.nora.dictionary.controllers.SearcherController">
+<BorderPane prefHeight="526.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.nora.dictionary.controllers.SearcherController">
    <left>
-            <VBox prefHeight="560.0" prefWidth="230.0" BorderPane.alignment="CENTER" />
-   </left>
-   <center>
-            <Label fx:id="wordExplainLabel" alignment="TOP_LEFT" prefHeight="560.0" prefWidth="646.0" BorderPane.alignment="CENTER">
-         <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
-   </center>
-   <top>
-            <HBox alignment="CENTER" BorderPane.alignment="CENTER">
-                <children>
-                    <TextField fx:id="wordSearchField" prefHeight="35.0" prefWidth="446.0" promptText="Enter your search word here">
+            <VBox prefHeight="560.0" prefWidth="230.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="searchField" promptText="Type your search word here">
                <font>
-                  <Font size="15.0" />
+                  <Font size="16.0" />
                </font>
             </TextField>
-                    <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchWord" prefHeight="35.0" prefWidth="87.0" text="Search">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
-                </children>
-            </HBox>
-   </top>
+            <ListView fx:id="autocompleteList" prefHeight="491.0" prefWidth="243.0" />
+         </children></VBox>
+   </left>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox>
+               <children>
+                  <HBox prefHeight="65.0" prefWidth="590.0">
+                     <children>
+                        <Label fx:id="wordTarget" prefHeight="100.0" prefWidth="442.0" text="Label">
+                           <font>
+                              <Font name="System Bold" size="26.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets left="30.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <WebView fx:id="wordExplain" prefHeight="460.0" prefWidth="590.0" />
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </center>
 </BorderPane>

@@ -1,33 +1,18 @@
 package org.nora.dictionary.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import org.nora.dictionary.DictionaryApplication;
+import javafx.scene.web.WebView;
 
 public class SearcherController {
-
     @FXML
-    private Button searchButton;
-
+    private TextField searchField;
     @FXML
-    private Label wordExplainLabel;
-
+    private ListView<String> autocompleteList;
     @FXML
-    private TextField wordSearchField;
-
-    public void searchWord() {
-        if (!wordSearchField.getText().isEmpty()) {
-            String word = wordSearchField.getText();
-            DictionaryApplication.dictionary.dictionarySearcher(word);
-            if (!DictionaryApplication.dictionary.getDictionary().getSearchResultList().isEmpty()) {
-                wordExplainLabel.setText(
-                        DictionaryApplication.dictionary.getDictionary().getSearchResultList().get(0).getWord_explain()
-                );
-            } else {
-                wordExplainLabel.setText("No word exists!");
-            }
-        }
-    }
+    private Label wordTarget;
+    @FXML
+    private WebView wordExplain;
 }

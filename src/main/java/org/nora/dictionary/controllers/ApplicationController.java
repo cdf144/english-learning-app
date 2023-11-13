@@ -15,13 +15,31 @@ import java.util.ResourceBundle;
 
 public class ApplicationController implements Initializable {
     @FXML
-    private Button gameTab;
-
-    @FXML
     private Button searchTab;
-
+    @FXML
+    private Button googleTranslateTab;
+    @FXML
+    private Button favoritesTab;
+    @FXML
+    private Button historyTab;
+    @FXML
+    private Button gameTab;
+    @FXML
+    private Button settingsTab;
     @FXML
     private BorderPane mainBorderPane;
+    @FXML
+    private BorderPane searcherPane;
+    @FXML
+    private BorderPane googleTranslatePane;
+    @FXML
+    private BorderPane favoritesPane;
+    @FXML
+    private BorderPane historyPane;
+    @FXML
+    private BorderPane gamePane;
+    @FXML
+    private BorderPane settingsPane;
 
     /**
      * Called to initialize a controller after its root element has been
@@ -36,34 +54,71 @@ public class ApplicationController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         try {
             DictionaryApplication.dictionary.readFromFile(DictionaryManagement.PATH_DICTIONARY_FILE);
+            loadSearcher();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+    private void setMainBorderPane(BorderPane borderPane) {
+        mainBorderPane.setTop(borderPane.getTop());
+        mainBorderPane.setLeft(borderPane.getLeft());
+        mainBorderPane.setCenter(borderPane.getCenter());
+        mainBorderPane.setRight(borderPane.getRight());
+        mainBorderPane.setBottom(borderPane.getBottom());
+    }
+
     public void loadSearcher() throws IOException {
-        BorderPane searcherPane = FXMLLoader.load(
+        searcherPane = FXMLLoader.load(
                 Objects.requireNonNull(
                         DictionaryApplication.class.getResource("searcher.fxml")
                 )
         );
+        setMainBorderPane(searcherPane);
+    }
 
-        mainBorderPane.setTop(searcherPane.getTop());
-        mainBorderPane.setLeft(searcherPane.getLeft());
-        mainBorderPane.setCenter(searcherPane.getCenter());
-        mainBorderPane.setRight(searcherPane.getRight());
-        mainBorderPane.setBottom(searcherPane.getBottom());
+    public void loadGoogleTranslate() throws IOException {
+        googleTranslatePane = FXMLLoader.load(
+                Objects.requireNonNull(
+                        DictionaryApplication.class.getResource("googleTranslate.fxml")
+                )
+        );
+        setMainBorderPane(googleTranslatePane);
+    }
+
+    public void loadFavorites() throws IOException {
+        favoritesPane = FXMLLoader.load(
+                Objects.requireNonNull(
+                        DictionaryApplication.class.getResource("favorites.fxml")
+                )
+        );
+        setMainBorderPane(favoritesPane);
+    }
+
+    public void loadHistory() throws IOException {
+        historyPane = FXMLLoader.load(
+                Objects.requireNonNull(
+                        DictionaryApplication.class.getResource("history.fxml")
+                )
+        );
+        setMainBorderPane(historyPane);
     }
 
     public void loadGame() throws IOException {
-        BorderPane gamePane = FXMLLoader.load(
-                Objects.requireNonNull(DictionaryApplication.class.getResource("game.fxml"))
+        gamePane = FXMLLoader.load(
+                Objects.requireNonNull(
+                        DictionaryApplication.class.getResource("game.fxml")
+                )
         );
+        setMainBorderPane(gamePane);
+    }
 
-        mainBorderPane.setTop(gamePane.getTop());
-        mainBorderPane.setLeft(gamePane.getLeft());
-        mainBorderPane.setCenter(gamePane.getCenter());
-        mainBorderPane.setRight(gamePane.getRight());
-        mainBorderPane.setBottom(gamePane.getBottom());
+    public void loadSettings() throws IOException {
+        settingsPane = FXMLLoader.load(
+                Objects.requireNonNull(
+                        DictionaryApplication.class.getResource("settings.fxml")
+                )
+        );
+        setMainBorderPane(settingsPane);
     }
 }
