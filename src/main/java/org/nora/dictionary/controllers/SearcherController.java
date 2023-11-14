@@ -7,10 +7,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.web.WebView;
 import org.nora.dictionary.DictionaryApplication;
 import org.nora.dictionary.entities.Word;
+import org.nora.dictionary.utils.TextToSpeech;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,6 +26,8 @@ public class SearcherController implements Initializable {
     private Label wordTargetLabel;
     @FXML
     private WebView wordExplainView;
+    @FXML
+    private ImageView wordToSpeech;
 
     private final ObservableList<String> autocompleteWordList = FXCollections.observableArrayList();
 
@@ -48,7 +52,7 @@ public class SearcherController implements Initializable {
         } else {
             DictionaryApplication.dictionary.dictionarySearcher(searchField.getText());
             for (Word word :
-                    DictionaryApplication.dictionary.getDictionary().getSearchResultList()) {
+                    DictionaryApplication.dictionary.getSearchResultList()) {
                 autocompleteWordList.add(word.getTarget());
             }
         }
@@ -69,5 +73,9 @@ public class SearcherController implements Initializable {
         Word word = DictionaryApplication.dictionary.getDictionary().getWordList().get(index);
         wordTargetLabel.setText(word.getTarget());
         wordExplainView.getEngine().loadContent(word.getExplain(), "text/html");
+    }
+
+    public void onWordToSpeechClick() {
+        TextToSpeech.speak(wordTargetLabel.getText());
     }
 }

@@ -4,6 +4,7 @@ module english.learning.app {
     requires javafx.controls;
     requires java.logging;
     requires javafx.web;
+    requires freetts;
 
     opens org.nora.dictionary to javafx.fxml;
     opens org.nora.dictionary.controllers to javafx.fxml;

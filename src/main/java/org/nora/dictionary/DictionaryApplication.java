@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.nora.dictionary.management.DictionaryManagement;
+import org.nora.dictionary.utils.TextToSpeech;
 
 public class DictionaryApplication extends Application {
     public static DictionaryManagement dictionary;
@@ -25,5 +26,7 @@ public class DictionaryApplication extends Application {
         primaryStage.initStyle(StageStyle.DECORATED);
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        primaryStage.setOnCloseRequest(e -> TextToSpeech.deallocateSynthesizer());
     }
 }
