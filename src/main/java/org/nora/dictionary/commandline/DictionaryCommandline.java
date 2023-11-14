@@ -178,14 +178,14 @@ public class DictionaryCommandline extends DictionaryManagement {
     }
 
     private void printSearchResult() {
-        if (dictionary.getSearchResultList().isEmpty()) {
+        if (searchResultList.isEmpty()) {
             System.out.println("No word exist!");
             return;
         }
 
         System.out.printf("%-4s | %-18s | %-20s%n", "No", "English", "Vietnamese");
         int wordCounter = 1;
-        for (Word word : dictionary.getSearchResultList()) {
+        for (Word word : searchResultList) {
             System.out.printf(
                     "%-4s | %-18s | %-20s%n",
                     wordCounter++,
