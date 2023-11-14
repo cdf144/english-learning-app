@@ -1,6 +1,8 @@
 package org.nora.dictionary.management;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,6 +12,7 @@ import org.nora.dictionary.entities.Word;
 
 public class DictionaryManagement {
     protected Dictionary dictionary;
+    protected List<Word> searchResultList;
 
     private static final Logger LOGGER = Logger.getLogger(DictionaryManagement.class.getName());
 
@@ -42,6 +45,7 @@ public class DictionaryManagement {
 
     public DictionaryManagement() {
         dictionary = new Dictionary();
+        searchResultList = new ArrayList<>();
     }
 
     public Dictionary getDictionary() {
@@ -50,6 +54,14 @@ public class DictionaryManagement {
 
     public void setDictionary(Dictionary dictionary) {
         this.dictionary = dictionary;
+    }
+
+    public List<Word> getSearchResultList() {
+        return searchResultList;
+    }
+
+    public void setSearchResultList(List<Word> searchResultList) {
+        this.searchResultList = searchResultList;
     }
 
     /**
@@ -126,7 +138,7 @@ public class DictionaryManagement {
      * In ra danh sách các Word trong searchResultList giống như hàm showAllWord
      */
     public void dictionarySearcher(String wordTarget) {
-        dictionary.getSearchResultList().clear();
+        searchResultList.clear();
         Word wordFind = new Word(wordTarget.toLowerCase(), null);
 
         int index = dictionary.findWordWithPrefix(wordFind);
@@ -150,7 +162,7 @@ public class DictionaryManagement {
         }
 
         for (int i = startIndex; i <= endIndex; i++) {
-            dictionary.getSearchResultList().add(dictionary.getWordList().get(i));
+            searchResultList.add(dictionary.getWordList().get(i));
         }
     }
 

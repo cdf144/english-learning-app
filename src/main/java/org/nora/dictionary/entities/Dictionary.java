@@ -9,16 +9,13 @@ import java.util.List;
 
 public class Dictionary {
     protected List<Word> wordList;
-    protected List<Word> searchResultList;
 
     public Dictionary() {
         wordList = new ArrayList<>();
-        searchResultList = new ArrayList<>();
     }
 
     public Dictionary(ArrayList<Word> wordList) {
         this.wordList = wordList;
-        searchResultList = new ArrayList<>();
     }
 
     public List<Word> getWordList() {
@@ -27,14 +24,6 @@ public class Dictionary {
 
     public void setWordList(List<Word> wordList) {
         this.wordList = wordList;
-    }
-
-    public List<Word> getSearchResultList() {
-        return searchResultList;
-    }
-
-    public void setSearchResultList(List<Word> searchResultList) {
-        this.searchResultList = searchResultList;
     }
 
     public void addWord(Word word) {

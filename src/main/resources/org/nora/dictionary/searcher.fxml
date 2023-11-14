@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -28,9 +30,9 @@
          <children>
             <VBox prefHeight="600.0" prefWidth="600.0">
                <children>
-                  <HBox prefHeight="65.0" prefWidth="750.0">
+                  <HBox prefHeight="60.0" prefWidth="750.0">
                      <children>
-                        <Label fx:id="wordTargetLabel" prefHeight="60.0" prefWidth="600.0">
+                        <Label fx:id="wordTargetLabel" prefHeight="60.0" prefWidth="330.0">
                            <font>
                               <Font name="System Bold" size="26.0" />
                            </font>
@@ -41,6 +43,14 @@
                               <Insets left="20.0" />
                            </padding>
                         </Label>
+                        <ImageView fx:id="wordToSpeech" fitHeight="48.0" fitWidth="48.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onWordToSpeechClick" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/hearing.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets top="5.0" />
+                           </HBox.margin>
+                        </ImageView>
                      </children>
                   </HBox>
                   <WebView fx:id="wordExplainView" prefHeight="540.0" prefWidth="600.0" />
