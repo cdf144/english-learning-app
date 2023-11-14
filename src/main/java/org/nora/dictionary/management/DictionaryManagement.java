@@ -21,13 +21,13 @@ public class DictionaryManagement {
             + File.separator + "src"
             + File.separator + "main"
             + File.separator + "resources"
-            + File.separator + "dictionaryCmdLine.txt";
+            + File.separator + "dictionaryAdvanced.txt";
 
     public static final String PATH_DICTIONARY_HTML_FILE = System.getProperty("user.dir")
             + File.separator + "src"
             + File.separator + "main"
             + File.separator + "resources"
-            + File.separator + "dictionaryEV.txt";
+            + File.separator + "dictionaryHTML_EV.txt";
 
     private static final FileHandler logFileHandler;
     static {
