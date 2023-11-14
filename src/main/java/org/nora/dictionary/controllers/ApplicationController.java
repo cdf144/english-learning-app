@@ -80,7 +80,7 @@ public class ApplicationController implements Initializable {
     public void loadGoogleTranslate() throws IOException {
         googleTranslatePane = FXMLLoader.load(
                 Objects.requireNonNull(
-                        DictionaryApplication.class.getResource("googleTranslate.fxml")
+                        DictionaryApplication.class.getResource("googletranslate.fxml")
                 )
         );
         setMainBorderPane(googleTranslatePane);
