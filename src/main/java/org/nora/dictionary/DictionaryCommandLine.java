@@ -1,6 +1,6 @@
 package org.nora.dictionary;
 
-import org.nora.dictionary.management.DictionaryCommandline;
+import org.nora.dictionary.commandline.DictionaryCommandline;
 import org.nora.dictionary.management.DictionaryManagement;
 
 import java.io.File;

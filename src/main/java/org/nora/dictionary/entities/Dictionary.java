@@ -89,7 +89,7 @@ public class Dictionary {
 
         boolean found = false;
         while (index < wordList.size()) {
-            if (wordList.get(index).getWord_explain().compareToIgnoreCase(word.getWord_explain()) == 0) {
+            if (wordList.get(index).getExplain().compareToIgnoreCase(word.getExplain()) == 0) {
                 found = true;
                 break;
             }

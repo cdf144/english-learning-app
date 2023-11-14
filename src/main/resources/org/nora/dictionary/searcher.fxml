@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.nora.dictionary.controllers.SearcherController">
+   <left>
+            <VBox prefHeight="600.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="searchField" onKeyTyped="#searchFieldOnKeyTyped" prefHeight="40.0" prefWidth="300.0" promptText="Type your search word here">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </TextField>
+            <ListView fx:id="autocompleteList" onMouseClicked="#autocompleteListOnClick" prefHeight="560.0" prefWidth="300.0" />
+         </children></VBox>
+   </left>
+   <center>
+      <AnchorPane prefHeight="600.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="600.0" prefWidth="600.0">
+               <children>
+                  <HBox prefHeight="65.0" prefWidth="750.0">
+                     <children>
+                        <Label fx:id="wordTargetLabel" prefHeight="60.0" prefWidth="600.0">
+                           <font>
+                              <Font name="System Bold" size="26.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets left="20.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <WebView fx:id="wordExplainView" prefHeight="540.0" prefWidth="600.0" />
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

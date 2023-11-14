@@ -21,7 +21,13 @@ public class DictionaryManagement {
             + File.separator + "src"
             + File.separator + "main"
             + File.separator + "resources"
-            + File.separator + "dictionaries.txt";
+            + File.separator + "dictionaryAdvanced.txt";
+
+    public static final String PATH_DICTIONARY_HTML_FILE = System.getProperty("user.dir")
+            + File.separator + "src"
+            + File.separator + "main"
+            + File.separator + "resources"
+            + File.separator + "dictionaryHTML_EV.txt";
 
     private static final FileHandler logFileHandler;
     static {
@@ -69,10 +75,25 @@ public class DictionaryManagement {
 
         dictionary.getWordList().clear();
 
+        String splitPattern;
+        String htmlStart;
+        if (filePath.equals(PATH_DICTIONARY_FILE)) {
+            splitPattern = "\t";
+            htmlStart = "";
+        } else if (filePath.equals(PATH_DICTIONARY_HTML_FILE)) {
+            splitPattern = "<html>";
+            htmlStart = "<html>";
+        } else {
+            System.out.println("Invalid file");
+            return;
+        }
+
         String line;
         while ((line = bufferedReader.readLine()) != null) {
-            String[] words = line.split("\t");
-            Word word = new Word(words[0].toLowerCase(), words[1]);
+            String[] wordParts = line.split(splitPattern);
+            String target = wordParts[0];
+            String explain = htmlStart + wordParts[1];
+            Word word = new Word(target.toLowerCase(), explain);
             dictionary.addWord(word);
         }
 
@@ -95,7 +116,7 @@ public class DictionaryManagement {
         if (index < 0) {
             return "No word exist!";
         } else {
-            return dictionary.getWordList().get(index).getWord_explain();
+            return dictionary.getWordList().get(index).getExplain();
         }
     }
 
@@ -117,13 +138,13 @@ public class DictionaryManagement {
         int endIndex = index;
 
         while (startIndex > 0
-                && dictionary.getWordList().get(startIndex - 1).getWord_target().startsWith(wordTarget)
+                && dictionary.getWordList().get(startIndex - 1).getTarget().startsWith(wordTarget)
         ) {
             startIndex--;
         }
 
         while (endIndex < dictionary.getWordList().size() - 1
-                && dictionary.getWordList().get(endIndex + 1).getWord_target().startsWith(wordTarget)
+                && dictionary.getWordList().get(endIndex + 1).getTarget().startsWith(wordTarget)
         ) {
             endIndex++;
         }
@@ -187,8 +208,8 @@ public class DictionaryManagement {
 
         StringBuilder content = new StringBuilder();
         for (Word word : dictionary.getWordList()) {
-            content.append(word.getWord_target()).append("\t");
-            content.append(word.getWord_explain()).append("\n");
+            content.append(word.getTarget()).append("\t");
+            content.append(word.getExplain()).append("\n");
         }
 
         fileWriter.write(content.toString());
