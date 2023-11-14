@@ -12,6 +12,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.web.WebView;
 import org.nora.dictionary.DictionaryApplication;
 import org.nora.dictionary.entities.Word;
+import org.nora.dictionary.utils.SearchHistory;
 import org.nora.dictionary.utils.TextToSpeech;
 
 import java.net.URL;
@@ -71,8 +72,10 @@ public class SearcherController implements Initializable {
                         new Word(target.toLowerCase(), null)
                 );
         Word word = DictionaryApplication.dictionary.getDictionary().getWordList().get(index);
+
         wordTargetLabel.setText(word.getTarget());
         wordExplainView.getEngine().loadContent(word.getExplain(), "text/html");
+        SearchHistory.searchHistory.add(word.getTarget());
     }
 
     public void onWordToSpeechClick() {

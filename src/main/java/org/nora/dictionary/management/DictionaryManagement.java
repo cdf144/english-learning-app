@@ -226,7 +226,5 @@ public class DictionaryManagement {
 
         fileWriter.write(content.toString());
         fileWriter.close();
-        System.out.println("Completed!");
     }
-
 }

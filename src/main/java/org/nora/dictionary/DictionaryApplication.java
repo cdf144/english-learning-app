@@ -6,7 +6,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.nora.dictionary.management.DictionaryManagement;
+import org.nora.dictionary.utils.SearchHistory;
 import org.nora.dictionary.utils.TextToSpeech;
+
+import java.io.IOException;
 
 public class DictionaryApplication extends Application {
     public static DictionaryManagement dictionary;
@@ -22,11 +25,19 @@ public class DictionaryApplication extends Application {
                 DictionaryApplication.class.getResource("application.fxml")
         );
         Scene scene = new Scene(fxmlLoader.load());
+        SearchHistory.loadSearchHistory();
         primaryStage.setTitle("Nora Dictionary");
         primaryStage.initStyle(StageStyle.DECORATED);
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        primaryStage.setOnCloseRequest(e -> TextToSpeech.deallocateSynthesizer());
+        primaryStage.setOnCloseRequest(event -> {
+            TextToSpeech.deallocateSynthesizer();
+            try {
+                SearchHistory.saveSearchHistory();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 }
