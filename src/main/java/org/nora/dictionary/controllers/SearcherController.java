@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.web.WebView;
 import org.nora.dictionary.DictionaryApplication;
 import org.nora.dictionary.entities.Word;
@@ -28,6 +29,12 @@ public class SearcherController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        autocompleteList.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                autocompleteListOnClick();
+            }
+        });
+
         updateAutocompleteList();
     }
 
