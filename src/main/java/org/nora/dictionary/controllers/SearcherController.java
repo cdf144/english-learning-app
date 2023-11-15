@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -204,11 +201,22 @@ public class SearcherController implements Initializable {
     }
 
     public void onRemoveClick() {
-        DictionaryApplication.dictionary.removeFromDictionary(wordTargetLabel.getText());
-        showNotification("Remove", "Word removed successfully!");
-        updateAutocompleteList();
-        wordTargetLabel.setText("");
-        wordExplainView.getEngine().loadContent("");
+        Alert alert = new Alert(
+                Alert.AlertType.CONFIRMATION,
+                "Delete '" + wordTargetLabel.getText() + "'?",
+                ButtonType.YES,
+                ButtonType.NO,
+                ButtonType.CANCEL
+        );
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+            DictionaryApplication.dictionary.removeFromDictionary(wordTargetLabel.getText());
+            showNotification("Remove", "Word removed successfully!");
+            updateAutocompleteList();
+            wordTargetLabel.setText("");
+            wordExplainView.getEngine().loadContent("");
+        }
     }
 
     public void showNotification(String title, String content) {
