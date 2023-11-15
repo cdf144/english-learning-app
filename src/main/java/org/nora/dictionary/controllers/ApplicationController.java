@@ -68,7 +68,18 @@ public class ApplicationController implements Initializable {
         mainBorderPane.setBottom(borderPane.getBottom());
     }
 
+    private void resetActiveStatusAllButtons() {
+        searchTab.getStyleClass().removeAll("active");
+        googleTranslateTab.getStyleClass().removeAll("active");
+        favoritesTab.getStyleClass().removeAll("active");
+        historyTab.getStyleClass().removeAll("active");
+        gameTab.getStyleClass().removeAll("active");
+        settingsTab.getStyleClass().removeAll("active");
+    }
+
     public void loadSearcher() throws IOException {
+        resetActiveStatusAllButtons();
+        searchTab.getStyleClass().add("active");
         searcherPane = FXMLLoader.load(
                 Objects.requireNonNull(
                         DictionaryApplication.class.getResource("searcher.fxml")
@@ -78,6 +89,8 @@ public class ApplicationController implements Initializable {
     }
 
     public void loadGoogleTranslate() throws IOException {
+        resetActiveStatusAllButtons();
+        googleTranslateTab.getStyleClass().add("active");
         googleTranslatePane = FXMLLoader.load(
                 Objects.requireNonNull(
                         DictionaryApplication.class.getResource("googletranslate.fxml")
@@ -87,6 +100,8 @@ public class ApplicationController implements Initializable {
     }
 
     public void loadFavorites() throws IOException {
+        resetActiveStatusAllButtons();
+        favoritesTab.getStyleClass().add("active");
         favoritesPane = FXMLLoader.load(
                 Objects.requireNonNull(
                         DictionaryApplication.class.getResource("favorites.fxml")
@@ -96,6 +111,8 @@ public class ApplicationController implements Initializable {
     }
 
     public void loadHistory() throws IOException {
+        resetActiveStatusAllButtons();
+        historyTab.getStyleClass().add("active");
         historyPane = FXMLLoader.load(
                 Objects.requireNonNull(
                         DictionaryApplication.class.getResource("history.fxml")
@@ -105,6 +122,8 @@ public class ApplicationController implements Initializable {
     }
 
     public void loadGame() throws IOException {
+        resetActiveStatusAllButtons();
+        gameTab.getStyleClass().add("active");
         gamePane = FXMLLoader.load(
                 Objects.requireNonNull(
                         DictionaryApplication.class.getResource("game.fxml")
@@ -114,6 +133,8 @@ public class ApplicationController implements Initializable {
     }
 
     public void loadSettings() throws IOException {
+        resetActiveStatusAllButtons();
+        settingsTab.getStyleClass().add("active");
         settingsPane = FXMLLoader.load(
                 Objects.requireNonNull(
                         DictionaryApplication.class.getResource("settings.fxml")

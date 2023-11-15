@@ -1,22 +1,23 @@
-.button {
+.tab-button {
     -fx-background-color: #657ee4;
     background-color: #657ee4;
     -fx-background-radius: 10px;
     -fx-border-radius: 10px;
+    border-radius: 10px;
 }
 
-.button:hover {
+.tab-button:hover {
     -fx-background-color: #6D8EFF;
     background-color: #6D8EFF;
     -fx-underline: true;
 }
 
-.button:pressed {
-    -fx-background-color: #7156DD;
-    background-color: #7156DD;
+.tab-button:pressed {
+    -fx-background-color: #6D6DFF;
+    background-color: #6D6DFF;
 }
 
-.button:focused {
+.tab-button.active {
     -fx-background-color: #7156DD;
     background-color: #7156DD;
     -fx-border-color : #CDD1D6;
