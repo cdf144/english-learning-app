@@ -15,6 +15,7 @@ import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
 import org.nora.dictionary.DictionaryApplication;
 import org.nora.dictionary.entities.Word;
+import org.nora.dictionary.management.FavoriteWords;
 import org.nora.dictionary.management.SearchHistory;
 import org.nora.dictionary.utils.TextToSpeech;
 
@@ -99,6 +100,12 @@ public class SearcherController implements Initializable {
             return;
         }
 
+        if (FavoriteWords.inFavorites(target)) {
+            favoriteButton.setImage(starFilledImage);
+        } else {
+            favoriteButton.setImage(starImage);
+        }
+
         int index =
                 DictionaryApplication.dictionary.getDictionary().findWord(
                         new Word(target.toLowerCase(), null)
@@ -106,12 +113,34 @@ public class SearcherController implements Initializable {
         Word word = DictionaryApplication.dictionary.getDictionary().getWordList().get(index);
 
         wordTargetLabel.setText(word.getTarget());
-        wordExplainView.getEngine().loadContent(word.getExplain(), "text/html");
+
+        if (wordExplainEditor.isDisable()) {
+            wordExplainView.getEngine().loadContent(word.getExplain(), "text/html");
+        } else if (wordExplainView.isDisable()) {
+            wordExplainEditor.setHtmlText(word.getExplain());
+        }
+
         SearchHistory.searchHistory.add(word.getTarget());
     }
 
     public void onWordToSpeechClick() {
         TextToSpeech.speak(wordTargetLabel.getText());
+    }
+
+    public void onFavoriteClick() {
+        String target = wordTargetLabel.getText();
+        if (target.isEmpty()) {
+            showNotification("Favorite", "No word chosen!");
+            return;
+        }
+
+        if (!FavoriteWords.inFavorites(target)) {
+            FavoriteWords.insertFavorite(target);
+            favoriteButton.setImage(starFilledImage);
+        } else {
+            FavoriteWords.removeFavorite(target);
+            favoriteButton.setImage(starImage);
+        }
     }
 
     public void onEditButtonClick() {

@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.nora.dictionary.management.DictionaryManagement;
+import org.nora.dictionary.management.FavoriteWords;
 import org.nora.dictionary.management.SearchHistory;
 import org.nora.dictionary.utils.TextToSpeech;
 
@@ -36,6 +37,7 @@ public class DictionaryApplication extends Application {
         );
         Scene scene = new Scene(fxmlLoader.load());
         SearchHistory.loadSearchHistory();
+        FavoriteWords.loadFavoriteWords();
         primaryStage.setTitle("Nora Dictionary");
         primaryStage.initStyle(StageStyle.DECORATED);
         primaryStage.setScene(scene);
@@ -46,6 +48,7 @@ public class DictionaryApplication extends Application {
             try {
                 dictionary.exportToFile(DictionaryManagement.PATH_DICTIONARY_HTML_FILE);
                 SearchHistory.saveSearchHistory();
+                FavoriteWords.saveFavoriteWords();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

@@ -52,7 +52,7 @@
                               <Insets left="5.0" top="13.0" />
                            </HBox.margin>
                         </ImageView>
-                        <ImageView fx:id="favoriteButton" fitHeight="42.0" fitWidth="42.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onWordToSpeechClick" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="favoriteButton" fitHeight="42.0" fitWidth="42.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onFavoriteClick" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@icons/star.png" />
                            </image>
