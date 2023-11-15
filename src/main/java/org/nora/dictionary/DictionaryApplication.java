@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.nora.dictionary.management.DictionaryManagement;
-import org.nora.dictionary.utils.SearchHistory;
+import org.nora.dictionary.management.SearchHistory;
 import org.nora.dictionary.utils.TextToSpeech;
 
 import java.io.IOException;

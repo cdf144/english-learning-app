@@ -12,7 +12,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.web.WebView;
 import org.nora.dictionary.DictionaryApplication;
 import org.nora.dictionary.entities.Word;
-import org.nora.dictionary.utils.SearchHistory;
+import org.nora.dictionary.management.SearchHistory;
 import org.nora.dictionary.utils.TextToSpeech;
 
 import java.net.URL;
