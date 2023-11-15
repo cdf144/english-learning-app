@@ -9,10 +9,20 @@ import org.nora.dictionary.management.DictionaryManagement;
 import org.nora.dictionary.management.SearchHistory;
 import org.nora.dictionary.utils.TextToSpeech;
 
+import java.io.File;
 import java.io.IOException;
 
 public class DictionaryApplication extends Application {
     public static DictionaryManagement dictionary;
+
+    public static final String PATH_ICONS_FOLDER = System.getProperty("user.dir")
+            + File.separator + "src"
+            + File.separator + "main"
+            + File.separator + "resources"
+            + File.separator + "org"
+            + File.separator + "nora"
+            + File.separator + "dictionary"
+            + File.separator + "icons" + File.separator;
 
     public static void main(String[] args) {
         launch(args);

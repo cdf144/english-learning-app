@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.web.HTMLEditor;
@@ -17,6 +18,7 @@ import org.nora.dictionary.entities.Word;
 import org.nora.dictionary.management.SearchHistory;
 import org.nora.dictionary.utils.TextToSpeech;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -42,6 +44,11 @@ public class SearcherController implements Initializable {
     @FXML
     public ImageView deleteButton;
 
+    private Image starImage;
+    private Image starFilledImage;
+    private Image editImage;
+    private Image cancelImage;
+
     private final ObservableList<String> autocompleteWordList = FXCollections.observableArrayList();
 
     @Override
@@ -51,6 +58,15 @@ public class SearcherController implements Initializable {
                 autocompleteListOnClick();
             }
         });
+
+        File star = new File(DictionaryApplication.PATH_ICONS_FOLDER + "star.png");
+        starImage = new Image(star.toURI().toString());
+        File starFilled = new File(DictionaryApplication.PATH_ICONS_FOLDER + "star_filled.png");
+        starFilledImage = new Image(starFilled.toURI().toString());
+        File edit = new File(DictionaryApplication.PATH_ICONS_FOLDER + "edit_note.png");
+        editImage = new Image(edit.toURI().toString());
+        File cancel = new File(DictionaryApplication.PATH_ICONS_FOLDER + "cancel.png");
+        cancelImage = new Image(cancel.toURI().toString());
 
         updateAutocompleteList();
     }
@@ -123,6 +139,8 @@ public class SearcherController implements Initializable {
 
         favoriteButton.setVisible(false);
         favoriteButton.setDisable(true);
+
+        editButton.setImage(cancelImage);
     }
 
     public void disableEditView() {
@@ -142,6 +160,8 @@ public class SearcherController implements Initializable {
 
         favoriteButton.setVisible(true);
         favoriteButton.setDisable(false);
+
+        editButton.setImage(editImage);
     }
 
     public void onSaveEditClick() {
