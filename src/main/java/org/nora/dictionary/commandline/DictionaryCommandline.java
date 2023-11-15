@@ -156,7 +156,7 @@ public class DictionaryCommandline extends DictionaryManagement {
                     break;
                 case 9:
                     try {
-                        exportToFile();
+                        exportToFile(DictionaryManagement.PATH_DICTIONARY_FILE);
                         System.out.println("Completed!");
                         LOGGER.info("No I/O error occured.");
                     } catch (IOException e) {

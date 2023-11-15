@@ -34,6 +34,7 @@ public class DictionaryApplication extends Application {
         primaryStage.setOnCloseRequest(event -> {
             TextToSpeech.deallocateSynthesizer();
             try {
+                dictionary.exportToFile(DictionaryManagement.PATH_DICTIONARY_HTML_FILE);
                 SearchHistory.saveSearchHistory();
             } catch (IOException e) {
                 throw new RuntimeException(e);

@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.web.HTMLEditor?>
 <?import javafx.scene.web.WebView?>
 
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.nora.dictionary.controllers.SearcherController">
@@ -32,7 +33,7 @@
                <children>
                   <HBox prefHeight="60.0" prefWidth="750.0">
                      <children>
-                        <Label fx:id="wordTargetLabel" prefHeight="60.0" prefWidth="330.0">
+                        <Label fx:id="wordTargetLabel" prefHeight="60.0" prefWidth="320.0">
                            <font>
                               <Font name="System Bold" size="26.0" />
                            </font>
@@ -43,17 +44,54 @@
                               <Insets left="20.0" />
                            </padding>
                         </Label>
-                        <ImageView fx:id="wordToSpeech" fitHeight="48.0" fitWidth="48.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onWordToSpeechClick" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="wordToSpeech" fitHeight="36.0" fitWidth="36.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onWordToSpeechClick" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@icons/hearing.png" />
                            </image>
                            <HBox.margin>
-                              <Insets top="5.0" />
+                              <Insets left="5.0" top="13.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <ImageView fx:id="favoriteButton" fitHeight="42.0" fitWidth="42.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onWordToSpeechClick" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/star.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="20.0" top="8.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <ImageView fx:id="saveEditButton" disable="true" fitHeight="40.0" fitWidth="40.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onSaveEditClick" pickOnBounds="true" preserveRatio="true" visible="false">
+                           <image>
+                              <Image url="@icons/save.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="20.0" top="10.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <ImageView fx:id="editButton" fitHeight="38.0" fitWidth="38.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onEditButtonClick" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/edit-note.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="15.0" top="12.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <ImageView fx:id="deleteButton" fitHeight="36.0" fitWidth="36.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onRemoveClick" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/delete-forever.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="15.0" top="12.0" />
                            </HBox.margin>
                         </ImageView>
                      </children>
                   </HBox>
-                  <WebView fx:id="wordExplainView" prefHeight="540.0" prefWidth="600.0" />
+                  <AnchorPane prefHeight="540.0" prefWidth="600.0">
+                     <children>
+                        <WebView fx:id="wordExplainView" prefHeight="540.0" prefWidth="600.0" />
+                        <HTMLEditor fx:id="wordExplainEditor" disable="true" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" prefHeight="540.0" prefWidth="600.0" visible="false" />
+                     </children>
+                  </AnchorPane>
                </children>
             </VBox>
          </children>

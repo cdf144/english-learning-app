@@ -96,7 +96,7 @@ public class DictionaryManagement {
             splitPattern = "<html>";
             htmlStart = "<html>";
         } else {
-            System.out.println("Invalid file");
+            System.err.println("Invalid file");
             return;
         }
 
@@ -214,13 +214,23 @@ public class DictionaryManagement {
      * Xuất wordList ra file.
      * @throws IOException Được ném nếu có lỗi xảy ra với FileWriter
      */
-    public void exportToFile() throws IOException {
+    public void exportToFile(String filePath) throws IOException {
         FileWriter fileWriter;
-        fileWriter = new FileWriter(DictionaryManagement.PATH_DICTIONARY_FILE);
+        fileWriter = new FileWriter(filePath);
+
+        String separator;
+        if (filePath.equals(PATH_DICTIONARY_FILE)) {
+            separator = "\t";
+        } else if (filePath.equals(PATH_DICTIONARY_HTML_FILE)) {
+            separator = "";
+        } else {
+            System.out.println("Invalid file");
+            return;
+        }
 
         StringBuilder content = new StringBuilder();
         for (Word word : dictionary.getWordList()) {
-            content.append(word.getTarget()).append("\t");
+            content.append(word.getTarget()).append(separator);
             content.append(word.getExplain()).append("\n");
         }
 
