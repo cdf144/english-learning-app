@@ -90,7 +90,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>org.nora.dictionary.HelloApplication</mainClass>
+                            <mainClass>org.nora.dictionary.DictionaryApplication</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
