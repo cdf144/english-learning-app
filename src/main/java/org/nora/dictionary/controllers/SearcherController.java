@@ -67,6 +67,10 @@ public class SearcherController implements Initializable {
 
     public void autocompleteListOnClick() {
         String target = autocompleteList.getSelectionModel().getSelectedItem();
+        if (target == null) {
+            return;
+        }
+
         int index =
                 DictionaryApplication.dictionary.getDictionary().findWord(
                         new Word(target.toLowerCase(), null)
