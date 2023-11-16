@@ -18,12 +18,12 @@
    <left>
             <VBox prefHeight="600.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="searchField" onKeyTyped="#searchFieldOnKeyTyped" prefHeight="40.0" prefWidth="300.0" promptText="Type your search word here">
+            <TextField fx:id="searchField" onKeyTyped="#onSearchFieldKeyTyped" prefHeight="40.0" prefWidth="300.0" promptText="Type your search word here">
                <font>
                   <Font size="16.0" />
                </font>
             </TextField>
-            <ListView fx:id="autocompleteList" onMouseClicked="#autocompleteListOnClick" prefHeight="560.0" prefWidth="300.0" />
+            <ListView fx:id="autocompleteList" onMouseClicked="#onAutocompleteListClick" prefHeight="560.0" prefWidth="300.0" />
          </children></VBox>
    </left>
    <center>

@@ -3,6 +3,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 *.log
+/src/main/resources/history.txt
+/src/main/resources/favorites.txt
 
 ### IntelliJ IDEA ###
 #.idea/modules.xml

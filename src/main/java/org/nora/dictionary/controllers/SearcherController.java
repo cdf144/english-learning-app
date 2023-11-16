@@ -53,7 +53,7 @@ public class SearcherController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         autocompleteList.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                autocompleteListOnClick();
+                onAutocompleteListClick();
             }
         });
 
@@ -87,11 +87,11 @@ public class SearcherController implements Initializable {
         autocompleteList.setItems(autocompleteWordList);
     }
 
-    public void searchFieldOnKeyTyped() {
+    public void onSearchFieldKeyTyped() {
         updateAutocompleteList();
     }
 
-    public void autocompleteListOnClick() {
+    public void onAutocompleteListClick() {
         String target = autocompleteList.getSelectionModel().getSelectedItem();
         if (target == null) {
             return;
