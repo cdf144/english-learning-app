@@ -33,6 +33,10 @@ public class TextToSpeech {
     }
 
     public static void deallocateSynthesizer() {
+        if (synthesizer == null) {
+            return;
+        }
+
         try {
             synthesizer.deallocate();
         } catch (Exception e) {

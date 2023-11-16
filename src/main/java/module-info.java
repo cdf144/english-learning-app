@@ -2,8 +2,9 @@ module english.learning.app {
     requires transitive javafx.graphics;
     requires javafx.fxml;
     requires javafx.controls;
-    requires java.logging;
     requires javafx.web;
+    requires java.sql;
+    requires java.logging;
     requires freetts;
 
     opens org.nora.dictionary to javafx.fxml;
