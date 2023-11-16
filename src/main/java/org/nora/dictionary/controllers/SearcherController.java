@@ -71,18 +71,13 @@ public class SearcherController implements Initializable {
 
     public void updateAutocompleteList() {
         autocompleteWordList.clear();
+        DictionaryApplication.dictionary.dictionarySearcher(searchField.getText());
 
-        if (searchField.getText().isEmpty()) {
-            for (Word word : DictionaryApplication.dictionary.getDictionary().getWordList()) {
-                autocompleteWordList.add(word.getTarget());
-            }
-        } else {
-            DictionaryApplication.dictionary.dictionarySearcher(searchField.getText());
-            for (Word word :
-                    DictionaryApplication.dictionary.getSearchResultList()) {
-                autocompleteWordList.add(word.getTarget());
-            }
+
+        for (Word word : DictionaryApplication.dictionary.getSearchResultList()) {
+            autocompleteWordList.add(word.getTarget());
         }
+
 
         autocompleteList.setItems(autocompleteWordList);
     }
@@ -103,11 +98,7 @@ public class SearcherController implements Initializable {
             favoriteButton.setImage(starImage);
         }
 
-        int index =
-                DictionaryApplication.dictionary.getDictionary().findWord(
-                        new Word(target.toLowerCase(), null)
-                );
-        Word word = DictionaryApplication.dictionary.getDictionary().getWordList().get(index);
+        Word word = DictionaryApplication.dictionary.dictionaryLookupWord(target);
 
         wordTargetLabel.setText(word.getTarget());
 
@@ -194,6 +185,9 @@ public class SearcherController implements Initializable {
         String newExplain = wordExplainEditor.getHtmlText().replace(" dir=\"ltr\"><head></head" +
                 "><body contenteditable=\"true\">", ">");
         newExplain = newExplain.replace("</body>", "");
+        newExplain = newExplain.replace("<html>", "");
+        newExplain = newExplain.replace("</html>", "");
+
         DictionaryApplication.dictionary.updateInDictionary(wordTargetLabel.getText(), newExplain);
 
         showNotification("Edit", "Word edited successfully!");

@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import org.nora.dictionary.entities.Dictionary;
 import org.nora.dictionary.entities.Word;
 
-public class DictionaryManagement {
+public class DictionaryManagement implements IDictionaryManagement {
     protected Dictionary dictionary;
     protected List<Word> searchResultList;
 
