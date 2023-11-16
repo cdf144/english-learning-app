@@ -4,6 +4,7 @@ import org.nora.dictionary.utils.IOFileList;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SearchHistory {
@@ -24,5 +25,9 @@ public class SearchHistory {
 
     public static void saveSearchHistory() throws IOException {
         IOFileList.saveListToFile(PATH_HISTORY_FILE, searchHistory);
+    }
+
+    public static void removeFromHistory(String word) {
+        searchHistory.removeAll(Collections.singleton(word));
     }
 }
