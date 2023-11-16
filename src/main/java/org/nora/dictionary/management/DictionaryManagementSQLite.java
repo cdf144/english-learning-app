@@ -66,10 +66,6 @@ public class DictionaryManagementSQLite implements IDictionaryManagement {
         return connection;
     }
 
-    public void setConnection(Connection connection) {
-        this.connection = connection;
-    }
-
     @Override
     public String dictionaryLookup(String wordTarget) {
         String sql = "SELECT html FROM av WHERE word = ?";
@@ -112,7 +108,7 @@ public class DictionaryManagementSQLite implements IDictionaryManagement {
     @Override
     public void dictionarySearcher(String wordTarget) {
         searchResultList.clear();
-        String sql = "SELECT word, html FROM av WHERE word LIKE ? ORDER BY word ASC LIMIT 15000";
+        String sql = "SELECT word, html FROM av WHERE word LIKE ? ORDER BY word ASC LIMIT 20000";
 
         PreparedStatement preparedStatement;
         try {
