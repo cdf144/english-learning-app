@@ -5,7 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
-import org.nora.dictionary.utils.GoogleTransAPI;
+import org.nora.dictionary.utils.GoogleTranslateAPI;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,8 +25,8 @@ public class GoogleTranslateController implements Initializable {
 
     String[] sourceLangs = {"English", "Vietnamese", "Auto"};
     String[] destLangs = {"English", "Vietnamese"};
-    GoogleTransAPI.LANGUAGE sourceLang;
-    GoogleTransAPI.LANGUAGE destLang;
+    GoogleTranslateAPI.LANGUAGE sourceLang;
+    GoogleTranslateAPI.LANGUAGE destLang;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -36,8 +36,8 @@ public class GoogleTranslateController implements Initializable {
         destLangChoiceBox.getItems().addAll(destLangs);
         destLangChoiceBox.setValue(destLangs[1]);
 
-        sourceLang = GoogleTransAPI.LANGUAGE.ENGLISH;
-        destLang = GoogleTransAPI.LANGUAGE.VIETNAMESE;
+        sourceLang = GoogleTranslateAPI.LANGUAGE.ENGLISH;
+        destLang = GoogleTranslateAPI.LANGUAGE.VIETNAMESE;
     }
 
     @FXML
@@ -45,19 +45,19 @@ public class GoogleTranslateController implements Initializable {
         String inputText = inputTextArea.getText();
 
         if (sourceLangChoiceBox.getValue().equals(sourceLangs[0])) {
-            sourceLang = GoogleTransAPI.LANGUAGE.ENGLISH;
+            sourceLang = GoogleTranslateAPI.LANGUAGE.ENGLISH;
         } else if (sourceLangChoiceBox.getValue().equals(sourceLangs[0])) {
-            sourceLang = GoogleTransAPI.LANGUAGE.VIETNAMESE;
+            sourceLang = GoogleTranslateAPI.LANGUAGE.VIETNAMESE;
         } else {
-            sourceLang = GoogleTransAPI.LANGUAGE.AUTO;
+            sourceLang = GoogleTranslateAPI.LANGUAGE.AUTO;
         }
 
         destLang = destLangChoiceBox.getValue().equals(destLangs[0])
-                ? GoogleTransAPI.LANGUAGE.ENGLISH
-                : GoogleTransAPI.LANGUAGE.VIETNAMESE;
+                ? GoogleTranslateAPI.LANGUAGE.ENGLISH
+                : GoogleTranslateAPI.LANGUAGE.VIETNAMESE;
 
         try {
-            resultTextArea.setText(GoogleTransAPI.translate(
+            resultTextArea.setText(GoogleTranslateAPI.translate(
                     inputText, sourceLang, destLang
             ));
         } catch (IOException e) {
