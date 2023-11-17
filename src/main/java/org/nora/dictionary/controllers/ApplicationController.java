@@ -22,6 +22,8 @@ public class ApplicationController implements Initializable {
     @FXML
     private Button historyTab;
     @FXML
+    private Button addToDictTab;
+    @FXML
     private Button gameTab;
     @FXML
     private Button settingsTab;
@@ -35,6 +37,8 @@ public class ApplicationController implements Initializable {
     private BorderPane favoritesPane;
     @FXML
     private BorderPane historyPane;
+    @FXML
+    private BorderPane addToDictPane;
     @FXML
     private BorderPane gamePane;
     @FXML
@@ -71,6 +75,7 @@ public class ApplicationController implements Initializable {
         googleTranslateTab.getStyleClass().removeAll("active");
         favoritesTab.getStyleClass().removeAll("active");
         historyTab.getStyleClass().removeAll("active");
+        addToDictTab.getStyleClass().removeAll("active");
         gameTab.getStyleClass().removeAll("active");
         settingsTab.getStyleClass().removeAll("active");
     }
@@ -117,6 +122,17 @@ public class ApplicationController implements Initializable {
                 )
         );
         setMainBorderPane(historyPane);
+    }
+
+    public void loadAddToDict() throws IOException {
+        resetActiveStatusAllButtons();
+        addToDictTab.getStyleClass().add("active");
+        addToDictPane = FXMLLoader.load(
+                Objects.requireNonNull(
+                        DictionaryApplication.class.getResource("add.fxml")
+                )
+        );
+        setMainBorderPane(addToDictPane);
     }
 
     public void loadGame() throws IOException {

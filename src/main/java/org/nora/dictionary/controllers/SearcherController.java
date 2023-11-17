@@ -25,32 +25,32 @@ import java.util.ResourceBundle;
 
 public class SearcherController implements Initializable {
     @FXML
-    private TextField searchField;
+    protected TextField searchField;
     @FXML
-    private ListView<String> autocompleteList;
+    protected ListView<String> autocompleteList;
     @FXML
-    private Label wordTargetLabel;
+    protected Label wordTargetLabel;
     @FXML
-    private WebView wordExplainView;
+    protected WebView wordExplainView;
     @FXML
-    public HTMLEditor wordExplainEditor;
+    protected HTMLEditor wordExplainEditor;
     @FXML
-    public ImageView wordToSpeech;
+    protected ImageView wordToSpeech;
     @FXML
-    public ImageView favoriteButton;
+    protected ImageView favoriteButton;
     @FXML
-    public ImageView saveEditButton;
+    protected ImageView saveEditButton;
     @FXML
-    public ImageView editButton;
+    protected ImageView editButton;
     @FXML
-    public ImageView deleteButton;
+    protected ImageView deleteButton;
 
-    private Image starImage;
-    private Image starFilledImage;
-    private Image editImage;
-    private Image cancelImage;
+    protected Image starImage;
+    protected Image starFilledImage;
+    protected Image editImage;
+    protected Image cancelImage;
 
-    private final ObservableList<String> autocompleteWordList = FXCollections.observableArrayList();
+    protected final ObservableList<String> autocompleteWordList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -76,11 +76,9 @@ public class SearcherController implements Initializable {
         autocompleteWordList.clear();
         DictionaryApplication.dictionary.dictionarySearcher(searchField.getText());
 
-
         for (Word word : DictionaryApplication.dictionary.getSearchResultList()) {
             autocompleteWordList.add(word.getTarget());
         }
-
 
         autocompleteList.setItems(autocompleteWordList);
     }
@@ -102,6 +100,14 @@ public class SearcherController implements Initializable {
         }
 
         Word word = DictionaryApplication.dictionary.dictionaryLookupWord(target);
+        if (word == null) {
+            if (wordExplainEditor.isDisable()) {
+                wordExplainView.getEngine().loadContent("No word exists!", "text/html");
+            } else if (wordExplainView.isDisable()) {
+                wordExplainEditor.setHtmlText("No word exists!");
+            }
+            return;
+        }
 
         wordTargetLabel.setText(word.getTarget());
 
@@ -111,7 +117,7 @@ public class SearcherController implements Initializable {
             wordExplainEditor.setHtmlText(word.getExplain());
         }
 
-        SearchHistory.searchHistory.add(word.getTarget());
+        SearchHistory.getSearchHistory().add(word.getTarget());
     }
 
     public void onWordToSpeechClick() {
@@ -147,6 +153,10 @@ public class SearcherController implements Initializable {
     }
 
     public void onEditButtonClick() {
+        if (wordTargetLabel.getText().isEmpty()) {
+            showNotification("Edit", "Cannot edit a non-existent word!");
+            return;
+        }
         if (wordExplainEditor.isVisible()) {
             disableEditView();
         } else {
@@ -210,6 +220,12 @@ public class SearcherController implements Initializable {
     }
 
     public void onRemoveClick() {
+        String wordTarget = wordTargetLabel.getText();
+        if (wordTarget.isEmpty()) {
+            showNotification("Delete", "Cannot delete a non-existent word!");
+            return;
+        }
+
         Alert alert = new Alert(
                 Alert.AlertType.CONFIRMATION,
                 "Delete '" + wordTargetLabel.getText() + "'?",
@@ -220,8 +236,10 @@ public class SearcherController implements Initializable {
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.YES) {
-            DictionaryApplication.dictionary.removeFromDictionary(wordTargetLabel.getText());
-            SearchHistory.removeFromHistory(wordTargetLabel.getText());
+            DictionaryApplication.dictionary.removeFromDictionary(wordTarget);
+            SearchHistory.removeFromHistory(wordTarget);
+            FavoriteWords.removeFavorite(wordTarget);
+
             showNotification("Remove", "Word removed successfully!");
             updateAutocompleteList();
             wordTargetLabel.setText("");

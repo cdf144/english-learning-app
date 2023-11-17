@@ -20,8 +20,4 @@
 .tab-button.active {
     -fx-background-color: #7156DD;
     background-color: #7156DD;
-    -fx-border-color : #CDD1D6;
-    border-color: #CDD1D6;
-    -fx-border-width: 0px 0px 0px 3px;
-    border-width: 0px 0px 0px 3px;
 }

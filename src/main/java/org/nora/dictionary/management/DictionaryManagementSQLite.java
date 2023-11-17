@@ -81,7 +81,7 @@ public class DictionaryManagementSQLite implements IDictionaryManagement {
             throw new RuntimeException(e);
         }
 
-        return explain == null ? "No word exist." : explain;
+        return explain;
     }
 
     public Word dictionaryLookupWord(String wordTarget) {
@@ -99,7 +99,7 @@ public class DictionaryManagementSQLite implements IDictionaryManagement {
         }
 
         if (explain == null) {
-            explain = "No word exist.";
+            return null;
         }
 
         return new Word(wordTarget, explain);
@@ -139,6 +139,23 @@ public class DictionaryManagementSQLite implements IDictionaryManagement {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, wordTarget);
             preparedStatement.setString(2, wordExplain);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void addToDictionary(String wordTarget, String wordExplain, String shortDesc,
+                                String pronunciation) {
+        String sql = "INSERT INTO av(word,html,description,pronounce) VALUES(?,?,?,?)";
+
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, wordTarget);
+            preparedStatement.setString(2, wordExplain);
+            preparedStatement.setString(3, shortDesc);
+            preparedStatement.setString(4, pronunciation);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
