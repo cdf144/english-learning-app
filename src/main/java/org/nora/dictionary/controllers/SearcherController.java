@@ -97,6 +97,14 @@ public class SearcherController implements Initializable {
         }
 
         Word word = DictionaryApplication.dictionary.dictionaryLookupWord(target);
+        if (word == null) {
+            if (wordExplainEditor.isDisable()) {
+                wordExplainView.getEngine().loadContent("No word exists!", "text/html");
+            } else if (wordExplainView.isDisable()) {
+                wordExplainEditor.setHtmlText("No word exists!");
+            }
+            return;
+        }
 
         wordTargetLabel.setText(word.getTarget());
 
@@ -110,6 +118,12 @@ public class SearcherController implements Initializable {
     }
 
     public void onWordToSpeechClick() {
+        String word = wordTargetLabel.getText();
+        if (word.isEmpty()) {
+            showNotification("TextToSpeech", "No word chosen!");
+            return;
+        }
+
         TextToSpeech.speak(wordTargetLabel.getText());
     }
 
@@ -130,6 +144,10 @@ public class SearcherController implements Initializable {
     }
 
     public void onEditButtonClick() {
+        if (wordTargetLabel.getText().isEmpty()) {
+            showNotification("Edit", "Cannot edit a non-existent word!");
+            return;
+        }
         if (wordExplainEditor.isVisible()) {
             disableEditView();
         } else {
@@ -193,6 +211,12 @@ public class SearcherController implements Initializable {
     }
 
     public void onRemoveClick() {
+        String wordTarget = wordTargetLabel.getText();
+        if (wordTarget.isEmpty()) {
+            showNotification("Delete", "Cannot delete a non-existent word!");
+            return;
+        }
+
         Alert alert = new Alert(
                 Alert.AlertType.CONFIRMATION,
                 "Delete '" + wordTargetLabel.getText() + "'?",
@@ -203,7 +227,6 @@ public class SearcherController implements Initializable {
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.YES) {
-            String wordTarget = wordTargetLabel.getText();
             DictionaryApplication.dictionary.removeFromDictionary(wordTarget);
             SearchHistory.removeFromHistory(wordTarget);
             FavoriteWords.removeFavorite(wordTarget);

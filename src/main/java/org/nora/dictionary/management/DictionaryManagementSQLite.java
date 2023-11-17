@@ -81,7 +81,7 @@ public class DictionaryManagementSQLite implements IDictionaryManagement {
             throw new RuntimeException(e);
         }
 
-        return explain == null ? "No word exist." : explain;
+        return explain;
     }
 
     public Word dictionaryLookupWord(String wordTarget) {
@@ -99,7 +99,7 @@ public class DictionaryManagementSQLite implements IDictionaryManagement {
         }
 
         if (explain == null) {
-            explain = "No word exist.";
+            return null;
         }
 
         return new Word(wordTarget, explain);
