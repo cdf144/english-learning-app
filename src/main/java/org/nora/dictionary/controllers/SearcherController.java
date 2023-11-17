@@ -22,32 +22,32 @@ import java.util.ResourceBundle;
 
 public class SearcherController implements Initializable {
     @FXML
-    private TextField searchField;
+    protected TextField searchField;
     @FXML
-    private ListView<String> autocompleteList;
+    protected ListView<String> autocompleteList;
     @FXML
-    private Label wordTargetLabel;
+    protected Label wordTargetLabel;
     @FXML
-    private WebView wordExplainView;
+    protected WebView wordExplainView;
     @FXML
-    public HTMLEditor wordExplainEditor;
+    protected HTMLEditor wordExplainEditor;
     @FXML
-    public ImageView wordToSpeech;
+    protected ImageView wordToSpeech;
     @FXML
-    public ImageView favoriteButton;
+    protected ImageView favoriteButton;
     @FXML
-    public ImageView saveEditButton;
+    protected ImageView saveEditButton;
     @FXML
-    public ImageView editButton;
+    protected ImageView editButton;
     @FXML
-    public ImageView deleteButton;
+    protected ImageView deleteButton;
 
-    private Image starImage;
-    private Image starFilledImage;
-    private Image editImage;
-    private Image cancelImage;
+    protected Image starImage;
+    protected Image starFilledImage;
+    protected Image editImage;
+    protected Image cancelImage;
 
-    private final ObservableList<String> autocompleteWordList = FXCollections.observableArrayList();
+    protected final ObservableList<String> autocompleteWordList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -108,7 +108,7 @@ public class SearcherController implements Initializable {
             wordExplainEditor.setHtmlText(word.getExplain());
         }
 
-        SearchHistory.searchHistory.add(word.getTarget());
+        SearchHistory.getSearchHistory().add(word.getTarget());
     }
 
     public void onWordToSpeechClick() {
