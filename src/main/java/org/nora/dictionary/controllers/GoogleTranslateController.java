@@ -46,7 +46,7 @@ public class GoogleTranslateController implements Initializable {
 
         if (sourceLangChoiceBox.getValue().equals(sourceLangs[0])) {
             sourceLang = GoogleTranslateAPI.LANGUAGE.ENGLISH;
-        } else if (sourceLangChoiceBox.getValue().equals(sourceLangs[0])) {
+        } else if (sourceLangChoiceBox.getValue().equals(sourceLangs[1])) {
             sourceLang = GoogleTranslateAPI.LANGUAGE.VIETNAMESE;
         } else {
             sourceLang = GoogleTranslateAPI.LANGUAGE.AUTO;
