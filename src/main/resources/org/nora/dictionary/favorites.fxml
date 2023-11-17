@@ -1,8 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.nora.dictionary.controllers.FavoritesController">
-
+   <left>
+      <VBox prefHeight="600.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField alignment="CENTER" prefHeight="52.0" prefWidth="300.0" promptText="Type your search word here" />
+            <ListView prefHeight="572.0" prefWidth="300.0" />
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <AnchorPane prefHeight="581.0" prefWidth="586.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="599.0" prefWidth="600.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="750.0" spacing="20.0" style="-fx-background-color: #0000FF;">
+                     <children>
+                        <Label prefHeight="50.0" prefWidth="250.0" text="                Label">
+                           <font>
+                              <Font size="26.0" />
+                           </font></Label>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/hearing.png" />
+                           </image></ImageView>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/star_filled.png" />
+                           </image></ImageView>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/edit_note.png" />
+                           </image></ImageView>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/delete_forever.png" />
+                           </image></ImageView>
+                     </children>
+                  </HBox>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </center>
 </BorderPane>
