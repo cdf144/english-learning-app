@@ -73,11 +73,9 @@ public class SearcherController implements Initializable {
         autocompleteWordList.clear();
         DictionaryApplication.dictionary.dictionarySearcher(searchField.getText());
 
-
         for (Word word : DictionaryApplication.dictionary.getSearchResultList()) {
             autocompleteWordList.add(word.getTarget());
         }
-
 
         autocompleteList.setItems(autocompleteWordList);
     }
