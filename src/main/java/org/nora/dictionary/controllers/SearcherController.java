@@ -115,6 +115,12 @@ public class SearcherController implements Initializable {
     }
 
     public void onWordToSpeechClick() {
+        String word = wordTargetLabel.getText();
+        if (word.isEmpty()) {
+            showNotification("TextToSpeech", "No word chosen!");
+            return;
+        }
+
         try {
             GoogleVoiceAPI.getInstance().play(GoogleVoiceAPI.getInstance().getAudio(wordTargetLabel.getText(),
                     "en-US"));
