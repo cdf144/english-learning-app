@@ -205,8 +205,11 @@ public class SearcherController implements Initializable {
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.YES) {
-            DictionaryApplication.dictionary.removeFromDictionary(wordTargetLabel.getText());
-            SearchHistory.removeFromHistory(wordTargetLabel.getText());
+            String wordTarget = wordTargetLabel.getText();
+            DictionaryApplication.dictionary.removeFromDictionary(wordTarget);
+            SearchHistory.removeFromHistory(wordTarget);
+            FavoriteWords.removeFavorite(wordTarget);
+
             showNotification("Remove", "Word removed successfully!");
             updateAutocompleteList();
             wordTargetLabel.setText("");
