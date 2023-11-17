@@ -1,4 +1,4 @@
 package org.nora.dictionary.controllers;
 
-public class FavoritesController {
+public class FavoritesController extends SearcherController {
 }
