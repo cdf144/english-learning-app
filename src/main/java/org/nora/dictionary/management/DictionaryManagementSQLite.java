@@ -145,6 +145,23 @@ public class DictionaryManagementSQLite implements IDictionaryManagement {
         }
     }
 
+    public void addToDictionary(String wordTarget, String wordExplain, String shortDesc,
+                                String pronunciation) {
+        String sql = "INSERT INTO av(word,html,description,pronounce) VALUES(?,?,?,?)";
+
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, wordTarget);
+            preparedStatement.setString(2, wordExplain);
+            preparedStatement.setString(3, shortDesc);
+            preparedStatement.setString(4, pronunciation);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public boolean removeFromDictionary(String wordTarget) {
         if (!wordExist(wordTarget)) {
