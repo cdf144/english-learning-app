@@ -10,13 +10,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
+import javazoom.jl.decoder.JavaLayerException;
 import org.nora.dictionary.DictionaryApplication;
 import org.nora.dictionary.entities.Word;
 import org.nora.dictionary.management.FavoriteWords;
 import org.nora.dictionary.management.SearchHistory;
+import org.nora.dictionary.utils.GoogleVoiceAPI;
 import org.nora.dictionary.utils.TextToSpeech;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -124,7 +127,13 @@ public class SearcherController implements Initializable {
             return;
         }
 
-        TextToSpeech.speak(wordTargetLabel.getText());
+        try {
+            GoogleVoiceAPI.getInstance().play(GoogleVoiceAPI.getInstance().getAudio(wordTargetLabel.getText(),
+                    "en-US"));
+        } catch (IOException | JavaLayerException e) {
+            System.err.println("Failed to play Audio from Google, fallback to FreeTTS");
+            TextToSpeech.speak(wordTargetLabel.getText());
+        }
     }
 
     public void onFavoriteClick() {

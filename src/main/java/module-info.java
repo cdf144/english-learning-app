@@ -6,6 +6,7 @@ module english.learning.app {
     requires java.sql;
     requires java.logging;
     requires freetts;
+    requires jlayer;
 
     opens org.nora.dictionary to javafx.fxml;
     opens org.nora.dictionary.controllers to javafx.fxml;
