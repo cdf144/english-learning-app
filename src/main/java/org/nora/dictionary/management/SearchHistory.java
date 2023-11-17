@@ -8,13 +8,17 @@ import java.util.Collections;
 import java.util.List;
 
 public class SearchHistory {
-    public static List<String> searchHistory;
+    private static List<String> searchHistory;
 
     public static final String PATH_HISTORY_FILE = System.getProperty("user.dir")
             + File.separator + "src"
             + File.separator + "main"
             + File.separator + "resources"
             + File.separator + "history.txt";
+
+    public static List<String> getSearchHistory() {
+        return searchHistory;
+    }
 
     public static void loadSearchHistory() throws IOException {
         if (searchHistory == null) {

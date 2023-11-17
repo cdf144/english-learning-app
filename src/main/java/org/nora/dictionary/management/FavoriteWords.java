@@ -8,7 +8,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class FavoriteWords {
-    public static List<String> favoriteWords;
+    protected static List<String> favoriteWords;
+    public static List<String> searchFavoriteResult;
+
 
     public static final String PATH_FAVORITES_FILE = System.getProperty("user.dir")
             + File.separator + "src"
@@ -44,6 +46,38 @@ public class FavoriteWords {
         }
 
         favoriteWords.set(i + 1, word);
+    }
+
+    public static void searchFavorite(String word) {
+        if (searchFavoriteResult == null) {
+            searchFavoriteResult = new ArrayList<>();
+        } else {
+            searchFavoriteResult.clear();
+        }
+
+        int index = Collections.binarySearch(favoriteWords, word, new StringPrefixComparator());
+        if (index < 0) {
+            return;
+        }
+
+        int startIndex = index;
+        int endIndex = index;
+
+        while (startIndex > 0
+                && favoriteWords.get(startIndex - 1).startsWith(word)
+        ) {
+            startIndex--;
+        }
+
+        while (endIndex < favoriteWords.size() - 1
+                && favoriteWords.get(endIndex + 1).startsWith(word)
+        ) {
+            endIndex++;
+        }
+
+        for (int i = startIndex; i <= endIndex; i++) {
+            searchFavoriteResult.add(favoriteWords.get(i));
+        }
     }
 
     public static void removeFavorite(String word) {
