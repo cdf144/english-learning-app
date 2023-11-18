@@ -1,6 +1,7 @@
 package org.nora.dictionary.commandline;
 
 import org.nora.dictionary.entities.Word;
+import org.nora.dictionary.game.CommandLineGame;
 import org.nora.dictionary.management.DictionaryManagement;
 
 import java.io.File;
@@ -86,6 +87,11 @@ public class DictionaryCommandline extends DictionaryManagement {
                 continue;
             }
 
+            if (choice != 0 && choice != 8 && getDictionary().getWordList().isEmpty()) {
+                System.err.println("Warning: Dictionary has not been loaded! Please press 8");
+                continue;
+            }
+
             String wordTarget = "";
             String wordExplain = "";
             switch (choice) {
@@ -144,7 +150,8 @@ public class DictionaryCommandline extends DictionaryManagement {
                     printSearchResult();
                     break;
                 case 7:
-                    System.out.println("lam gi đa co game ma choi :)))");
+                    CommandLineGame.startGame(getDictionary().getWordList());
+                    printMenu();
                     break;
                 case 8:
                     try {
