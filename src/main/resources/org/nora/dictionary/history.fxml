@@ -26,7 +26,7 @@
                     <children>
                         <HBox prefHeight="60.0" prefWidth="780.0">
                             <children>
-                                <Label fx:id="wordTargetLabel" prefHeight="50.0" prefWidth="430.0">
+                                <Label fx:id="wordTargetLabel" prefHeight="50.0" prefWidth="400.0">
                                     <font>
                                         <Font name="System Bold" size="28.0" />
                                     </font>
@@ -37,14 +37,22 @@
                                         <Insets left="20.0" />
                                     </padding>
                                 </Label>
-                                <ImageView fx:id="wordToSpeech" fitHeight="36.0" fitWidth="36.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onWordToSpeechClick" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@icons/hearing.png" />
-                                    </image>
-                                    <HBox.margin>
-                                        <Insets left="5.0" top="13.0" />
-                                    </HBox.margin>
-                                </ImageView>
+                        <ImageView fx:id="wordToSpeechUS" fitHeight="62.0" fitWidth="52.0" onMouseClicked="#onWordToSpeechUSClick" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/audioUS.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="5.0" top="5.0" />
+                           </HBox.margin>
+                        </ImageView>
+                        <ImageView fx:id="wordToSpeechUK" fitHeight="62.0" fitWidth="52.0" onMouseClicked="#onWordToSpeechUKClick" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons/audioUK.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets left="10.0" top="5.0" />
+                           </HBox.margin>
+                        </ImageView>
                                 <ImageView fx:id="favoriteButton" fitHeight="42.0" fitWidth="42.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onFavoriteClick" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@icons/star.png" />
