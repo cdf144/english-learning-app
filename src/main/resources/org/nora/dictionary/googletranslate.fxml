@@ -10,16 +10,16 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.nora.dictionary.controllers.GoogleTranslateController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="705.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.nora.dictionary.controllers.GoogleTranslateController">
    <left>
-      <AnchorPane prefHeight="500.0" prefWidth="380.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="620.0" prefWidth="480.0" BorderPane.alignment="CENTER">
          <children>
-            <TextArea fx:id="inputTextArea" layoutX="50.0" layoutY="59.0" prefHeight="420.0" prefWidth="330.0" promptText="Type your word (paragraph) to translate here" wrapText="true">
+            <TextArea fx:id="inputTextArea" layoutX="50.0" layoutY="75.0" prefHeight="500.0" prefWidth="430.0" promptText="Type your word (paragraph) to translate here" wrapText="true">
                <font>
                   <Font size="16.0" />
                </font>
             </TextArea>
-            <ImageView fx:id="speakButtonSrc" fitHeight="42.0" fitWidth="42.0" layoutX="194.0" layoutY="14.0" onMouseClicked="#onSpeakButtonSrcClick" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="speakButtonSrc" fitHeight="42.0" fitWidth="42.0" layoutX="229.0" layoutY="14.0" onMouseClicked="#onSpeakButtonSrcClick" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@icons/audio.png" />
                </image>
@@ -28,13 +28,13 @@
       </AnchorPane>
    </left>
    <right>
-      <AnchorPane prefHeight="500.0" prefWidth="380.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="720.0" prefWidth="480.0" BorderPane.alignment="CENTER">
          <children>
-            <TextArea fx:id="resultTextArea" editable="false" layoutY="60.0" prefHeight="420.0" prefWidth="330.0" wrapText="true">
+            <TextArea fx:id="resultTextArea" editable="false" layoutY="73.0" prefHeight="500.0" prefWidth="430.0" wrapText="true">
                <font>
                   <Font name="System Italic" size="16.0" />
                </font></TextArea>
-            <ImageView fx:id="speakButtonDest" fitHeight="42.0" fitWidth="42.0" layoutX="148.0" layoutY="14.0" onMouseClicked="#onSpeakButtonDestClick" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="speakButtonDest" fitHeight="42.0" fitWidth="42.0" layoutX="194.0" layoutY="14.0" onMouseClicked="#onSpeakButtonDestClick" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@icons/audio.png" />
                </image>
@@ -43,25 +43,25 @@
       </AnchorPane>
    </right>
    <top>
-      <AnchorPane prefHeight="75.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="85.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="40.0" layoutY="14.0" prefHeight="60.0" prefWidth="90.0" text="Translate From" textAlignment="CENTER" wrapText="true">
+            <Label layoutX="81.0" layoutY="25.0" prefHeight="60.0" prefWidth="125.0" text="Translate From" textAlignment="CENTER" wrapText="true">
                <font>
-                  <Font name="System Bold" size="16.0" />
+                  <Font name="System Bold" size="18.0" />
                </font></Label>
-            <Label layoutX="572.0" layoutY="32.0" prefHeight="25.0" prefWidth="30.0" text="To" textAlignment="CENTER">
+            <Label layoutX="738.0" layoutY="40.0" prefHeight="30.0" prefWidth="45.0" text="To" textAlignment="CENTER">
                <font>
-                  <Font name="System Bold" size="16.0" />
+                  <Font name="System Bold" size="17.0" />
                </font></Label>
-            <ChoiceBox fx:id="sourceLangChoiceBox" layoutX="146.0" layoutY="29.0" prefHeight="30.0" prefWidth="175.0" />
-            <ChoiceBox fx:id="destLangChoiceBox" layoutX="618.0" layoutY="29.0" prefHeight="30.0" prefWidth="175.0" />
+            <ChoiceBox fx:id="sourceLangChoiceBox" layoutX="206.0" layoutY="40.0" prefHeight="30.0" prefWidth="185.0" />
+            <ChoiceBox fx:id="destLangChoiceBox" layoutX="793.0" layoutY="40.0" prefHeight="30.0" prefWidth="175.0" />
          </children>
       </AnchorPane>
    </top>
    <center>
-      <AnchorPane prefHeight="300.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="720.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="translateButton" layoutX="20.0" layoutY="210.0" mnemonicParsing="false" onAction="#translateButtonClicked" prefHeight="65.0" prefWidth="100.0" text="TRANSLATE">
+            <Button fx:id="translateButton" layoutX="20.0" layoutY="213.0" mnemonicParsing="false" onAction="#translateButtonClicked" prefHeight="65.0" prefWidth="100.0" text="TRANSLATE">
                <font>
                   <Font name="System Bold Italic" size="14.0" />
                </font></Button>
