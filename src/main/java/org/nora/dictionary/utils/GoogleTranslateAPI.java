@@ -23,6 +23,10 @@ public class GoogleTranslateAPI {
             "\\[\"(.*)\"]"
     );
 
+    private static final Pattern AUTO_ENDING_PATTERN = Pattern.compile(
+            "(.*)\",\".{2,5}$"
+    );
+
     public static String translateWithInternetCheck(String textToTranslate) {
         try {
             return GoogleTranslateAPI.translate(textToTranslate, LANGUAGE.ENGLISH, LANGUAGE.VIETNAMESE);
@@ -33,6 +37,7 @@ public class GoogleTranslateAPI {
     }
 
     public static String translate(String query, LANGUAGE srcLang, LANGUAGE destLang) throws IOException {
+        query = query.replace("\n", " ");
         String urlStr = generateTranslateURL(srcLang.toString(), destLang.toString(), query);
         URL url = new URL(urlStr);
 
@@ -54,7 +59,14 @@ public class GoogleTranslateAPI {
             translatedWord = matcher.group(1);
         }
 
-        return translatedWord.trim().replace("\\", "");
+        translatedWord = translatedWord.trim().replace("\\", "");
+
+        matcher = AUTO_ENDING_PATTERN.matcher(translatedWord);
+        if (matcher.find()) {
+            translatedWord = matcher.group(1);
+        }
+
+        return translatedWord;
     }
 
     private static String generateTranslateURL(String sourceLanguage, String targetLanguage, String text) {
