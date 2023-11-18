@@ -33,11 +33,11 @@
    <top>
       <AnchorPane prefHeight="100.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="55.0" layoutY="27.0" prefHeight="60.0" prefWidth="74.0" text="Translate From" textAlignment="CENTER" wrapText="true">
+            <Label layoutX="39.0" layoutY="27.0" prefHeight="60.0" prefWidth="90.0" text="Translate From" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font></Label>
-            <Label layoutX="574.0" layoutY="45.0" prefHeight="25.0" prefWidth="25.0" text="To" textAlignment="CENTER">
+            <Label layoutX="573.0" layoutY="45.0" prefHeight="25.0" prefWidth="30.0" text="To" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font></Label>
@@ -49,7 +49,10 @@
    <center>
       <AnchorPane prefHeight="300.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="translateButton" layoutX="20.0" layoutY="210.0" mnemonicParsing="false" onAction="#translateButtonClicked" prefHeight="65.0" prefWidth="100.0" text="TRANSLATE" />
+            <Button fx:id="translateButton" layoutX="20.0" layoutY="210.0" mnemonicParsing="false" onAction="#translateButtonClicked" prefHeight="65.0" prefWidth="100.0" text="TRANSLATE">
+               <font>
+                  <Font name="System Bold Italic" size="14.0" />
+               </font></Button>
          </children>
       </AnchorPane>
    </center>

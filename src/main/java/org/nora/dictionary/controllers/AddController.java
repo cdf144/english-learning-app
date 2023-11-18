@@ -22,21 +22,32 @@ public class AddController {
 
     public void onWordFieldType() {
         String word = wordField.getText();
-        if (DictionaryApplication.dictionary.wordExist(word)) {
+        if (word.isEmpty()) {
+            warningLabel.setText("");
+            disableAddInfoFields();
+        } else if (DictionaryApplication.dictionary.wordExist(word)) {
             warningLabel.setText("Warning: Word already exist in Dictionary!");
             warningLabel.setTextFill(Color.RED);
-            addButton.setDisable(true);
-            explainField.setDisable(true);
-            pronunciationField.setDisable(true);
-            shortDescArea.setDisable(true);
+            disableAddInfoFields();
         } else {
             warningLabel.setText("Word does not exist in Dictionary!");
             warningLabel.setTextFill(Color.LIMEGREEN);
-            addButton.setDisable(false);
-            explainField.setDisable(false);
-            pronunciationField.setDisable(false);
-            shortDescArea.setDisable(false);
+            enableAddInfoFields();
         }
+    }
+
+    public void disableAddInfoFields() {
+        addButton.setDisable(true);
+        explainField.setDisable(true);
+        pronunciationField.setDisable(true);
+        shortDescArea.setDisable(true);
+    }
+
+    public void enableAddInfoFields() {
+        addButton.setDisable(false);
+        explainField.setDisable(false);
+        pronunciationField.setDisable(false);
+        shortDescArea.setDisable(false);
     }
 
     public void onAddButtonClick() {
