@@ -1,5 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="705.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.nora.dictionary.controllers.GameController" />
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="705.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.nora.dictionary.controllers.GameGuessWordController">
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="buttonA" layoutX="183.0" layoutY="454.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Button" />
+            <Button fx:id="buttonB" layoutX="611.0" layoutY="454.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Button" />
+            <Button fx:id="buttonC" layoutX="183.0" layoutY="561.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Button" />
+            <Button fx:id="buttonD" layoutX="611.0" layoutY="561.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Button" />
+            <Label layoutX="91.0" layoutY="39.0" text="SCORE : ">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="scoreLabel" layoutX="183.0" layoutY="39.0" prefHeight="30.0" prefWidth="66.0" text="LB">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <StackPane layoutY="73.0" prefHeight="326.0" prefWidth="1100.0">
+               <children>
+                  <ImageView fx:id="imageView" fitHeight="300.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER" />
+               </children>
+            </StackPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

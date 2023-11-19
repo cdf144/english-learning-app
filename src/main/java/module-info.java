@@ -14,4 +14,5 @@ module english.learning.app {
     exports org.nora.dictionary.entities;
     exports org.nora.dictionary.management;
     exports org.nora.dictionary.commandline;
+    exports org.nora.dictionary.game.GuessWord;
 }
