@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
@@ -37,30 +38,48 @@
                                         <Insets left="20.0" />
                                     </padding>
                                 </Label>
-                        <ImageView fx:id="wordToSpeechUS" fitHeight="62.0" fitWidth="52.0" onMouseClicked="#onWordToSpeechUSClick" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@icons/audioUS.png" />
-                           </image>
+                        <StackPane prefHeight="52.0" prefWidth="52.0" styleClass="utility-button" stylesheets="@css/utility-buttons.css">
                            <HBox.margin>
-                              <Insets left="5.0" top="5.0" />
+                              <Insets bottom="4.0" left="5.0" top="4.0" />
                            </HBox.margin>
-                        </ImageView>
-                        <ImageView fx:id="wordToSpeechUK" fitHeight="62.0" fitWidth="52.0" onMouseClicked="#onWordToSpeechUKClick" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@icons/audioUK.png" />
-                           </image>
+                           <children>
+                              <ImageView fx:id="wordToSpeechUS" fitHeight="52.0" fitWidth="52.0" onMouseClicked="#onWordToSpeechUSClick" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/audioUS.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </StackPane>
+                        <StackPane prefHeight="52.0" prefWidth="52.0" styleClass="utility-button" stylesheets="@css/utility-buttons.css">
                            <HBox.margin>
-                              <Insets left="10.0" top="5.0" />
+                              <Insets bottom="4.0" left="10.0" top="4.0" />
                            </HBox.margin>
-                        </ImageView>
-                                <ImageView fx:id="favoriteButton" fitHeight="42.0" fitWidth="42.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onFavoriteClick" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@icons/star.png" />
-                                    </image>
-                                    <HBox.margin>
-                                        <Insets left="30.0" top="8.0" />
-                                    </HBox.margin>
-                                </ImageView>
+                           <children>
+                              <ImageView fx:id="wordToSpeechUK" fitHeight="52.0" fitWidth="52.0" onMouseClicked="#onWordToSpeechUKClick" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@icons/audioUK.png" />
+                                 </image>
+                                 <StackPane.margin>
+                                    <Insets />
+                                 </StackPane.margin>
+                              </ImageView>
+                           </children>
+                        </StackPane>
+                        <StackPane prefHeight="52.0" prefWidth="52.0" styleClass="utility-button" stylesheets="@css/utility-buttons.css">
+                           <HBox.margin>
+                              <Insets bottom="4.0" left="10.0" top="4.0" />
+                           </HBox.margin>
+                           <children>
+                                      <ImageView fx:id="favoriteButton" fitHeight="44.0" fitWidth="44.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onFavoriteClick" pickOnBounds="true" preserveRatio="true">
+                                          <image>
+                                              <Image url="@icons/star.png" />
+                                          </image>
+                                 <StackPane.margin>
+                                    <Insets bottom="2.0" />
+                                 </StackPane.margin>
+                                      </ImageView>
+                           </children>
+                        </StackPane>
                             </children>
                         </HBox>
                         <AnchorPane prefHeight="645.0" prefWidth="780.0">
