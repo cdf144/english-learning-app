@@ -17,7 +17,10 @@
     <left>
         <VBox prefHeight="600.0" prefWidth="320.0" BorderPane.alignment="CENTER">
             <children>
-                <ListView fx:id="autocompleteList" onMouseClicked="#onAutocompleteListClick" prefHeight="705.0" prefWidth="320.0" />
+                <ListView fx:id="autocompleteList" onMouseClicked="#onAutocompleteListClick" prefHeight="705.0" prefWidth="320.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin></ListView>
             </children></VBox>
     </left>
     <center>
@@ -27,20 +30,20 @@
                     <children>
                         <HBox prefHeight="60.0" prefWidth="780.0">
                             <children>
-                                <Label fx:id="wordTargetLabel" prefHeight="50.0" prefWidth="400.0">
-                                    <font>
-                                        <Font name="System Bold" size="28.0" />
-                                    </font>
-                                    <HBox.margin>
-                                        <Insets top="5.0" />
-                                    </HBox.margin>
-                                    <padding>
-                                        <Insets left="20.0" />
-                                    </padding>
-                                </Label>
+                        <Label fx:id="wordTargetLabel" onMouseClicked="#onWordLabelClick" prefHeight="50.0" prefWidth="400.0" styleClass="word-label" stylesheets="@css/word-label.css">
+                           <font>
+                              <Font name="System Bold" size="28.0" />
+                           </font>
+                           <padding>
+                              <Insets left="15.0" right="40.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets top="5.0" />
+                           </HBox.margin>
+                        </Label>
                         <StackPane prefHeight="52.0" prefWidth="52.0" styleClass="utility-button" stylesheets="@css/utility-buttons.css">
                            <HBox.margin>
-                              <Insets bottom="4.0" left="5.0" top="4.0" />
+                              <Insets bottom="4.0" left="10.0" top="4.0" />
                            </HBox.margin>
                            <children>
                               <ImageView fx:id="wordToSpeechUS" fitHeight="52.0" fitWidth="52.0" onMouseClicked="#onWordToSpeechUSClick" pickOnBounds="true" preserveRatio="true">
@@ -84,8 +87,11 @@
                         </HBox>
                         <AnchorPane prefHeight="645.0" prefWidth="780.0">
                             <children>
-                                <WebView fx:id="wordExplainView" fontScale="1.1" prefHeight="645.0" prefWidth="780.0" />
+                                <WebView fx:id="wordExplainView" fontScale="1.1" prefHeight="637.0" prefWidth="775.0" />
                             </children>
+                     <VBox.margin>
+                        <Insets top="2.0" />
+                     </VBox.margin>
                         </AnchorPane>
                     </children>
                 </VBox>

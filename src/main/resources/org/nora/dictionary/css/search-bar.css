@@ -1,0 +1,10 @@
+.search-bar {
+    -fx-background-image: url('../icons/search-dark.png');
+    -fx-background-size: 28;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 97% 50%;
+    background-image: url('../icons/search-dark.png');
+    background-size: 28;
+    background-repeat: no-repeat;
+    background-position: 97% 50%;
+}

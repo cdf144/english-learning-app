@@ -1,0 +1,18 @@
+.word-label {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    background-color: white;
+}
+
+.word-label:hover {
+    -fx-background-image: url('../icons/copy.png');
+    -fx-background-size: 32;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 98% 50%;
+    -fx-background-color:#FAFAFA;
+    background-image: url('../icons/copy.png');
+    background-size: 42;
+    background-repeat: no-repeat;
+    background-position: 98% 50%;
+    background-color: #FAFAFA;
+}

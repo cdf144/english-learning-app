@@ -7,6 +7,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
@@ -120,6 +122,21 @@ public class SearcherController implements Initializable {
         }
 
         SearchHistory.getSearchHistory().add(word.getTarget());
+    }
+
+    public void onWordLabelClick() {
+        String word = wordTargetLabel.getText();
+        if (word.isEmpty()) {
+            showNotification("Copy to clipboard", "No word chosen!");
+            return;
+        }
+
+        Clipboard clipboard = Clipboard.getSystemClipboard();
+        ClipboardContent content = new ClipboardContent();
+        content.putString(word);
+        clipboard.setContent(content);
+
+        showNotification("Copy to clipboard", "'" + word + "' copied to clipboard!");
     }
 
     public void onWordToSpeechUSClick() {
