@@ -17,7 +17,7 @@
     <left>
         <VBox prefHeight="600.0" prefWidth="320.0" BorderPane.alignment="CENTER">
             <children>
-                <ListView fx:id="autocompleteList" onMouseClicked="#onAutocompleteListClick" prefHeight="705.0" prefWidth="320.0">
+                <ListView fx:id="autocompleteList" onMouseClicked="#onAutocompleteListClick" prefHeight="705.0" prefWidth="320.0" styleClass="autocomplete-list" stylesheets="@css/autocomplete-list.css">
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin></ListView>
