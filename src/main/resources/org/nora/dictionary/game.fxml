@@ -10,12 +10,12 @@
    <top>
       <AnchorPane prefHeight="600.0" prefWidth="400.0" BorderPane.alignment="CENTER">
          <children>
-            <Button layoutX="198.0" layoutY="200.0" mnemonicParsing="false" prefHeight="200.0" prefWidth="250.0" text="SHUFFLE GAME">
+            <Button layoutX="198.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#onStartShuffleGameButtonClick" prefHeight="200.0" prefWidth="250.0" text="SHUFFLE GAME">
                <font>
                   <Font size="19.0" />
                </font>
             </Button>
-            <Button layoutX="638.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#onStartGameButtonClick" prefHeight="200.0" prefWidth="250.0" text="GUESS WORD GAME">
+            <Button layoutX="638.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#onStartGuessGameButtonClick" prefHeight="200.0" prefWidth="250.0" text="GUESS WORD GAME">
                <font>
                   <Font size="19.0" />
                </font>
