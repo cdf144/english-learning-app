@@ -1,4 +1,4 @@
-package org.nora.dictionary.game;
+package org.nora.dictionary.game.CommandLineShuffle;
 
 import org.nora.dictionary.entities.Word;
 

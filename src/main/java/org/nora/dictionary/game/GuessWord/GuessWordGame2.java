@@ -1,6 +1,7 @@
-package org.nora.dictionary.game2;
+package org.nora.dictionary.game.GuessWord;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,9 +15,21 @@ public class GuessWordGame2 {
     private List<String> imageList;
     private int score;
 
+    public static final String PATH_GUESS_GAME_TXT = System.getProperty("user.dir")
+            + File.separator + "src"
+            + File.separator + "main"
+            + File.separator + "resources"
+            + File.separator + "GuessGame.txt";
+
+    public static final String PATH_GUESS_GAME_IMAGE = System.getProperty("user.dir")
+            + File.separator + "src"
+            + File.separator + "main"
+            + File.separator + "resources"
+            + File.separator + "GuessGameImage";
+
     public GuessWordGame2() {
-        this.wordList = generateWordList("src\\main\\resources\\GuessGame.txt");
-        this.imageList = generateImageList("src\\main\\resources\\GuessGameImage", this.wordList);
+        this.wordList = generateWordList(PATH_GUESS_GAME_TXT);
+        this.imageList = generateImageList(PATH_GUESS_GAME_IMAGE, this.wordList);
         this.score = 0;
     }
 

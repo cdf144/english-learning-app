@@ -1,4 +1,4 @@
-package org.nora.dictionary.game2;
+package org.nora.dictionary.game.GuessWord;
 
 import java.util.*;
 
