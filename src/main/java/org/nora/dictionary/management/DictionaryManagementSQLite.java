@@ -108,7 +108,7 @@ public class DictionaryManagementSQLite implements IDictionaryManagement {
     @Override
     public void dictionarySearcher(String wordTarget) {
         searchResultList.clear();
-        String sql = "SELECT word, html FROM av WHERE word LIKE ? ORDER BY word ASC LIMIT 20000";
+        String sql = "SELECT word, html FROM av WHERE word LIKE ? ORDER BY word ASC LIMIT 5000";
 
         PreparedStatement preparedStatement;
         try {
