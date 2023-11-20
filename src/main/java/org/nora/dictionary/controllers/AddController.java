@@ -23,8 +23,7 @@ public class AddController {
     public void onWordFieldType() {
         String word = wordField.getText();
         if (word.isEmpty()) {
-            warningLabel.setText("");
-            disableAddInfoFields();
+            clearFields();
         } else if (DictionaryApplication.dictionary.wordExist(word)) {
             warningLabel.setText("Warning: Word already exist in Dictionary!");
             warningLabel.setTextFill(Color.RED);
@@ -33,6 +32,7 @@ public class AddController {
             warningLabel.setText("Word does not exist in Dictionary!");
             warningLabel.setTextFill(Color.LIMEGREEN);
             enableAddInfoFields();
+            updateExplainFieldTemplate();
         }
     }
 
@@ -50,6 +50,15 @@ public class AddController {
         shortDescArea.setDisable(false);
     }
 
+    public void updateExplainFieldTemplate() {
+        String explainTemplate = String.format(
+                "<h1>%s</h1><h3><i>/%s/</i></h3><h2></h2><ul><li>%s</li></ul>",
+                wordField.getText(),
+                pronunciationField.getText(),
+                shortDescArea.getText());
+        explainField.setHtmlText(explainTemplate);
+    }
+
     public void onAddButtonClick() {
         String target = wordField.getText();
         String explain = explainField.getHtmlText().replace(" dir=\"ltr\"><head></head" +
@@ -64,20 +73,17 @@ public class AddController {
         DictionaryApplication.dictionary.addToDictionary(target, explain, shortDesc, pronunciation);
 
         showNotification("Add to Dictionary", "Added '" + target + "' to Dictionary successfully");
-        clear();
+        clearFields();
     }
 
-    public void clear() {
+    public void clearFields() {
         wordField.setText("");
         explainField.setHtmlText("");
         pronunciationField.setText("");
         shortDescArea.setText("");
         warningLabel.setText("");
 
-        addButton.setDisable(true);
-        explainField.setDisable(true);
-        pronunciationField.setDisable(true);
-        shortDescArea.setDisable(true);
+        disableAddInfoFields();
     }
 
     public void showNotification(String title, String content) {

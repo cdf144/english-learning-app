@@ -277,6 +277,7 @@ public class SearcherController implements Initializable {
 
             showNotification("Remove", "Word removed successfully!");
             updateAutocompleteList();
+            favoriteButton.setImage(starImage);
             wordTargetLabel.setText("");
             wordExplainView.getEngine().loadContent("");
         }
