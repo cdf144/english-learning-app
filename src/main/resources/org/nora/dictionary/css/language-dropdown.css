@@ -17,7 +17,8 @@
 }
 
 .language-dropdown .menu-item {
-    -fx-label-padding: 1px;
+    -fx-label-padding: 2px;
+    -fx-padding: 2 2 2 8;
 }
 
 .language-dropdown .menu-item > .label {
