@@ -16,12 +16,17 @@
     -fx-border-radius: 10px;
 }
 
+.language-dropdown .menu-item {
+    -fx-label-padding: 1px;
+}
+
 .language-dropdown .menu-item > .label {
     -fx-font-size: 18;
     -fx-text-fill: #555c5d;
 }
 
 .language-dropdown .menu-item:focused {
+    -fx-background-insets: 0 3px 0 3px;
     -fx-background-radius: 8px;
     -fx-background-color: rgba(101, 126, 228, 0.9);
 }
