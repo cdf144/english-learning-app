@@ -65,14 +65,12 @@ public class GameShuffleController {
         Random random = new Random();
         int index = random.nextInt(wordList.size());
         correctAnswer = wordList.get(index);
-        System.out.println(correctAnswer);
 
         List<String> tempWordList = new ArrayList<>(wordList);
         tempWordList.remove(correctAnswer);
-        System.out.println("wordList size: " + wordList.size());
         String ques = generateRandomCharacter(correctAnswer);
-        System.out.println("ques: " + ques);
         questionField.setText(ques);
+        answerField.setText("");
     }
     public static String generateRandomCharacter(String s) {
         int n = s.length();
