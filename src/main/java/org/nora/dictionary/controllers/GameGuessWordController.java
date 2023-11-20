@@ -1,5 +1,6 @@
 package org.nora.dictionary.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -38,6 +39,7 @@ public class GameGuessWordController {
     private List<String> wordList;
     private List<String> imageList;
     private int score = 0;
+    protected String correctAnswer;
 
     public static final String PATH_GUESS_GAME_TXT = System.getProperty("user.dir")
             + File.separator + "src"
@@ -82,6 +84,11 @@ public class GameGuessWordController {
         this.imageList = generateImageList(PATH_GUESS_GAME_IMAGE, this.wordList);
         loadNextQuestion();
         scoreLabel.setText("0");
+
+        buttonA.setOnAction(this::handleAnswerButtonClick);
+        buttonB.setOnAction(this::handleAnswerButtonClick);
+        buttonC.setOnAction(this::handleAnswerButtonClick);
+        buttonD.setOnAction(this::handleAnswerButtonClick);
     }
 
     private void loadNextQuestion() {
@@ -89,7 +96,7 @@ public class GameGuessWordController {
         int index = random.nextInt(imageList.size());
 
         String imagePath = imageList.get(index);
-        String correctAnswer = wordList.get(index);
+        correctAnswer = wordList.get(index);
 
         Image image = new Image(new File(imagePath).toURI().toString());
         imageView.setImage(image);
@@ -112,5 +119,22 @@ public class GameGuessWordController {
         buttonB.setText(answers.get(1));
         buttonC.setText(answers.get(2));
         buttonD.setText(answers.get(3));
+    }
+
+    @FXML
+    protected void handleAnswerButtonClick(ActionEvent event) {
+        Button clickedButton = (Button) event.getSource();
+        String selectedAnswer = clickedButton.getText();
+
+
+        if (selectedAnswer.equals(correctAnswer)) {
+            score += 5;
+        } else {
+            score -= 10;
+        }
+
+        scoreLabel.setText(String.valueOf(score));
+
+        loadNextQuestion();
     }
 }

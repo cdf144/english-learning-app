@@ -21,6 +21,7 @@ Inform
 Invite
 Lend
 Manage
+Quit
 Respect
 Roast
 Save
