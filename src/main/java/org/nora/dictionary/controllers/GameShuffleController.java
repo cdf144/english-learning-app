@@ -22,9 +22,12 @@ public class GameShuffleController {
     protected TextField answerField;
     @FXML
     protected Label scoreLabel;
+    @FXML
+    protected Label highScoreLabel;
 
     private List<String> wordList;
     private int score = 0;
+    private int highScore = 0;
     protected String correctAnswer;
 
     public static final String PATH_SHUFFLE_GAME_TXT = System.getProperty("user.dir")
@@ -52,6 +55,7 @@ public class GameShuffleController {
         this.wordList = generateWordList(PATH_SHUFFLE_GAME_TXT);
         loadNextQuestion();
         scoreLabel.setText("0");
+        highScoreLabel.setText("0");
 
         answerField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -97,7 +101,11 @@ public class GameShuffleController {
 
         if (userAnswer.equalsIgnoreCase(correctAnswer)) {
             score += 5;
+            if(score > highScore) {
+                highScore = score;
+            }
             scoreLabel.setText(String.valueOf(score));
+            highScoreLabel.setText(String.valueOf(highScore));
             loadNextQuestion();
         } else {
             score -= 10;
