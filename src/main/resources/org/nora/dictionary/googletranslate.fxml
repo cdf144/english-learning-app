@@ -14,7 +14,7 @@
    <left>
       <AnchorPane prefHeight="620.0" prefWidth="480.0" BorderPane.alignment="CENTER">
          <children>
-            <TextArea fx:id="inputTextArea" layoutX="50.0" layoutY="75.0" prefHeight="500.0" prefWidth="430.0" promptText="Type your word (paragraph) to translate here" styleClass="translate-text-area" stylesheets="@css/translate-text-area.css" wrapText="true">
+            <TextArea fx:id="inputTextArea" layoutX="50.0" layoutY="75.0" prefHeight="500.0" prefWidth="430.0" promptText="Type your word (paragraph) to translate here" styleClass="text-area" stylesheets="@css/text-area.css" wrapText="true">
                <font>
                   <Font size="20.0" />
                </font>
@@ -34,7 +34,7 @@
    <right>
       <AnchorPane prefHeight="720.0" prefWidth="480.0" BorderPane.alignment="CENTER">
          <children>
-            <TextArea fx:id="resultTextArea" editable="false" layoutY="73.0" prefHeight="500.0" prefWidth="430.0" styleClass="translate-text-area" stylesheets="@css/translate-text-area.css" wrapText="true">
+            <TextArea fx:id="resultTextArea" editable="false" layoutY="73.0" prefHeight="500.0" prefWidth="430.0" styleClass="text-area" stylesheets="@css/text-area.css" wrapText="true">
                <font>
                   <Font name="System Italic" size="20.0" />
                </font></TextArea>
@@ -70,7 +70,7 @@
    <center>
       <AnchorPane prefHeight="720.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="translateButton" alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="211.0" mnemonicParsing="false" onAction="#translateButtonClicked" prefHeight="70.0" prefWidth="100.0" styleClass="translate-button" stylesheets="@css/translate-button.css" text="TRANSLATE">
+            <Button fx:id="translateButton" alignment="BOTTOM_CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="211.0" mnemonicParsing="false" onAction="#translateButtonClicked" prefHeight="70.0" prefWidth="100.0" styleClass="translate-button" stylesheets="@css/big-buttons.css" text="TRANSLATE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font></Button>
