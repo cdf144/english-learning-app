@@ -7,6 +7,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebView;
@@ -35,7 +37,9 @@ public class SearcherController implements Initializable {
     @FXML
     protected HTMLEditor wordExplainEditor;
     @FXML
-    protected ImageView wordToSpeech;
+    protected ImageView wordToSpeechUS;
+    @FXML
+    protected ImageView wordToSpeechUK;
     @FXML
     protected ImageView favoriteButton;
     @FXML
@@ -120,7 +124,22 @@ public class SearcherController implements Initializable {
         SearchHistory.getSearchHistory().add(word.getTarget());
     }
 
-    public void onWordToSpeechClick() {
+    public void onWordLabelClick() {
+        String word = wordTargetLabel.getText();
+        if (word.isEmpty()) {
+            showNotification("Copy to clipboard", "No word chosen!");
+            return;
+        }
+
+        Clipboard clipboard = Clipboard.getSystemClipboard();
+        ClipboardContent content = new ClipboardContent();
+        content.putString(word);
+        clipboard.setContent(content);
+
+        showNotification("Copy to clipboard", "'" + word + "' copied to clipboard!");
+    }
+
+    public void onWordToSpeechUSClick() {
         String word = wordTargetLabel.getText();
         if (word.isEmpty()) {
             showNotification("TextToSpeech", "No word chosen!");
@@ -130,6 +149,22 @@ public class SearcherController implements Initializable {
         try {
             GoogleVoiceAPI.getInstance().play(GoogleVoiceAPI.getInstance().getAudio(wordTargetLabel.getText(),
                     "en-US"));
+        } catch (IOException | JavaLayerException e) {
+            System.err.println("Failed to play Audio from Google, fallback to FreeTTS");
+            TextToSpeech.speak(wordTargetLabel.getText());
+        }
+    }
+
+    public void onWordToSpeechUKClick() {
+        String word = wordTargetLabel.getText();
+        if (word.isEmpty()) {
+            showNotification("TextToSpeech", "No word chosen!");
+            return;
+        }
+
+        try {
+            GoogleVoiceAPI.getInstance().play(GoogleVoiceAPI.getInstance().getAudio(wordTargetLabel.getText(),
+                    "en-UK"));
         } catch (IOException | JavaLayerException e) {
             System.err.println("Failed to play Audio from Google, fallback to FreeTTS");
             TextToSpeech.speak(wordTargetLabel.getText());
