@@ -16,12 +16,12 @@
             <Button fx:id="buttonB" layoutX="611.0" layoutY="454.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Button" />
             <Button fx:id="buttonC" layoutX="183.0" layoutY="561.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Button" />
             <Button fx:id="buttonD" layoutX="611.0" layoutY="561.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Button" />
-            <Label layoutX="491.0" layoutY="39.0" text="SCORE : ">
+            <Label layoutX="333.0" layoutY="35.0" text="SCORE : ">
                <font>
-                  <Font name="System Bold Italic" size="18.0" />
+                  <Font name="System Bold Italic" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="scoreLabel" layoutX="590.0" layoutY="37.0" prefHeight="30.0" prefWidth="53.0" text="LB">
+            <Label fx:id="scoreLabel" layoutX="429.0" layoutY="35.0" prefHeight="30.0" prefWidth="53.0" text="LB">
                <font>
                   <Font size="20.0" />
                </font>
@@ -31,6 +31,16 @@
                   <ImageView fx:id="imageView" fitHeight="300.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER" />
                </children>
             </StackPane>
+            <Label layoutX="589.0" layoutY="37.0" text="HIGH SCORE : " textFill="#1860b5">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="highScoreLabel" layoutX="730.0" layoutY="35.0" text="LB" textFill="#3b38bc">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </top>
