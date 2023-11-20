@@ -2,9 +2,9 @@ package org.nora.dictionary.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import org.nora.dictionary.DictionaryApplication;
 
 import java.io.IOException;
@@ -12,30 +12,43 @@ import java.util.Objects;
 
 public class GameController {
     @FXML
+    private Label titleLabel;
+    @FXML
+    private Button shuffleGameButton;
+    @FXML
+    private Button guessWordGameButton;
+    @FXML
+    private BorderPane gamePane;
+    @FXML
+    private BorderPane guessWordGamePane;
+    @FXML
+    private BorderPane shuffleGamePane;
+
+    @FXML
     public void onStartGuessGameButtonClick() throws IOException {
-        Parent root;
-        root = FXMLLoader.load(
+        guessWordGamePane = FXMLLoader.load(
                 Objects.requireNonNull(
                         DictionaryApplication.class.getResource("gameguessword.fxml")
                 )
         );
-        Stage stage = new Stage();
-        stage.setTitle("Guess Word Game");
-        stage.setScene(new Scene(root, 1100, 705));
-        stage.show();
+        setGamePane(guessWordGamePane);
     }
 
     @FXML
     public void onStartShuffleGameButtonClick() throws IOException {
-        Parent root;
-        root = FXMLLoader.load(
+        shuffleGamePane = FXMLLoader.load(
                 Objects.requireNonNull(
-                        DictionaryApplication.class.getResource("shufflegame.fxml")
+                        DictionaryApplication.class.getResource("gameshuffle.fxml")
                 )
         );
-        Stage stage = new Stage();
-        stage.setTitle("Shuffle Game");
-        stage.setScene(new Scene(root, 1100, 705));
-        stage.show();
+        setGamePane(shuffleGamePane);
+    }
+
+    private void setGamePane(BorderPane borderPane) {
+        gamePane.setTop(borderPane.getTop());
+        gamePane.setLeft(borderPane.getLeft());
+        gamePane.setCenter(borderPane.getCenter());
+        gamePane.setRight(borderPane.getRight());
+        gamePane.setBottom(borderPane.getBottom());
     }
 }
