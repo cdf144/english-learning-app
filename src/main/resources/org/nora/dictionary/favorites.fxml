@@ -42,7 +42,7 @@
                      <children>
                         <Label fx:id="wordTargetLabel" onMouseClicked="#onWordLabelClick" prefHeight="50.0" prefWidth="400.0" styleClass="word-label" stylesheets="@css/word-label.css">
                            <font>
-                              <Font name="System Bold" size="28.0" />
+                              <Font name="System Bold Italic" size="28.0" />
                            </font>
                            <padding>
                               <Insets left="15.0" right="40.0" />
