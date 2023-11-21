@@ -78,7 +78,7 @@ public class SearcherController implements Initializable {
 
     public void updateAutocompleteList() {
         autocompleteWordList.clear();
-        DictionaryApplication.dictionary.dictionarySearcher(searchField.getText());
+        DictionaryApplication.dictionary.dictionarySearcher(searchField.getText().trim().replaceAll("\\s+", " "));
 
         for (Word word : DictionaryApplication.dictionary.getSearchResultList()) {
             autocompleteWordList.add(word.getTarget());
@@ -147,7 +147,7 @@ public class SearcherController implements Initializable {
         }
 
         try {
-            GoogleVoiceAPI.getInstance().play(GoogleVoiceAPI.getInstance().getAudio(wordTargetLabel.getText(),
+            GoogleVoiceAPI.getInstance().playAudio(GoogleVoiceAPI.getInstance().getAudio(wordTargetLabel.getText(),
                     "en-US"));
         } catch (IOException | JavaLayerException e) {
             System.err.println("Failed to play Audio from Google, fallback to FreeTTS");
@@ -163,7 +163,7 @@ public class SearcherController implements Initializable {
         }
 
         try {
-            GoogleVoiceAPI.getInstance().play(GoogleVoiceAPI.getInstance().getAudio(wordTargetLabel.getText(),
+            GoogleVoiceAPI.getInstance().playAudio(GoogleVoiceAPI.getInstance().getAudio(wordTargetLabel.getText(),
                     "en-UK"));
         } catch (IOException | JavaLayerException e) {
             System.err.println("Failed to play Audio from Google, fallback to FreeTTS");
@@ -277,6 +277,7 @@ public class SearcherController implements Initializable {
 
             showNotification("Remove", "Word removed successfully!");
             updateAutocompleteList();
+            favoriteButton.setImage(starImage);
             wordTargetLabel.setText("");
             wordExplainView.getEngine().loadContent("");
         }

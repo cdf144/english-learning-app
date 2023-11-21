@@ -86,7 +86,7 @@ public class GoogleTranslateController implements Initializable {
                 : "en-US";
 
         try {
-            GoogleVoiceAPI.getInstance().play(GoogleVoiceAPI.getInstance().getAudio(inputTextArea.getText(),
+            GoogleVoiceAPI.getInstance().playAudio(GoogleVoiceAPI.getInstance().getAudio(inputTextArea.getText(),
                     languageOutput));
         } catch (IOException | JavaLayerException e) {
             System.err.println("Failed to play Audio from Google, fallback to FreeTTS");
@@ -106,7 +106,7 @@ public class GoogleTranslateController implements Initializable {
                                 : "en-US";
 
         try {
-            GoogleVoiceAPI.getInstance().play(
+            GoogleVoiceAPI.getInstance().playAudio(
                     GoogleVoiceAPI.getInstance().getAudio(resultTextArea.getText(),
                     languageOutput)
             );
