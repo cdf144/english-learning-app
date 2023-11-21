@@ -2,53 +2,49 @@ package org.nora.dictionary.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import org.nora.dictionary.DictionaryApplication;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Objects;
+import java.util.ResourceBundle;
 
-public class GameController {
+public class GameController implements Initializable {
     @FXML
-    private Label titleLabel;
+    private BorderPane fatherPane;
     @FXML
-    private Button shuffleGameButton;
-    @FXML
-    private Button guessWordGameButton;
-    @FXML
-    private BorderPane gamePane;
-    @FXML
-    private BorderPane guessWordGamePane;
-    @FXML
-    private BorderPane shuffleGamePane;
+    private Button quitGameButton;
 
     @FXML
-    public void onStartGuessGameButtonClick() throws IOException {
-        guessWordGamePane = FXMLLoader.load(
-                Objects.requireNonNull(
-                        DictionaryApplication.class.getResource("gameguessword.fxml")
-                )
-        );
-        setGamePane(guessWordGamePane);
+    private BorderPane gameChoosePane;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            onQuitGameButtonClick();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    @FXML
-    public void onStartShuffleGameButtonClick() throws IOException {
-        shuffleGamePane = FXMLLoader.load(
+    public void onQuitGameButtonClick() throws IOException {
+        gameChoosePane = FXMLLoader.load(
                 Objects.requireNonNull(
-                        DictionaryApplication.class.getResource("gameshuffle.fxml")
+                        DictionaryApplication.class.getResource("gamechoose.fxml")
                 )
         );
-        setGamePane(shuffleGamePane);
+
+        setFatherPane(gameChoosePane);
     }
 
-    private void setGamePane(BorderPane borderPane) {
-        gamePane.setTop(borderPane.getTop());
-        gamePane.setLeft(borderPane.getLeft());
-        gamePane.setCenter(borderPane.getCenter());
-        gamePane.setRight(borderPane.getRight());
-        gamePane.setBottom(borderPane.getBottom());
+    private void setFatherPane(BorderPane borderPane) {
+        fatherPane.setTop(borderPane.getTop());
+        fatherPane.setLeft(borderPane.getLeft());
+        fatherPane.setCenter(borderPane.getCenter());
+        fatherPane.setRight(borderPane.getRight());
+        fatherPane.setBottom(borderPane.getBottom());
     }
 }

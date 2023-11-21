@@ -68,7 +68,7 @@ public class DictionaryManagementSQLite implements IDictionaryManagement {
 
     @Override
     public String dictionaryLookup(String wordTarget) {
-        String sql = "SELECT html FROM av WHERE word = ?";
+        String sql = "SELECT html FROM av WHERE word = ? COLLATE NOCASE"; // alternative: 'LIKE ?'
 
         String explain;
         PreparedStatement preparedStatement;
@@ -85,7 +85,7 @@ public class DictionaryManagementSQLite implements IDictionaryManagement {
     }
 
     public Word dictionaryLookupWord(String wordTarget) {
-        String sql = "SELECT html FROM av WHERE word = ?";
+        String sql = "SELECT html FROM av WHERE word = ? COLLATE NOCASE";
 
         String explain;
         PreparedStatement preparedStatement;

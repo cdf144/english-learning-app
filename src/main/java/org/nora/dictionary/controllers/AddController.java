@@ -21,7 +21,7 @@ public class AddController {
     private Button addButton;
 
     public void onWordFieldType() {
-        String word = wordField.getText();
+        String word = wordField.getText().trim().replaceAll("\\s+", " ");
         if (word.isEmpty()) {
             clearFields();
         } else if (DictionaryApplication.dictionary.wordExist(word)) {
@@ -52,10 +52,9 @@ public class AddController {
 
     public void updateExplainFieldTemplate() {
         String explainTemplate = String.format(
-                "<h1>%s</h1><h3><i>/%s/</i></h3><h2></h2><ul><li>%s</li></ul>",
+                "<h1>%s</h1><h3><i>/%s/</i></h3><h2></h2><ul><li></li></ul>",
                 wordField.getText(),
-                pronunciationField.getText(),
-                shortDescArea.getText());
+                pronunciationField.getText());
         explainField.setHtmlText(explainTemplate);
     }
 

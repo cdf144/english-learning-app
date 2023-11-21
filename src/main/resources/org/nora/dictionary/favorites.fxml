@@ -40,7 +40,7 @@
                <children>
                   <HBox prefHeight="60.0" prefWidth="780.0">
                      <children>
-                        <Label fx:id="wordTargetLabel" onMouseClicked="#onWordLabelClick" prefHeight="50.0" prefWidth="400.0" styleClass="word-label" stylesheets="@css/word-label.css">
+                        <Label fx:id="wordTargetLabel" onMouseClicked="#onWordLabelClick" prefHeight="50.0" prefWidth="400.0" styleClass="word-label" stylesheets="@css/labels.css">
                            <font>
                               <Font name="System Bold Italic" size="28.0" />
                            </font>
