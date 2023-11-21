@@ -31,12 +31,12 @@
                   <ImageView fx:id="imageView" fitHeight="300.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER" />
                </children>
             </StackPane>
-            <Label layoutX="589.0" layoutY="37.0" text="HIGH SCORE : " textFill="#1860b5">
+            <Label layoutX="601.0" layoutY="36.0" text="HIGH SCORE : " textFill="#1860b5">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="highScoreLabel" layoutX="730.0" layoutY="35.0" text="LB" textFill="#3b38bc">
+            <Label fx:id="highScoreLabel" layoutX="739.0" layoutY="35.0" text="LB" textFill="#3b38bc">
                <font>
                   <Font size="20.0" />
                </font>
