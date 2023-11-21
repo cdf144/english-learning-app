@@ -38,6 +38,7 @@ public class DictionaryApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
         SearchHistory.loadSearchHistory();
         FavoriteWords.loadFavoriteWords();
+        primaryStage.resizableProperty().setValue(Boolean.FALSE);
         primaryStage.setTitle("Nora Dictionary");
         primaryStage.initStyle(StageStyle.DECORATED);
         primaryStage.setScene(scene);
