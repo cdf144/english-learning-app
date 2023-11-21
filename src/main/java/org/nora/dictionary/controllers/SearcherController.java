@@ -147,7 +147,7 @@ public class SearcherController implements Initializable {
         }
 
         try {
-            GoogleVoiceAPI.getInstance().play(GoogleVoiceAPI.getInstance().getAudio(wordTargetLabel.getText(),
+            GoogleVoiceAPI.getInstance().playAudio(GoogleVoiceAPI.getInstance().getAudio(wordTargetLabel.getText(),
                     "en-US"));
         } catch (IOException | JavaLayerException e) {
             System.err.println("Failed to play Audio from Google, fallback to FreeTTS");
@@ -163,7 +163,7 @@ public class SearcherController implements Initializable {
         }
 
         try {
-            GoogleVoiceAPI.getInstance().play(GoogleVoiceAPI.getInstance().getAudio(wordTargetLabel.getText(),
+            GoogleVoiceAPI.getInstance().playAudio(GoogleVoiceAPI.getInstance().getAudio(wordTargetLabel.getText(),
                     "en-UK"));
         } catch (IOException | JavaLayerException e) {
             System.err.println("Failed to play Audio from Google, fallback to FreeTTS");
