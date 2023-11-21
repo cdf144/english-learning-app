@@ -6,10 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -36,6 +33,12 @@ public class GameShuffleController {
             + File.separator + "resources"
             + File.separator + "GuessGame.txt";
 
+    public static final String PATH_GUESS_GAME_HIGH_SCORE_TXT = System.getProperty("user.dir")
+            + File.separator + "src"
+            + File.separator + "main"
+            + File.separator + "resources"
+            + File.separator + "shuffleGameHighScore.txt";
+
     private List<String> generateWordList(String filePath) {
         List<String> words = new ArrayList<>();
 
@@ -54,8 +57,8 @@ public class GameShuffleController {
     public void initialize() {
         this.wordList = generateWordList(PATH_SHUFFLE_GAME_TXT);
         loadNextQuestion();
-        scoreLabel.setText("0");
-        highScoreLabel.setText("0");
+        scoreLabel.setText("0");updateHighScoreIfNeeded();
+        highScoreLabel.setText(Integer.toString(highScore));
 
         answerField.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -75,6 +78,7 @@ public class GameShuffleController {
         String ques = generateRandomCharacter(correctAnswer);
         questionField.setText(ques);
         answerField.setText("");
+        updateHighScoreIfNeeded();
     }
     public static String generateRandomCharacter(String s) {
         int n = s.length();
@@ -101,17 +105,46 @@ public class GameShuffleController {
 
         if (userAnswer.equalsIgnoreCase(correctAnswer)) {
             score += 5;
-            if(score > highScore) {
-                highScore = score;
-            }
             scoreLabel.setText(String.valueOf(score));
-            highScoreLabel.setText(String.valueOf(highScore));
             loadNextQuestion();
         } else {
             score -= 10;
             scoreLabel.setText(String.valueOf(score));
             loadNextQuestion();
         }
+    }
+
+    public void checkAndUpdateHighScore(int currentScore) {
+        try {
+            File highScoreFile = new File(PATH_GUESS_GAME_HIGH_SCORE_TXT);
+            if (!highScoreFile.exists()) {
+                highScoreFile.createNewFile();
+            }
+
+            BufferedReader reader = new BufferedReader(new FileReader(highScoreFile));
+            String highScoreString = reader.readLine();
+            reader.close();
+
+//            int highScore = 0;
+            if (highScoreString != null && !highScoreString.isEmpty()) {
+                highScore = Integer.parseInt(highScoreString.trim());
+            }
+
+            if (currentScore > highScore) {
+                highScore = currentScore;
+
+                BufferedWriter writer = new BufferedWriter(new FileWriter(highScoreFile));
+                writer.write(String.valueOf(highScore));
+                writer.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateHighScoreIfNeeded() {
+        checkAndUpdateHighScore(score);
+        highScoreLabel.setText(Integer.toString(highScore));
     }
 }
 
