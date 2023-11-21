@@ -9,7 +9,7 @@ public class FavoritesController extends SearcherController {
     @Override
     public void updateAutocompleteList() {
         autocompleteWordList.clear();
-        FavoriteWords.searchFavorite(searchField.getText());
+        FavoriteWords.searchFavorite(searchField.getText().trim().replaceAll("\\s+", " "));
         autocompleteWordList.addAll(FavoriteWords.searchFavoriteResult);
         autocompleteList.setItems(autocompleteWordList);
     }

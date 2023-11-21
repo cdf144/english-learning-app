@@ -78,7 +78,7 @@ public class SearcherController implements Initializable {
 
     public void updateAutocompleteList() {
         autocompleteWordList.clear();
-        DictionaryApplication.dictionary.dictionarySearcher(searchField.getText());
+        DictionaryApplication.dictionary.dictionarySearcher(searchField.getText().trim().replaceAll("\\s+", " "));
 
         for (Word word : DictionaryApplication.dictionary.getSearchResultList()) {
             autocompleteWordList.add(word.getTarget());

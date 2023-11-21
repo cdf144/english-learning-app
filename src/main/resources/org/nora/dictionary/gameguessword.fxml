@@ -8,14 +8,26 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="705.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.nora.dictionary.controllers.GameGuessWordController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="630.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.nora.dictionary.controllers.GameGuessWordController">
    <top>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="630.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="buttonA" layoutX="183.0" layoutY="454.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Button" />
-            <Button fx:id="buttonB" layoutX="611.0" layoutY="454.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Button" />
-            <Button fx:id="buttonC" layoutX="183.0" layoutY="561.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Button" />
-            <Button fx:id="buttonD" layoutX="611.0" layoutY="561.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Button" />
+            <Button fx:id="buttonA" layoutX="183.0" layoutY="417.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Button">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font></Button>
+            <Button fx:id="buttonB" layoutX="611.0" layoutY="417.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Button">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font></Button>
+            <Button fx:id="buttonC" layoutX="183.0" layoutY="524.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Button">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font></Button>
+            <Button fx:id="buttonD" layoutX="613.0" layoutY="524.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" text="Button">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font></Button>
             <Label layoutX="333.0" layoutY="35.0" text="SCORE : ">
                <font>
                   <Font name="System Bold Italic" size="20.0" />
@@ -26,7 +38,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <StackPane layoutY="73.0" prefHeight="326.0" prefWidth="1100.0">
+            <StackPane layoutY="73.0" prefHeight="300.0" prefWidth="1100.0">
                <children>
                   <ImageView fx:id="imageView" fitHeight="300.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER" />
                </children>
@@ -36,7 +48,7 @@
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="highScoreLabel" layoutX="739.0" layoutY="35.0" text="LB" textFill="#3b38bc">
+            <Label fx:id="highScoreLabel" layoutX="737.0" layoutY="34.0" text="LB" textFill="#3b38bc">
                <font>
                   <Font size="20.0" />
                </font>
