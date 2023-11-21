@@ -14,9 +14,10 @@ public class GameShuffleController {
 
     @FXML
     protected TextField questionField;
-
     @FXML
     protected TextField answerField;
+    @FXML
+    protected TextField correctField;
     @FXML
     protected Label scoreLabel;
     @FXML
@@ -57,7 +58,8 @@ public class GameShuffleController {
     public void initialize() {
         this.wordList = generateWordList(PATH_SHUFFLE_GAME_TXT);
         loadNextQuestion();
-        scoreLabel.setText("0");updateHighScoreIfNeeded();
+        scoreLabel.setText("0");
+        updateHighScoreIfNeeded();
         highScoreLabel.setText(Integer.toString(highScore));
 
         answerField.setOnKeyPressed(event -> {
@@ -125,7 +127,6 @@ public class GameShuffleController {
             String highScoreString = reader.readLine();
             reader.close();
 
-//            int highScore = 0;
             if (highScoreString != null && !highScoreString.isEmpty()) {
                 highScore = Integer.parseInt(highScoreString.trim());
             }

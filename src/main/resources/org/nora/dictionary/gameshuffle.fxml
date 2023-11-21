@@ -14,7 +14,7 @@
                <font>
                   <Font size="20.0" />
                </font></TextField>
-            <TextField fx:id="answerField" alignment="CENTER" layoutX="277.0" layoutY="423.0" prefHeight="200.0" prefWidth="550.0">
+            <TextField fx:id="answerField" alignment="CENTER" layoutX="277.0" layoutY="469.0" prefHeight="154.0" prefWidth="550.0">
                <font>
                   <Font size="25.0" />
                </font></TextField>
@@ -38,6 +38,7 @@
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Label>
+            <TextField fx:id="correctField" alignment="CENTER" layoutX="415.0" layoutY="311.0" prefHeight="84.0" prefWidth="276.0" />
          </children></AnchorPane>
    </center>
 </BorderPane>
