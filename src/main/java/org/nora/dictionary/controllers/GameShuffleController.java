@@ -1,9 +1,12 @@
 package org.nora.dictionary.controllers;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.util.Duration;
 
 
 import java.io.*;
@@ -63,7 +66,7 @@ public class GameShuffleController {
         highScoreLabel.setText(Integer.toString(highScore));
 
         answerField.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
+            if (event.getCode() == KeyCode.ENTER ) {
                 checkAnswer();
             }
         });
@@ -108,12 +111,19 @@ public class GameShuffleController {
         if (userAnswer.equalsIgnoreCase(correctAnswer)) {
             score += 5;
             scoreLabel.setText(String.valueOf(score));
-            loadNextQuestion();
+            questionField.setStyle("-fx-background-color: green;");
+            questionField.setText("Correct");
         } else {
             score -= 10;
             scoreLabel.setText(String.valueOf(score));
-            loadNextQuestion();
+            questionField.setStyle("-fx-background-color: red;");
+            questionField.setText(correctAnswer);
         }
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> {
+            loadNextQuestion();
+            questionField.setStyle("-fx-background-color: white;");
+        }));
+        timeline.play();
     }
 
     public void checkAndUpdateHighScore(int currentScore) {
@@ -147,5 +157,6 @@ public class GameShuffleController {
         checkAndUpdateHighScore(score);
         highScoreLabel.setText(Integer.toString(highScore));
     }
+
 }
 
