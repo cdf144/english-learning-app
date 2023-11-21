@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="705.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.nora.dictionary.controllers.GameController">
+<BorderPane fx:id="gameFatherPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="705.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.nora.dictionary.controllers.GameController">
    <center>
       <BorderPane fx:id="gamePane" prefHeight="630.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
          <center>
@@ -18,7 +18,7 @@
                         <Font name="System Bold" size="28.0" />
                      </font>
                   </Label>
-                  <Button fx:id="shuffleGameButton" layoutX="111.0" layoutY="208.0" mnemonicParsing="false" onMouseClicked="#onStartShuffleGameButtonClick" prefHeight="100.0" prefWidth="400.0" styleClass="shuffle-game" stylesheets="@css/big-buttons.css" text="SHUFFLE GAME">
+                  <Button fx:id="shuffleGameButton" layoutX="111.0" layoutY="208.0" mnemonicParsing="false" onAction="#onShuffleGameButtonClick" prefHeight="100.0" prefWidth="400.0" styleClass="shuffle-game" stylesheets="@css/big-buttons.css" text="SHUFFLE GAME">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -26,7 +26,7 @@
                         <Insets left="40.0" />
                      </padding>
                   </Button>
-                  <Button fx:id="guessWordGameButton" layoutX="111.0" layoutY="343.0" mnemonicParsing="false" onMouseClicked="#onStartGuessGameButtonClick" prefHeight="100.0" prefWidth="400.0" styleClass="guess-game" stylesheets="@css/big-buttons.css" text="GUESS WORD GAME">
+                  <Button fx:id="guessWordGameButton" layoutX="111.0" layoutY="343.0" mnemonicParsing="false" onAction="#onGuessGameButtonClick" prefHeight="100.0" prefWidth="400.0" styleClass="guess-game" stylesheets="@css/big-buttons.css" text="GUESS WORD GAME">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>
@@ -47,11 +47,6 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <Button fx:id="enterGameButton" alignment="BOTTOM_CENTER" layoutX="883.0" layoutY="263.0" mnemonicParsing="false" prefHeight="104.0" prefWidth="118.0" styleClass="enter-game" stylesheets="@css/big-buttons.css" text="Enter Game" textAlignment="CENTER" wrapText="true">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                  </Button>
                </children>
             </AnchorPane>
          </center>
@@ -60,9 +55,14 @@
    <top>
       <AnchorPane prefHeight="75.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="quitGameButton" alignment="CENTER_RIGHT" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="153.0" styleClass="exit-button" stylesheets="@css/big-buttons.css" text="Quit Game">
+            <Button fx:id="quitGameButton" alignment="CENTER_RIGHT" disable="true" layoutX="14.0" layoutY="11.0" mnemonicParsing="false" onAction="#onQuitGameButtonClick" prefHeight="60.0" prefWidth="150.0" styleClass="exit-button" stylesheets="@css/big-buttons.css" text="Quit Game" visible="false">
                <font>
                   <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="enterGameButton" alignment="BOTTOM_CENTER" disable="true" layoutX="913.0" layoutY="7.0" mnemonicParsing="false" onAction="#onEnterGameButtonClick" prefHeight="61.0" prefWidth="173.0" styleClass="enter-game" stylesheets="@css/big-buttons.css" text="Enter Game" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font name="System Bold" size="20.0" />
                </font>
             </Button>
          </children>
