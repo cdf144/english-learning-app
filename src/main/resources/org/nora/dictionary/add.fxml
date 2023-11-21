@@ -14,7 +14,7 @@
    <center>
       <AnchorPane prefHeight="600.0" prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <TextArea fx:id="wordField" layoutX="56.0" layoutY="58.0" onKeyTyped="#onWordFieldType" prefHeight="70.0" prefWidth="450.0" promptText="Type word to add to dictionary here" styleClass="text-area" stylesheets="@css/text-area.css" wrapText="true">
+            <TextArea fx:id="wordField" layoutX="56.0" layoutY="58.0" onKeyTyped="#onWordFieldType" prefHeight="70.0" prefWidth="450.0" promptText="Type word to add to dictionary here" styleClass="text-area" stylesheets="@css/text-areas.css" wrapText="true">
                <font>
                   <Font size="18.0" />
                </font>
@@ -37,12 +37,12 @@
                   <Font name="System Bold Italic" size="16.0" />
                </font>
             </Button>
-            <TextField fx:id="pronunciationField" disable="true" layoutX="683.0" layoutY="250.0" onKeyTyped="#updateExplainFieldTemplate" prefHeight="45.0" prefWidth="210.0" promptText="Word pronunciation" styleClass="text-field" stylesheets="@css/text-area.css">
+            <TextField fx:id="pronunciationField" disable="true" layoutX="683.0" layoutY="250.0" onKeyTyped="#updateExplainFieldTemplate" prefHeight="45.0" prefWidth="210.0" promptText="Word pronunciation" styleClass="text-field" stylesheets="@css/text-areas.css">
                <font>
                   <Font size="16.0" />
                </font>
             </TextField>
-            <TextArea fx:id="shortDescArea" disable="true" layoutX="683.0" layoutY="330.0" onKeyTyped="#updateExplainFieldTemplate" prefHeight="190.0" prefWidth="210.0" promptText="Short description for word" styleClass="text-area" stylesheets="@css/text-area.css" wrapText="true">
+            <TextArea fx:id="shortDescArea" disable="true" layoutX="683.0" layoutY="330.0" onKeyTyped="#updateExplainFieldTemplate" prefHeight="190.0" prefWidth="210.0" promptText="Short description for word" styleClass="text-area" stylesheets="@css/text-areas.css" wrapText="true">
                <font>
                   <Font size="16.0" />
                </font>

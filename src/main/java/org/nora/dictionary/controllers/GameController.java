@@ -20,6 +20,11 @@ public class GameController {
     @FXML
     private BorderPane gamePane;
     @FXML
+    private Button enterGameButton;
+    @FXML
+    private Label gameRuleLabel;
+
+    @FXML
     private BorderPane guessWordGamePane;
     @FXML
     private BorderPane shuffleGamePane;
