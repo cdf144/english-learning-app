@@ -29,7 +29,7 @@ public class GameChooseController {
 
     private final String guessWordRule = "Guess Word: You will be given a picture and 4 words "
             + "(answers). Choose the appropiate word that accurately describes the picture given. "
-            + "You start with 10 points. For each correct answer you will be given 5 points. For "
+            + "You start with 0 points. For each correct answer you will be given 5 points. For "
             + "each wrong answer you will be deducted 10 points.";
 
     private final String shuffleRule = "Shuffle: You will be given characters separated by forward "
