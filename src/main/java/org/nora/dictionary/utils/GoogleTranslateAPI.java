@@ -48,7 +48,7 @@ public class GoogleTranslateAPI {
 
     public static String translate(String query, LANGUAGE srcLang, LANGUAGE destLang) throws IOException {
         if (executorService == null) {
-            executorService = Executors.newFixedThreadPool(2);
+            executorService = Executors.newFixedThreadPool(1);
         }
 
         final String finalQuery = query.replace("\n", " ");
@@ -98,8 +98,10 @@ public class GoogleTranslateAPI {
          */
         try {
             String completed = future.get(3, TimeUnit.SECONDS);
-        } catch (InterruptedException | ExecutionException | TimeoutException e) {
+        } catch (TimeoutException e) {
             translatedWord = "ERROR: Took too long to get query result from Google Translate";
+        } catch (InterruptedException | ExecutionException e) {
+            throw new IOException(e);
         }
 
         return translatedWord;

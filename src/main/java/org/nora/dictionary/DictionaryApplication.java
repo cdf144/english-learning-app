@@ -47,7 +47,7 @@ public class DictionaryApplication extends Application {
         primaryStage.show();
 
         primaryStage.setOnCloseRequest(event -> {
-            TextToSpeech.deallocateSynthesizer();
+            TextToSpeech.shutDown();
             GoogleVoiceAPI.shutdownExecutorService();
             GoogleTranslateAPI.shutdownExecutorService();
             try {
