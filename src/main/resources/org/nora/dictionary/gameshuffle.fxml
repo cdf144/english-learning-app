@@ -28,12 +28,12 @@
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Label>
-            <Label fx:id="highScoreLabel" alignment="CENTER" layoutX="762.0" layoutY="51.0" prefHeight="31.0" prefWidth="83.0" text="Label">
+            <Label fx:id="highScoreLabel" alignment="CENTER" layoutX="798.0" layoutY="51.0" prefHeight="31.0" prefWidth="83.0" text="Label">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="553.0" layoutY="50.0" prefHeight="33.0" prefWidth="130.0" text="HIGHSCORE:">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="553.0" layoutY="50.0" prefHeight="33.0" prefWidth="198.0" text="WINNING STREAK:">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>

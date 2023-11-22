@@ -109,12 +109,12 @@ public class GameShuffleController {
         String userAnswer = answerField.getText();
 
         if (userAnswer.equalsIgnoreCase(correctAnswer)) {
-            score += 5;
+            score ++;
             scoreLabel.setText(String.valueOf(score));
             questionField.setStyle("-fx-background-color: green;");
             questionField.setText("Correct");
         } else {
-            score -= 10;
+            score = 0;
             scoreLabel.setText(String.valueOf(score));
             questionField.setStyle("-fx-background-color: red;");
             questionField.setText(correctAnswer);
