@@ -30,7 +30,7 @@ public class DictionaryManagementSQLite implements IDictionaryManagement {
         }
     }
 
-    protected List<Word> searchResultList;
+    private final List<Word> searchResultList;
 
     public static final String PATH_EV_DB = System.getProperty("user.dir")
             + File.separator + "src"
@@ -40,7 +40,7 @@ public class DictionaryManagementSQLite implements IDictionaryManagement {
 
     public static final String URL_EV_DB = "jdbc:sqlite:" + PATH_EV_DB;
 
-    public Connection connection;
+    private final Connection connection;
 
     public DictionaryManagementSQLite() {
         searchResultList = new ArrayList<>();
@@ -56,10 +56,6 @@ public class DictionaryManagementSQLite implements IDictionaryManagement {
 
     public List<Word> getSearchResultList() {
         return searchResultList;
-    }
-
-    public void setSearchResultList(List<Word> searchResultList) {
-        this.searchResultList = searchResultList;
     }
 
     public Connection getConnection() {
