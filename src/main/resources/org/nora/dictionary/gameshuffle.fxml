@@ -14,7 +14,7 @@
                <font>
                   <Font size="25.0" />
                </font></TextField>
-            <TextField fx:id="answerField" alignment="CENTER" layoutX="275.0" layoutY="402.0" prefHeight="154.0" prefWidth="550.0">
+            <TextField fx:id="answerField" alignment="CENTER" layoutX="275.0" layoutY="402.0" prefHeight="154.0" prefWidth="550.0" promptText="Type your answer here">
                <font>
                   <Font size="30.0" />
                </font></TextField>
