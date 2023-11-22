@@ -2,10 +2,7 @@ package org.nora.dictionary.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javazoom.jl.decoder.JavaLayerException;
 import org.nora.dictionary.utils.GoogleTranslateAPI;
@@ -31,11 +28,15 @@ public class GoogleTranslateController implements Initializable {
     private ImageView speakButtonSrc;
     @FXML
     private ImageView speakButtonDest;
+    @FXML
+    private Label charCountLabel;
 
     String[] sourceLangs = {"English", "Vietnamese", "Auto"};
     String[] destLangs = {"English", "Vietnamese"};
     GoogleTranslateAPI.LANGUAGE sourceLang;
     GoogleTranslateAPI.LANGUAGE destLang;
+
+    private static final int CHAR_LIMIT = 9999;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -47,6 +48,23 @@ public class GoogleTranslateController implements Initializable {
 
         sourceLang = GoogleTranslateAPI.LANGUAGE.ENGLISH;
         destLang = GoogleTranslateAPI.LANGUAGE.VIETNAMESE;
+        updateCharCountLabel();
+    }
+
+    public void onInputTextAreaTyped() {
+        updateCharCountLabel();
+    }
+
+    private void updateCharCountLabel() {
+        String inputText = inputTextArea.getText();
+
+        if (inputText.length() > 9999) {
+            showNotification("Warning!", "Translate word limit reached!");
+            inputText = inputText.substring(0, 9999);
+            inputTextArea.setText(inputText);
+        }
+
+        charCountLabel.setText(inputText.length() + " / " + CHAR_LIMIT);
     }
 
     @FXML
