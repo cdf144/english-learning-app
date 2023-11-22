@@ -29,7 +29,7 @@ public class GoogleVoiceAPI {
 
     public synchronized static GoogleVoiceAPI getInstance() {
         if (executorService == null) {
-            executorService = Executors.newFixedThreadPool(2);
+            executorService = Executors.newFixedThreadPool(3);
         }
 
         if (voice == null) {

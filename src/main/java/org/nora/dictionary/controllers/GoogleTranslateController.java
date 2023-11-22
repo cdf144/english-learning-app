@@ -70,7 +70,7 @@ public class GoogleTranslateController implements Initializable {
                     inputText, sourceLang, destLang
             ));
         } catch (IOException e) {
-            resultTextArea.setText("Error, cannot connect to Google Translate.");
+            resultTextArea.setText("ERROR: Cannot connect to Google Translate.");
         }
     }
 
