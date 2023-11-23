@@ -1,5 +1,8 @@
 package org.nora.dictionary.controllers;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,10 +11,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+
+import javafx.util.Duration;
 
 public class GameGuessWordController {
 
@@ -31,16 +33,19 @@ public class GameGuessWordController {
     protected Button buttonD;
 
     @FXML
-    protected Label scoreLabel;
+    protected Label comboLabel;
 
     @FXML
-    protected Label highScoreLabel;
+    protected Label longestComboLabel;
 
     private List<String> wordList;
     private List<String> imageList;
-    private int score = 0;
-    private int highScore = 0;
+    private int combo = 0;
+    private int longestCombo = 0;
     protected String correctAnswer;
+
+    private List<Integer> recentlyUsedQuestions = new ArrayList<>();
+    private static final int MINIMUM_GAP = 30;
 
     public static final String PATH_GUESS_GAME_TXT = System.getProperty("user.dir")
             + File.separator + "src"
@@ -54,11 +59,11 @@ public class GameGuessWordController {
             + File.separator + "resources"
             + File.separator + "GuessGameImage";
 
-    public static final String PATH_GUESS_GAME_HIGH_SCORE_TXT = System.getProperty("user.dir")
+    public static final String PATH_GUESS_GAME_LONGEST_COMBO_TXT = System.getProperty("user.dir")
             + File.separator + "src"
             + File.separator + "main"
             + File.separator + "resources"
-            + File.separator + "guessGameHighScore.txt";
+            + File.separator + "guessGameLongestCombo.txt";
 
     private List<String> generateWordList(String filePath) {
         List<String> words = new ArrayList<>();
@@ -90,9 +95,9 @@ public class GameGuessWordController {
         this.wordList = generateWordList(PATH_GUESS_GAME_TXT);
         this.imageList = generateImageList(PATH_GUESS_GAME_IMAGE, this.wordList);
         loadNextQuestion();
-        scoreLabel.setText("0");
-        updateHighScoreIfNeeded();
-        highScoreLabel.setText(Integer.toString(highScore));
+        comboLabel.setText("0");
+        updateLongestComboIfNeeded();
+        longestComboLabel.setText(Integer.toString(longestCombo));
 
         buttonA.setOnAction(this::handleAnswerButtonClick);
         buttonB.setOnAction(this::handleAnswerButtonClick);
@@ -102,7 +107,17 @@ public class GameGuessWordController {
 
     private void loadNextQuestion() {
         Random random = new Random();
-        int index = random.nextInt(imageList.size());
+        int index;
+
+        if (recentlyUsedQuestions.size() >= MINIMUM_GAP) {
+            recentlyUsedQuestions.remove(0);
+        }
+
+        do {
+            index = random.nextInt(imageList.size());
+        } while (recentlyUsedQuestions.contains(index));
+
+        recentlyUsedQuestions.add(index);
 
         String imagePath = imageList.get(index);
         correctAnswer = wordList.get(index);
@@ -129,47 +144,72 @@ public class GameGuessWordController {
         buttonC.setText(answers.get(2));
         buttonD.setText(answers.get(3));
 
-        updateHighScoreIfNeeded();
+        updateLongestComboIfNeeded();
     }
 
     @FXML
-    protected void handleAnswerButtonClick(ActionEvent event) {
+    private void handleAnswerButtonClick(ActionEvent event) {
         Button clickedButton = (Button) event.getSource();
         String selectedAnswer = clickedButton.getText();
+        boolean isCorrect = selectedAnswer.equals(correctAnswer);
 
-
-        if (selectedAnswer.equals(correctAnswer)) {
-            score += 5;
+        if (isCorrect) {
+            combo += 1;
+            clickedButton.setStyle("-fx-background-color: green;");
         } else {
-            score -= 10;
+            combo = 0;
+            clickedButton.setStyle("-fx-background-color: red;");
+
+            Button correctButton = null;
+            for (Button button : Arrays.asList(buttonA, buttonB, buttonC, buttonD)) {
+                if (correctAnswer.equalsIgnoreCase(button.getText())) {
+                    correctButton = button;
+                    break;
+                }
+            }
+
+            if (correctButton != null) {
+                correctButton.setStyle("-fx-background-color: green;");
+            }
         }
 
-        scoreLabel.setText(String.valueOf(score));
+        comboLabel.setText(String.valueOf(combo));
 
-        loadNextQuestion();
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+            loadNextQuestion();
+            resetButtonColors();
+        }));
+        timeline.play();
     }
 
-    public void checkAndUpdateHighScore(int currentScore) {
+    private void resetButtonColors() {
+        buttonA.setStyle("");
+        buttonB.setStyle("");
+        buttonC.setStyle("");
+        buttonD.setStyle("");
+    }
+
+
+    public void checkAndUpdateLongestCombo(int currentCombo) {
         try {
-            File highScoreFile = new File(PATH_GUESS_GAME_HIGH_SCORE_TXT);
-            if (!highScoreFile.exists()) {
-                highScoreFile.createNewFile();
+            File longestComboFile = new File(PATH_GUESS_GAME_LONGEST_COMBO_TXT);
+            if (!longestComboFile.exists()) {
+                longestComboFile.createNewFile();
             }
 
-            BufferedReader reader = new BufferedReader(new FileReader(highScoreFile));
-            String highScoreString = reader.readLine();
+            BufferedReader reader = new BufferedReader(new FileReader(longestComboFile));
+            String longestComboString = reader.readLine();
             reader.close();
 
-//            int highScore = 0;
-            if (highScoreString != null && !highScoreString.isEmpty()) {
-                highScore = Integer.parseInt(highScoreString.trim());
+            if (longestComboString != null && !longestComboString.isEmpty()) {
+                longestCombo = Integer.parseInt(longestComboString.trim());
             }
 
-            if (currentScore > highScore) {
-                highScore = currentScore;
+            if (currentCombo > longestCombo) {
+                longestCombo = currentCombo;
 
-                BufferedWriter writer = new BufferedWriter(new FileWriter(highScoreFile));
-                writer.write(String.valueOf(highScore));
+                BufferedWriter writer = new BufferedWriter(new FileWriter(longestComboFile));
+                writer.write(String.valueOf(longestCombo));
                 writer.close();
             }
         } catch (IOException e) {
@@ -177,8 +217,8 @@ public class GameGuessWordController {
         }
     }
 
-    public void updateHighScoreIfNeeded() {
-        checkAndUpdateHighScore(score);
-        highScoreLabel.setText(Integer.toString(highScore));
+    public void updateLongestComboIfNeeded() {
+        checkAndUpdateLongestCombo(combo);
+        longestComboLabel.setText(Integer.toString(longestCombo));
     }
 }
