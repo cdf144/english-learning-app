@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.HTMLEditor?>
 <?import javafx.scene.web.WebView?>
-
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="705.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.nora.dictionary.controllers.SearcherController">
   <left>
             <VBox prefHeight="705.0" prefWidth="320.0" BorderPane.alignment="CENTER">
@@ -58,7 +52,7 @@
                            <children>
                               <ImageView fx:id="wordToSpeechUS" fitHeight="52.0" fitWidth="52.0" onMouseClicked="#onWordToSpeechUSClick" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@icons/audioUS.png" />
+                                    <Image url="@icons/utilities/audioUS.png" />
                                  </image>
                                  <StackPane.margin>
                                     <Insets />
@@ -73,7 +67,7 @@
                            <children>
                               <ImageView fx:id="wordToSpeechUK" fitHeight="52.0" fitWidth="52.0" onMouseClicked="#onWordToSpeechUKClick" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@icons/audioUK.png" />
+                                    <Image url="@icons/utilities/audioUK.png" />
                                  </image>
                               </ImageView>
                            </children>
@@ -85,7 +79,7 @@
                            <children>
                               <ImageView fx:id="favoriteButton" fitHeight="44.0" fitWidth="44.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onFavoriteClick" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@icons/star.png" />
+                                    <Image url="@icons/utilities/star.png" />
                                  </image>
                                  <StackPane.margin>
                                     <Insets bottom="2.0" />
@@ -100,7 +94,7 @@
                            <children>
                               <ImageView fx:id="saveEditButton" disable="true" fitHeight="40.0" fitWidth="40.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onSaveEditClick" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>
-                                    <Image url="@icons/save.png" />
+                                    <Image url="@icons/utilities/save.png" />
                                  </image>
                               </ImageView>
                            </children>
@@ -112,7 +106,7 @@
                            <children>
                               <ImageView fx:id="editButton" fitHeight="38.0" fitWidth="38.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onEditButtonClick" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@icons/edit_note.png" />
+                                    <Image url="@icons/utilities/edit_note.png" />
                                  </image>
                               </ImageView>
                            </children>
@@ -124,7 +118,7 @@
                            <children>
                               <ImageView fx:id="deleteButton" fitHeight="36.0" fitWidth="36.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#onRemoveClick" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@icons/delete_forever.png" />
+                                    <Image url="@icons/utilities/delete_forever.png" />
                                  </image>
                               </ImageView>
                            </children>

@@ -64,13 +64,13 @@ public class SearcherController implements Initializable {
             }
         });
 
-        File star = new File(DictionaryApplication.PATH_ICONS_FOLDER + "star.png");
+        File star = new File(DictionaryApplication.PATH_UTILITY_ICONS_FOLDER + "star.png");
         starImage = new Image(star.toURI().toString());
-        File starFilled = new File(DictionaryApplication.PATH_ICONS_FOLDER + "star_filled.png");
+        File starFilled = new File(DictionaryApplication.PATH_UTILITY_ICONS_FOLDER + "star_filled.png");
         starFilledImage = new Image(starFilled.toURI().toString());
-        File edit = new File(DictionaryApplication.PATH_ICONS_FOLDER + "edit_note.png");
+        File edit = new File(DictionaryApplication.PATH_UTILITY_ICONS_FOLDER + "edit_note.png");
         editImage = new Image(edit.toURI().toString());
-        File cancel = new File(DictionaryApplication.PATH_ICONS_FOLDER + "cancel.png");
+        File cancel = new File(DictionaryApplication.PATH_UTILITY_ICONS_FOLDER + "cancel.png");
         cancelImage = new Image(cancel.toURI().toString());
 
         updateAutocompleteList();
@@ -265,8 +265,7 @@ public class SearcherController implements Initializable {
                 Alert.AlertType.CONFIRMATION,
                 "Delete '" + wordTargetLabel.getText() + "'?",
                 ButtonType.YES,
-                ButtonType.NO,
-                ButtonType.CANCEL
+                ButtonType.NO
         );
         alert.showAndWait();
 

@@ -18,14 +18,15 @@ import java.io.IOException;
 public class DictionaryApplication extends Application {
     public static DictionaryManagementSQLite dictionary;
 
-    public static final String PATH_ICONS_FOLDER = System.getProperty("user.dir")
+    public static final String PATH_UTILITY_ICONS_FOLDER = System.getProperty("user.dir")
             + File.separator + "src"
             + File.separator + "main"
             + File.separator + "resources"
             + File.separator + "org"
             + File.separator + "nora"
             + File.separator + "dictionary"
-            + File.separator + "icons" + File.separator;
+            + File.separator + "icons"
+            + File.separator + "utilities" + File.separator;
 
     public static void main(String[] args) {
         launch(args);

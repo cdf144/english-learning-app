@@ -13,7 +13,7 @@
                <children>
                   <ImageView fitHeight="57.0" fitWidth="310.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@icons/title.png" />
+                        <Image url="@icons/decorations/title.png" />
                      </image>
                      <HBox.margin>
                         <Insets top="6.0" />
@@ -32,7 +32,7 @@
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@icons/search.png" />
+                              <Image url="@icons/tabs/search.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -50,7 +50,7 @@
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@icons/g_translate.png" />
+                              <Image url="@icons/tabs/g_translate.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -68,7 +68,7 @@
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@icons/kid_star.png" />
+                              <Image url="@icons/tabs/kid_star.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -86,7 +86,7 @@
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@icons/history.png" />
+                              <Image url="@icons/tabs/history.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -104,7 +104,7 @@
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@icons/add.png" />
+                              <Image url="@icons/tabs/add.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -122,7 +122,7 @@
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@icons/game.png" />
+                              <Image url="@icons/tabs/game.png" />
                            </image>
                         </ImageView>
                      </graphic>

@@ -17,7 +17,7 @@
                <children>
                   <ImageView fx:id="speakButtonSrc" fitHeight="42.0" fitWidth="42.0" onMouseClicked="#onSpeakButtonSrcClick" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@icons/audio.png" />
+                        <Image url="@icons/utilities/audio.png" />
                      </image>
                   </ImageView>
                </children>
@@ -41,7 +41,7 @@
                <children>
                   <ImageView fx:id="speakButtonDest" fitHeight="42.0" fitWidth="42.0" onMouseClicked="#onSpeakButtonDestClick" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@icons/audio.png" />
+                        <Image url="@icons/utilities/audio.png" />
                      </image>
                   </ImageView>
                </children>
@@ -58,7 +58,7 @@
                <children>
                   <ImageView fitHeight="55.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@icons/double_arrow_right.png" />
+                        <Image url="@icons/decorations/double_arrow_right.png" />
                      </image>
                   </ImageView>
                </children>
