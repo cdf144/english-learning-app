@@ -36,7 +36,7 @@ public class GameShuffleController implements Initializable {
             + File.separator + "src"
             + File.separator + "main"
             + File.separator + "resources"
-            + File.separator + "GuessGame.txt";
+            + File.separator + "guessGame.txt";
     public static final String PATH_SHUFFLE_GAME_HIGH_SCORE = System.getProperty("user.dir")
             + File.separator + "src"
             + File.separator + "main"

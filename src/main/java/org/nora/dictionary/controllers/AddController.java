@@ -23,9 +23,8 @@ public class AddController {
     @FXML
     private Button addButton;
 
-    private static final String invalidWordPattern1 = "[^-a-zA-Z0-9'()\\[\\]{}\\s]+(?!\\s)";
     private static final Pattern INVALID_WORD_PATTERN = Pattern.compile(
-            invalidWordPattern1
+            "[^-a-zA-Z0-9'()\\[\\]{}\\s]+(?!\\s)"
     );
 
     public void onWordFieldType() {
@@ -42,7 +41,7 @@ public class AddController {
             warningLabel.setTextFill(Color.RED);
             disableAddInfoFields();
         } else {
-            warningLabel.setText("Word does not exist in Dictionary!");
+            warningLabel.setText("Word can be added to Dictionary!");
             warningLabel.setTextFill(Color.LIMEGREEN);
             enableAddInfoFields();
             updateExplainFieldTemplate();

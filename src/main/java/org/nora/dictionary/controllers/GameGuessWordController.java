@@ -2,18 +2,16 @@ package org.nora.dictionary.controllers;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 import java.io.*;
 import java.util.*;
-
-import javafx.util.Duration;
 
 public class GameGuessWordController {
 
@@ -51,7 +49,7 @@ public class GameGuessWordController {
             + File.separator + "src"
             + File.separator + "main"
             + File.separator + "resources"
-            + File.separator + "GuessGame.txt";
+            + File.separator + "guessGame.txt";
 
     public static final String PATH_GUESS_GAME_IMAGE = System.getProperty("user.dir")
             + File.separator + "src"

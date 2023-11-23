@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-public class GuessWordGame2 {
+public class GuessWordGame {
 
     private List<String> wordList;
     private List<String> imageList;
@@ -19,7 +19,7 @@ public class GuessWordGame2 {
             + File.separator + "src"
             + File.separator + "main"
             + File.separator + "resources"
-            + File.separator + "GuessGame.txt";
+            + File.separator + "guessGame.txt";
 
     public static final String PATH_GUESS_GAME_IMAGE = System.getProperty("user.dir")
             + File.separator + "src"
@@ -27,7 +27,7 @@ public class GuessWordGame2 {
             + File.separator + "resources"
             + File.separator + "GuessGameImage";
 
-    public GuessWordGame2() {
+    public GuessWordGame() {
         this.wordList = generateWordList(PATH_GUESS_GAME_TXT);
         this.imageList = generateImageList(PATH_GUESS_GAME_IMAGE, this.wordList);
         this.score = 0;
@@ -101,7 +101,7 @@ public class GuessWordGame2 {
     }
 
     public static void main(String[] args) {
-        GuessWordGame2 game = new GuessWordGame2();
+        GuessWordGame game = new GuessWordGame();
         game.startGame();
     }
 }
