@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
@@ -37,30 +37,26 @@
                <padding>
                   <Insets left="25.0" />
                </padding></Button>
-            <Label layoutX="226.0" layoutY="21.0" text="CORRECT COMBO : ">
-               <font>
-                  <Font name="System Bold Italic" size="20.0" />
-               </font>
-            </Label>
-            <Label fx:id="comboLabel" alignment="CENTER" layoutX="416.0" layoutY="21.0" prefHeight="30.0" prefWidth="55.0" styleClass="combo-count-label" stylesheets="@css/labels.css" text="LB" textFill="WHITE">
+            <Label fx:id="comboLabel" alignment="CENTER" layoutX="367.0" layoutY="13.0" prefHeight="45.0" prefWidth="120.0" styleClass="combo-count-label" stylesheets="@css/labels.css" text="LB">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
+               <padding>
+                  <Insets left="35.0" />
+               </padding>
             </Label>
-            <StackPane layoutY="73.0" prefHeight="300.0" prefWidth="1100.0">
+            <StackPane layoutY="83.0" prefHeight="300.0" prefWidth="1100.0">
                <children>
                   <ImageView fx:id="imageView" fitHeight="300.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER" />
                </children>
             </StackPane>
-            <Label layoutX="635.0" layoutY="22.0" text="LONGEST COMBO : " textFill="#1860b5">
-               <font>
-                  <Font name="System Bold Italic" size="18.0" />
-               </font>
-            </Label>
-            <Label fx:id="longestComboLabel" alignment="CENTER" layoutX="811.0" layoutY="21.0" prefHeight="30.0" prefWidth="55.0" styleClass="combo-count-label" stylesheets="@css/labels.css" text="LB" textFill="WHITE">
+            <Label fx:id="longestComboLabel" alignment="CENTER" layoutX="618.0" layoutY="13.0" prefHeight="45.0" prefWidth="120.0" styleClass="highest-combo-count-label" stylesheets="@css/labels.css" text="LB" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
+               <padding>
+                  <Insets left="35.0" />
+               </padding>
             </Label>
          </children>
       </AnchorPane>

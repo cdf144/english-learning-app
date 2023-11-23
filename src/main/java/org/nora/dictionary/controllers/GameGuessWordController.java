@@ -17,33 +17,26 @@ import java.net.URL;
 import java.util.*;
 
 public class GameGuessWordController implements Initializable {
-
     @FXML
-    protected ImageView imageView;
-
+    private ImageView imageView;
     @FXML
-    protected Button buttonA;
-
+    private Button buttonA;
     @FXML
-    protected Button buttonB;
-
+    private Button buttonB;
     @FXML
-    protected Button buttonC;
-
+    private Button buttonC;
     @FXML
-    protected Button buttonD;
-
+    private Button buttonD;
     @FXML
-    protected Label comboLabel;
-
+    private Label comboLabel;
     @FXML
-    protected Label longestComboLabel;
+    private Label longestComboLabel;
 
     private List<String> wordList;
     private List<String> imageList;
     private int combo = 0;
     private int longestCombo = 0;
-    protected String correctAnswer;
+    private String correctAnswer;
 
     private final List<Integer> recentlyUsedQuestions = new ArrayList<>();
     private static final int MINIMUM_GAP = 30;
