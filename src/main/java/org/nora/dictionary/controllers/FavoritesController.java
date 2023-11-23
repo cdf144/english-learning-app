@@ -42,7 +42,7 @@ public class FavoritesController extends SearcherController {
     }
 
     @Override
-    public void enableEditView() {
+    protected void enableEditView() {
         wordExplainView.setVisible(false);
         wordExplainView.setDisable(true);
 
@@ -61,7 +61,7 @@ public class FavoritesController extends SearcherController {
     }
 
     @Override
-    public void disableEditView() {
+    protected void disableEditView() {
         String explain = DictionaryApplication.dictionary.dictionaryLookup(wordTargetLabel.getText());
         wordExplainView.setVisible(true);
         wordExplainView.setDisable(false);

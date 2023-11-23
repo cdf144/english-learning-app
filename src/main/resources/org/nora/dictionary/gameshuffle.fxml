@@ -1,11 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.text.*?>
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="705.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.nora.dictionary.controllers.GameShuffleController">
    <center>
-      <AnchorPane prefHeight="705.0" prefWidth="1100.0" BorderPane.alignment="CENTER" />
+      <AnchorPane prefHeight="705.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="questionField" alignment="CENTER" layoutX="279.0" layoutY="151.0" prefHeight="96.0" prefWidth="547.0">
+               <font>
+                  <Font size="25.0" />
+               </font></TextField>
+            <TextField fx:id="answerField" alignment="CENTER" layoutX="275.0" layoutY="402.0" prefHeight="154.0" prefWidth="550.0" promptText="Type your answer here">
+               <font>
+                  <Font size="30.0" />
+               </font></TextField>
+            <Label fx:id="scoreLabel" alignment="CENTER" layoutX="382.0" layoutY="46.0" prefHeight="41.0" prefWidth="82.0" text="Label">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="240.0" layoutY="34.0" prefHeight="64.0" prefWidth="102.0" text="SCORE:" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" wrapText="true">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="highScoreLabel" alignment="CENTER" layoutX="798.0" layoutY="51.0" prefHeight="31.0" prefWidth="83.0" text="Label">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="553.0" layoutY="50.0" prefHeight="33.0" prefWidth="198.0" text="WINNING STREAK:">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
    </center>
 </BorderPane>

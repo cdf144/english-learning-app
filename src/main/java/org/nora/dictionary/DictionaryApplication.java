@@ -8,6 +8,8 @@ import javafx.stage.StageStyle;
 import org.nora.dictionary.management.DictionaryManagementSQLite;
 import org.nora.dictionary.management.FavoriteWords;
 import org.nora.dictionary.management.SearchHistory;
+import org.nora.dictionary.utils.GoogleTranslateAPI;
+import org.nora.dictionary.utils.GoogleVoiceAPI;
 import org.nora.dictionary.utils.TextToSpeech;
 
 import java.io.File;
@@ -45,7 +47,9 @@ public class DictionaryApplication extends Application {
         primaryStage.show();
 
         primaryStage.setOnCloseRequest(event -> {
-            TextToSpeech.deallocateSynthesizer();
+            TextToSpeech.shutDown();
+            GoogleVoiceAPI.shutdownExecutorService();
+            GoogleTranslateAPI.shutdownExecutorService();
             try {
                 SearchHistory.saveSearchHistory();
                 FavoriteWords.saveFavoriteWords();
