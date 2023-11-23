@@ -6,6 +6,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.web.HTMLEditor;
 import org.nora.dictionary.DictionaryApplication;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class AddController {
     @FXML
     private TextArea wordField;
@@ -20,10 +23,20 @@ public class AddController {
     @FXML
     private Button addButton;
 
+    private static final String invalidWordPattern1 = "[^-a-zA-Z0-9'()\\[\\]{}\\s]+(?!\\s)";
+    private static final Pattern INVALID_WORD_PATTERN = Pattern.compile(
+            invalidWordPattern1
+    );
+
     public void onWordFieldType() {
         String word = wordField.getText().trim().replaceAll("\\s+", " ");
+        Matcher m = INVALID_WORD_PATTERN.matcher(word);
         if (word.isEmpty()) {
             clearFields();
+        } else if (m.find()) {
+            warningLabel.setText("Warning: Invalid English Word!");
+            warningLabel.setTextFill(Color.RED);
+            disableAddInfoFields();
         } else if (DictionaryApplication.dictionary.wordExist(word)) {
             warningLabel.setText("Warning: Word already exist in Dictionary!");
             warningLabel.setTextFill(Color.RED);
