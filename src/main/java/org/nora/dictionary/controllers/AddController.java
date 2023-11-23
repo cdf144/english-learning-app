@@ -24,15 +24,21 @@ public class AddController {
     private Button addButton;
 
     private static final Pattern INVALID_WORD_PATTERN = Pattern.compile(
-            "[^-a-zA-Z0-9'()\\[\\]{}\\s]+(?!\\s)"
+            "[^-a-zA-Z0-9'()\\s]+(?!\\s)"
+    );
+    private static final Pattern INVALID_WORD_PATTERN_2 = Pattern.compile(
+            "\\s[^a-zA-Z0-9]+\\s"
     );
 
     public void onWordFieldType() {
         String word = wordField.getText().trim().replaceAll("\\s+", " ");
+
         Matcher m = INVALID_WORD_PATTERN.matcher(word);
+        Matcher m2 = INVALID_WORD_PATTERN_2.matcher(word);
+
         if (word.isEmpty()) {
             clearFields();
-        } else if (m.find()) {
+        } else if (m.find() || m2.find()) {
             warningLabel.setText("Warning: Invalid English Word!");
             warningLabel.setTextFill(Color.RED);
             disableAddInfoFields();
