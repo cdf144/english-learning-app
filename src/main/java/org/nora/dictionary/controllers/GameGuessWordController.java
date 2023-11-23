@@ -4,16 +4,19 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
+import org.nora.dictionary.utils.IOFileList;
 
 import java.io.*;
+import java.net.URL;
 import java.util.*;
 
-public class GameGuessWordController {
+public class GameGuessWordController implements Initializable {
 
     @FXML
     protected ImageView imageView;
@@ -42,7 +45,7 @@ public class GameGuessWordController {
     private int longestCombo = 0;
     protected String correctAnswer;
 
-    private List<Integer> recentlyUsedQuestions = new ArrayList<>();
+    private final List<Integer> recentlyUsedQuestions = new ArrayList<>();
     private static final int MINIMUM_GAP = 30;
 
     public static final String PATH_GUESS_GAME_TXT = System.getProperty("user.dir")
@@ -63,35 +66,29 @@ public class GameGuessWordController {
             + File.separator + "resources"
             + File.separator + "guessGameLongestCombo.txt";
 
-    private List<String> generateWordList(String filePath) {
-        List<String> words = new ArrayList<>();
-
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                words.add(line.trim());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return words;
+    private void generateWordList() throws IOException {
+        IOFileList.loadFileToList(PATH_GUESS_GAME_TXT, wordList);
     }
 
-    private List<String> generateImageList(String folderPath, List<String> wordList) {
-        List<String> images = new ArrayList<>();
-
+    private void generateImageList(List<String> wordList) {
         for (String word : wordList) {
-            String imagePath = folderPath + "/" + word + ".jpg";
-            images.add(imagePath);
+            String imagePath = PATH_GUESS_GAME_IMAGE + File.separator + word + ".jpg";
+            imageList.add(imagePath);
         }
-
-        return images;
     }
 
-    public void initialize() {
-        this.wordList = generateWordList(PATH_GUESS_GAME_TXT);
-        this.imageList = generateImageList(PATH_GUESS_GAME_IMAGE, this.wordList);
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.wordList = new ArrayList<>();
+        this.imageList = new ArrayList<>();
+
+        try {
+            generateWordList();
+        } catch (IOException e) {
+            System.err.println(e.toString());
+        }
+        generateImageList(this.wordList);
+
         loadNextQuestion();
         comboLabel.setText("0");
         updateLongestComboIfNeeded();
@@ -152,7 +149,7 @@ public class GameGuessWordController {
         boolean isCorrect = selectedAnswer.equals(correctAnswer);
 
         if (isCorrect) {
-            combo += 1;
+            combo++;
             clickedButton.setStyle("-fx-background-color: green;");
         } else {
             combo = 0;
@@ -211,7 +208,7 @@ public class GameGuessWordController {
                 writer.close();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println(e.toString());
         }
     }
 

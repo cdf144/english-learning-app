@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ReadFilePaths {
+public class ReadFileNames {
     public static List<String> filePaths;
 
     public static final String PATH_GUESS_GAME_IMAGE = System.getProperty("user.dir")
@@ -21,6 +21,12 @@ public class ReadFilePaths {
 
         for (File file : Objects.requireNonNull(folder.listFiles())) {
             filePaths.add(file.getAbsolutePath());
+        }
+    }
+
+    public static void listFilesInFolder(File folder, List<String> pathList) {
+        for (File file : Objects.requireNonNull(folder.listFiles())) {
+            pathList.add(file.getAbsolutePath());
         }
     }
 
