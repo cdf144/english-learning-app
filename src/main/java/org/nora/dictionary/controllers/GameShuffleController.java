@@ -1,43 +1,79 @@
 package org.nora.dictionary.controllers;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-
+import javafx.util.Duration;
 
 import java.io.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-public class GameShuffleController {
+import java.util.ResourceBundle;
 
+public class GameShuffleController implements Initializable {
     @FXML
     protected TextField questionField;
-
     @FXML
     protected TextField answerField;
+    @FXML
+    protected TextField correctField;
     @FXML
     protected Label scoreLabel;
     @FXML
     protected Label highScoreLabel;
-
+    protected String correctAnswer;
     private List<String> wordList;
     private int score = 0;
     private int highScore = 0;
-    protected String correctAnswer;
 
     public static final String PATH_SHUFFLE_GAME_TXT = System.getProperty("user.dir")
             + File.separator + "src"
             + File.separator + "main"
             + File.separator + "resources"
             + File.separator + "GuessGame.txt";
-
-    public static final String PATH_GUESS_GAME_HIGH_SCORE_TXT = System.getProperty("user.dir")
+    public static final String PATH_SHUFFLE_GAME_HIGH_SCORE = System.getProperty("user.dir")
             + File.separator + "src"
             + File.separator + "main"
             + File.separator + "resources"
             + File.separator + "shuffleGameHighScore.txt";
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        this.wordList = generateWordList(PATH_SHUFFLE_GAME_TXT);
+        loadNextQuestion();
+        scoreLabel.setText("0");
+        updateHighScoreIfNeeded();
+        highScoreLabel.setText(Integer.toString(highScore));
+
+        answerField.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER && !answerField.getText().trim().isEmpty()) {
+                checkAnswer();
+            }
+        });
+    }
+
+    public static String generateRandomCharacter(String s) {
+        int n = s.length();
+        Random random = new Random();
+        StringBuilder shuffled = new StringBuilder();
+        List<Integer> charIndexList = new ArrayList<>();
+
+        while (charIndexList.size() < n) {
+            int index = random.nextInt(n);
+            if (!charIndexList.contains(index)) {
+                charIndexList.add(index);
+                shuffled.append(s.charAt(index)).append(" / ");
+            }
+        }
+
+        return shuffled.substring(0, shuffled.length() - 3);
+    }
 
     private List<String> generateWordList(String filePath) {
         List<String> words = new ArrayList<>();
@@ -54,20 +90,6 @@ public class GameShuffleController {
         return words;
     }
 
-    public void initialize() {
-        this.wordList = generateWordList(PATH_SHUFFLE_GAME_TXT);
-        loadNextQuestion();
-        scoreLabel.setText("0");updateHighScoreIfNeeded();
-        highScoreLabel.setText(Integer.toString(highScore));
-
-        answerField.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                checkAnswer();
-            }
-        });
-
-    }
-
     private void loadNextQuestion() {
         Random random = new Random();
         int index = random.nextInt(wordList.size());
@@ -80,43 +102,31 @@ public class GameShuffleController {
         answerField.setText("");
         updateHighScoreIfNeeded();
     }
-    public static String generateRandomCharacter(String s) {
-        int n = s.length();
-        Random random = new Random();
-        String tmpRes = "";
-        String res = "";
-        List<Integer> tmp = new ArrayList<>();
-
-        while (tmp.size() < n) {
-            int tmpIndex = random.nextInt(n);
-            if (!tmp.contains(tmpIndex)) {
-                tmp.add(tmpIndex);
-                tmpRes += s.charAt(tmpIndex) + " / ";
-            }
-        }
-        for (int i = 0; i < tmpRes.length() - 3; i++) {
-            res += tmpRes.charAt(i);
-        }
-        return res;
-    }
 
     private void checkAnswer() {
         String userAnswer = answerField.getText();
 
-        if (userAnswer.equalsIgnoreCase(correctAnswer)) {
-            score += 5;
+        if (userAnswer.trim().equalsIgnoreCase(correctAnswer)) {
+            score++;
             scoreLabel.setText(String.valueOf(score));
-            loadNextQuestion();
+            questionField.setStyle("-fx-background-color: green;");
+            questionField.setText("Correct");
         } else {
-            score -= 10;
+            score = 0;
             scoreLabel.setText(String.valueOf(score));
-            loadNextQuestion();
+            questionField.setStyle("-fx-background-color: red;");
+            questionField.setText(correctAnswer);
         }
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> {
+            loadNextQuestion();
+            questionField.setStyle("-fx-background-color: white;");
+        }));
+        timeline.play();
     }
 
     public void checkAndUpdateHighScore(int currentScore) {
         try {
-            File highScoreFile = new File(PATH_GUESS_GAME_HIGH_SCORE_TXT);
+            File highScoreFile = new File(PATH_SHUFFLE_GAME_HIGH_SCORE);
             if (!highScoreFile.exists()) {
                 highScoreFile.createNewFile();
             }
@@ -125,7 +135,6 @@ public class GameShuffleController {
             String highScoreString = reader.readLine();
             reader.close();
 
-//            int highScore = 0;
             if (highScoreString != null && !highScoreString.isEmpty()) {
                 highScore = Integer.parseInt(highScoreString.trim());
             }
