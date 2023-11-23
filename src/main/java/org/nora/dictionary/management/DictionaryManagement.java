@@ -1,14 +1,14 @@
 package org.nora.dictionary.management;
 
+import org.nora.dictionary.entities.Dictionary;
+import org.nora.dictionary.entities.Word;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.nora.dictionary.entities.Dictionary;
-import org.nora.dictionary.entities.Word;
 
 public class DictionaryManagement implements IDictionaryManagement {
     protected Dictionary dictionary;
@@ -52,16 +52,8 @@ public class DictionaryManagement implements IDictionaryManagement {
         return dictionary;
     }
 
-    public void setDictionary(Dictionary dictionary) {
-        this.dictionary = dictionary;
-    }
-
     public List<Word> getSearchResultList() {
         return searchResultList;
-    }
-
-    public void setSearchResultList(List<Word> searchResultList) {
-        this.searchResultList = searchResultList;
     }
 
     /**

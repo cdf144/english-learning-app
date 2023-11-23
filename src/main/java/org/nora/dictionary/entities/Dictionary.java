@@ -8,22 +8,14 @@ import java.util.Collections;
 import java.util.List;
 
 public class Dictionary {
-    protected List<Word> wordList;
+    private final List<Word> wordList;
 
     public Dictionary() {
         wordList = new ArrayList<>();
     }
 
-    public Dictionary(ArrayList<Word> wordList) {
-        this.wordList = wordList;
-    }
-
     public List<Word> getWordList() {
         return wordList;
-    }
-
-    public void setWordList(List<Word> wordList) {
-        this.wordList = wordList;
     }
 
     public void addWord(Word word) {

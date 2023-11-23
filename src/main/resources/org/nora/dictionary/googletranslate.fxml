@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="705.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.nora.dictionary.controllers.GoogleTranslateController">
    <left>
       <AnchorPane prefHeight="620.0" prefWidth="480.0" BorderPane.alignment="CENTER">
          <children>
-            <TextArea fx:id="inputTextArea" layoutX="50.0" layoutY="75.0" prefHeight="500.0" prefWidth="430.0" promptText="Type your word (paragraph) to translate here" styleClass="text-area" stylesheets="@css/text-areas.css" wrapText="true">
+            <TextArea fx:id="inputTextArea" layoutX="50.0" layoutY="75.0" onKeyTyped="#onInputTextAreaTyped" prefHeight="500.0" prefWidth="430.0" promptText="Type your word (paragraph) to translate here" styleClass="text-area" stylesheets="@css/text-areas.css" wrapText="true">
                <font>
                   <Font size="20.0" />
                </font>
             </TextArea>
-            <StackPane layoutX="241.0" layoutY="8.0" prefHeight="48.0" prefWidth="48.0" styleClass="utility-button" stylesheets="@css/utility-buttons.css">
+            <StackPane layoutX="241.0" layoutY="14.0" prefHeight="48.0" prefWidth="48.0" styleClass="utility-button" stylesheets="@css/utility-buttons.css">
                <children>
                   <ImageView fx:id="speakButtonSrc" fitHeight="42.0" fitWidth="42.0" onMouseClicked="#onSpeakButtonSrcClick" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -28,6 +22,11 @@
                   </ImageView>
                </children>
             </StackPane>
+            <Label fx:id="charCountLabel" alignment="CENTER" layoutX="356.0" layoutY="32.0" prefHeight="30.0" prefWidth="110.0" styleClass="word-count-label" stylesheets="@css/labels.css" text="9999 / 9999">
+               <font>
+                  <Font name="System Bold Italic" size="16.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </left>
@@ -38,7 +37,7 @@
                <font>
                   <Font name="System Italic" size="20.0" />
                </font></TextArea>
-            <StackPane layoutX="191.0" layoutY="7.0" prefHeight="48.0" prefWidth="48.0" styleClass="utility-button" stylesheets="@css/utility-buttons.css">
+            <StackPane layoutX="191.0" layoutY="14.0" prefHeight="48.0" prefWidth="48.0" styleClass="utility-button" stylesheets="@css/utility-buttons.css">
                <children>
                   <ImageView fx:id="speakButtonDest" fitHeight="42.0" fitWidth="42.0" onMouseClicked="#onSpeakButtonDestClick" pickOnBounds="true" preserveRatio="true">
                      <image>

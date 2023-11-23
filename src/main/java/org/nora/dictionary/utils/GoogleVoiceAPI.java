@@ -12,6 +12,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.concurrent.*;
 
 public class GoogleVoiceAPI {
     public static final String GOOGLE_TRANS_AUDIO = "http://translate.google.com/translate_tts?";
@@ -22,9 +23,15 @@ public class GoogleVoiceAPI {
             + "AppleWebKit/528.18 (KHTML, like Gecko) Version/4.0 Mobile/7A341 Safari/528.16";
     private static GoogleVoiceAPI voice;
 
+    private static ExecutorService executorService;
+
     private GoogleVoiceAPI() {}
 
     public synchronized static GoogleVoiceAPI getInstance() {
+        if (executorService == null) {
+            executorService = Executors.newFixedThreadPool(3);
+        }
+
         if (voice == null) {
             voice = new GoogleVoiceAPI();
         }
@@ -48,7 +55,13 @@ public class GoogleVoiceAPI {
     }
 
     public void playAudio(InputStream sound) throws JavaLayerException {
-        new Player(sound).play();
+        Future<String> future = executorService.submit(new Callable<String>() {
+            @Override
+            public String call() throws JavaLayerException {
+                new Player(sound).play();
+                return "completed";
+            }
+        });
     }
 
     private static String generateSpeakURL(String lang, String text) {
@@ -57,5 +70,18 @@ public class GoogleVoiceAPI {
                 "&tl=" + lang +
                 "&tk=" + generateNewToken() +
                 "&client=tw-ob";
+    }
+
+    public static void shutdownExecutorService() {
+        if (executorService != null) {
+            executorService.shutdown();
+            try {
+                if (!executorService.awaitTermination(500, TimeUnit.MILLISECONDS)) {
+                    executorService.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                executorService.shutdownNow();
+            }
+        }
     }
 }

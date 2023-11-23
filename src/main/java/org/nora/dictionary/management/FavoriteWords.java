@@ -2,13 +2,14 @@ package org.nora.dictionary.management;
 
 import org.nora.dictionary.utils.IOFileList;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class FavoriteWords {
-    protected static List<String> favoriteWords;
+    private static List<String> favoriteWords;
     public static List<String> searchFavoriteResult;
 
 

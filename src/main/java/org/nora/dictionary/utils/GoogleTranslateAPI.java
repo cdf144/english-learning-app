@@ -9,6 +9,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.concurrent.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,37 +43,68 @@ public class GoogleTranslateAPI {
         }
     }
 
+    private static ExecutorService executorService;
+    private static String translatedWord = "";
+
     public static String translate(String query, LANGUAGE srcLang, LANGUAGE destLang) throws IOException {
-        query = query.replace("\n", " ");
-        String strUrl = generateTransURL(srcLang.toString(), destLang.toString(), query);
-        URL url = new URL(strUrl);
-
-        StringBuilder response = new StringBuilder();
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
-        con.setRequestProperty("User-Agent", userAgent);
-
-        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        String inputLn;
-        while ((inputLn = in.readLine()) != null) {
-            response.append(inputLn);
-        }
-        in.close();
-
-        String transWord = "";
-        Matcher newMatcher = WORD_PATTERN.matcher(response.toString());
-        if (newMatcher.find()) {
-            transWord = newMatcher.group(1);
+        if (executorService == null) {
+            executorService = Executors.newFixedThreadPool(1);
         }
 
-        transWord = transWord.trim().replace("\\", "");
+        final String finalQuery = query.replace("\n", " ");
 
-        newMatcher = AUTO_ENDING_PATTERN.matcher(transWord);
-        if (newMatcher.find()) {
-            transWord = newMatcher.group(1);
+        Future<String> future = executorService.submit(new Callable<String>() {
+            @Override
+            public String call() throws IOException {
+                String strUrl = generateTransURL(srcLang.toString(), destLang.toString(), finalQuery);
+                URL url = new URL(strUrl);
+
+                StringBuilder response = new StringBuilder();
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                con.setRequestMethod("GET");
+                con.setRequestProperty("User-Agent", userAgent);
+
+                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                String inputLn;
+                while ((inputLn = in.readLine()) != null) {
+                    response.append(inputLn);
+                }
+                in.close();
+
+                String transWord = "";
+                Matcher newMatcher = WORD_PATTERN.matcher(response.toString());
+                if (newMatcher.find()) {
+                    transWord = newMatcher.group(1);
+                }
+
+                transWord = transWord.trim().replace("\\", "");
+
+                newMatcher = AUTO_ENDING_PATTERN.matcher(transWord);
+                if (newMatcher.find()) {
+                    transWord = newMatcher.group(1);
+                }
+
+                translatedWord = transWord;
+                return "completed";
+            }
+        });
+
+        /*
+         * 2 mục đích:
+         * 1. Buộc phải chờ cho đến khi thread xử lý xong mới return translatedWord, nếu
+         *    không translatedWord sẽ là xâu rỗng hoặc xâu chứa kết quả của truy vấn trước.
+         * 2. Bổ sung cơ chế timeout cho Google Translate, ở đây timeout là 3s, tức là nếu
+         *    kết quả không được trả về trong 3s, lỗi sẽ được báo.
+         */
+        try {
+            String completed = future.get(3, TimeUnit.SECONDS);
+        } catch (TimeoutException e) {
+            translatedWord = "ERROR: Took too long to get query result from Google Translate";
+        } catch (InterruptedException | ExecutionException e) {
+            throw new IOException(e);
         }
 
-        return transWord;
+        return translatedWord;
     }
 
     public static String translateWithInternetCheck(String textToTranslate) {
@@ -99,4 +131,16 @@ public class GoogleTranslateAPI {
         return base64Encoder.encodeToString(ranBytes);
     }
 
+    public static void shutdownExecutorService() {
+        if (executorService != null) {
+            executorService.shutdown();
+            try {
+                if (!executorService.awaitTermination(500, TimeUnit.MILLISECONDS)) {
+                    executorService.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                executorService.shutdownNow();
+            }
+        }
+    }
 }

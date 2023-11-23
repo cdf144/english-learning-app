@@ -26,8 +26,6 @@ public class ApplicationController implements Initializable {
     @FXML
     private Button gameTab;
     @FXML
-    private Button settingsTab;
-    @FXML
     private BorderPane mainBorderPane;
     @FXML
     private BorderPane searcherPane;
@@ -41,8 +39,6 @@ public class ApplicationController implements Initializable {
     private BorderPane addToDictPane;
     @FXML
     private BorderPane gamePane;
-    @FXML
-    private BorderPane settingsPane;
 
     /**
      * Called to initialize a controller after its root element has been
@@ -77,7 +73,6 @@ public class ApplicationController implements Initializable {
         historyTab.getStyleClass().removeAll("active");
         addToDictTab.getStyleClass().removeAll("active");
         gameTab.getStyleClass().removeAll("active");
-        settingsTab.getStyleClass().removeAll("active");
     }
 
     public void loadSearcher() throws IOException {
@@ -144,16 +139,5 @@ public class ApplicationController implements Initializable {
                 )
         );
         setMainBorderPane(gamePane);
-    }
-
-    public void loadSettings() throws IOException {
-        resetActiveStatusAllButtons();
-        settingsTab.getStyleClass().add("active");
-        settingsPane = FXMLLoader.load(
-                Objects.requireNonNull(
-                        DictionaryApplication.class.getResource("settings.fxml")
-                )
-        );
-        setMainBorderPane(settingsPane);
     }
 }
