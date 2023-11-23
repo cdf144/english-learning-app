@@ -13,6 +13,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 public class GameShuffleController {
 
     @FXML
@@ -66,7 +67,7 @@ public class GameShuffleController {
         highScoreLabel.setText(Integer.toString(highScore));
 
         answerField.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER ) {
+            if (event.getCode() == KeyCode.ENTER && isEmpty(answerField.getText().trim())) {
                 checkAnswer();
             }
         });
@@ -85,6 +86,7 @@ public class GameShuffleController {
         answerField.setText("");
         updateHighScoreIfNeeded();
     }
+
     public static String generateRandomCharacter(String s) {
         int n = s.length();
         Random random = new Random();
@@ -108,8 +110,8 @@ public class GameShuffleController {
     private void checkAnswer() {
         String userAnswer = answerField.getText();
 
-        if (userAnswer.equalsIgnoreCase(correctAnswer)) {
-            score ++;
+        if ( userAnswer.trim().equalsIgnoreCase(correctAnswer)) {
+            score++;
             scoreLabel.setText(String.valueOf(score));
             questionField.setStyle("-fx-background-color: green;");
             questionField.setText("Correct");
@@ -158,5 +160,11 @@ public class GameShuffleController {
         highScoreLabel.setText(Integer.toString(highScore));
     }
 
+    public boolean isEmpty(String s) {
+        if (s.isEmpty()) {
+            return false;
+        }
+        return true;
+    }
 }
 
