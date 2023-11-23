@@ -67,7 +67,7 @@ public class GameShuffleController {
         highScoreLabel.setText(Integer.toString(highScore));
 
         answerField.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER && isEmpty(answerField.getText().trim())) {
+            if (event.getCode() == KeyCode.ENTER && !answerField.getText().trim().isEmpty()) {
                 checkAnswer();
             }
         });
@@ -160,11 +160,5 @@ public class GameShuffleController {
         highScoreLabel.setText(Integer.toString(highScore));
     }
 
-    public boolean isEmpty(String s) {
-        if (s.isEmpty()) {
-            return false;
-        }
-        return true;
-    }
 }
 
