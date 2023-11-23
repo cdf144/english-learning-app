@@ -185,10 +185,12 @@ public class GameGuessWordController implements Initializable {
         }
 
         comboLabel.setText(String.valueOf(combo));
+        disableButtons();
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(delay), e -> {
             loadNextQuestion();
             resetButtonColors();
+            enableButtons();
         }));
         timeline.play();
     }
@@ -209,6 +211,19 @@ public class GameGuessWordController implements Initializable {
         buttonD.setVisible(true);
     }
 
+    private void disableButtons() {
+        buttonA.setOnAction(null);
+        buttonB.setOnAction(null);
+        buttonC.setOnAction(null);
+        buttonD.setOnAction(null);
+    }
+
+    private void enableButtons() {
+        buttonA.setOnAction(this::handleAnswerButtonClick);
+        buttonB.setOnAction(this::handleAnswerButtonClick);
+        buttonC.setOnAction(this::handleAnswerButtonClick);
+        buttonD.setOnAction(this::handleAnswerButtonClick);
+    }
 
     public void checkAndUpdateLongestCombo(int currentCombo) {
         try {
