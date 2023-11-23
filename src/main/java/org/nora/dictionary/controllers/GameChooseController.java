@@ -28,9 +28,10 @@ public class GameChooseController {
     private BorderPane shuffleGamePane;
 
     private final String guessWordRule = "Guess Word: You will be given a picture and 4 words "
-            + "(answers). Choose the appropiate word that accurately describes the picture given. "
-            + "You start with 0 points. For each correct answer you will be given 5 points. For "
-            + "each wrong answer you will be deducted 10 points.";
+            + "(answers). Choose the appropiate word that accurately describes the picture given.\n"
+            + "Scoring in this game is \"Combo\" based, meaning your score will be how many "
+            + "questions you have answered correctly in a row. If you answer a question wrong, "
+            + "your score will be resetted to 0.";
 
     private final String shuffleRule = "Shuffle: You will be given characters separated by forward "
             + "slashes (\"/\") that originally form a word. Type the original word in the box "

@@ -148,8 +148,11 @@ public class GameGuessWordController implements Initializable {
         String selectedAnswer = clickedButton.getText();
         boolean isCorrect = selectedAnswer.equals(correctAnswer);
 
+        double delay;
         if (isCorrect) {
             combo++;
+            delay = 0.75;
+
             clickedButton.getStyleClass().add("right");
             for (Button button : Arrays.asList(buttonA, buttonB, buttonC, buttonD)) {
                 if (!button.equals(clickedButton)) {
@@ -158,6 +161,8 @@ public class GameGuessWordController implements Initializable {
             }
         } else {
             combo = 0;
+            delay = 1.25;
+
             clickedButton.getStyleClass().add("wrong");
 
             Button correctButton = null;
@@ -181,7 +186,7 @@ public class GameGuessWordController implements Initializable {
 
         comboLabel.setText(String.valueOf(combo));
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(delay), e -> {
             loadNextQuestion();
             resetButtonColors();
         }));

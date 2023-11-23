@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
@@ -11,19 +12,31 @@
             <Button fx:id="buttonA" layoutX="217.0" layoutY="410.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" styleClass="answer-button1" stylesheets="@css/big-buttons.css" text="Button" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
-               </font></Button>
+               </font>
+               <padding>
+                  <Insets left="25.0" />
+               </padding></Button>
             <Button fx:id="buttonB" layoutX="588.0" layoutY="410.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" styleClass="answer-button2" stylesheets="@css/big-buttons.css" text="Button" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
-               </font></Button>
+               </font>
+               <padding>
+                  <Insets left="25.0" />
+               </padding></Button>
             <Button fx:id="buttonC" layoutX="217.0" layoutY="523.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" styleClass="answer-button3" stylesheets="@css/big-buttons.css" text="Button" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
-               </font></Button>
+               </font>
+               <padding>
+                  <Insets left="25.0" />
+               </padding></Button>
             <Button fx:id="buttonD" layoutX="588.0" layoutY="523.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="300.0" styleClass="answer-button4" stylesheets="@css/big-buttons.css" text="Button" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="20.0" />
-               </font></Button>
+               </font>
+               <padding>
+                  <Insets left="25.0" />
+               </padding></Button>
             <Label layoutX="226.0" layoutY="21.0" text="CORRECT COMBO : ">
                <font>
                   <Font name="System Bold Italic" size="20.0" />
