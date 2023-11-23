@@ -150,10 +150,15 @@ public class GameGuessWordController implements Initializable {
 
         if (isCorrect) {
             combo++;
-            clickedButton.setStyle("-fx-background-color: green;");
+            clickedButton.getStyleClass().add("right");
+            for (Button button : Arrays.asList(buttonA, buttonB, buttonC, buttonD)) {
+                if (!button.equals(clickedButton)) {
+                    button.setVisible(false);
+                }
+            }
         } else {
             combo = 0;
-            clickedButton.setStyle("-fx-background-color: red;");
+            clickedButton.getStyleClass().add("wrong");
 
             Button correctButton = null;
             for (Button button : Arrays.asList(buttonA, buttonB, buttonC, buttonD)) {
@@ -164,7 +169,13 @@ public class GameGuessWordController implements Initializable {
             }
 
             if (correctButton != null) {
-                correctButton.setStyle("-fx-background-color: green;");
+                correctButton.getStyleClass().add("right");
+            }
+
+            for (Button button : Arrays.asList(buttonA, buttonB, buttonC, buttonD)) {
+                if (!button.equals(clickedButton) && !button.equals(correctButton)) {
+                    button.setVisible(false);
+                }
             }
         }
 
@@ -178,10 +189,19 @@ public class GameGuessWordController implements Initializable {
     }
 
     private void resetButtonColors() {
-        buttonA.setStyle("");
-        buttonB.setStyle("");
-        buttonC.setStyle("");
-        buttonD.setStyle("");
+        buttonA.getStyleClass().removeAll("wrong");
+        buttonA.getStyleClass().removeAll("right");
+        buttonB.getStyleClass().removeAll("wrong");
+        buttonB.getStyleClass().removeAll("right");
+        buttonC.getStyleClass().removeAll("wrong");
+        buttonC.getStyleClass().removeAll("right");
+        buttonD.getStyleClass().removeAll("wrong");
+        buttonD.getStyleClass().removeAll("right");
+
+        buttonA.setVisible(true);
+        buttonB.setVisible(true);
+        buttonC.setVisible(true);
+        buttonD.setVisible(true);
     }
 
 

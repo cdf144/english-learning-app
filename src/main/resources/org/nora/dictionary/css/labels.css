@@ -37,3 +37,10 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.4, 0, 1);
     background-color: white;
 }
+
+.combo-count-label {
+    -fx-background-color: #2e2e2e;
+    -fx-background-radius: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.4, 0, 1);
+    background-color: #2e2e2e;
+}
