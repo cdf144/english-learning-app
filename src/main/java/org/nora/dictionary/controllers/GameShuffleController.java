@@ -8,44 +8,57 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
+import org.nora.dictionary.DictionaryApplication;
+import org.nora.dictionary.game.Shuffle.ShuffleCore;
+import org.nora.dictionary.management.DictionaryManagement;
 
 import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.regex.Pattern;
 
-public class GameShuffleController implements Initializable {
+public class GameShuffleController extends ShuffleCore implements Initializable {
     @FXML
-    protected TextField questionField;
+    private Label questionLabel;
     @FXML
-    protected TextField answerField;
+    private Label descLabel;
     @FXML
-    protected TextField correctField;
+    private Label hintLabel;
     @FXML
-    protected Label scoreLabel;
+    private TextField answerField;
     @FXML
-    protected Label highScoreLabel;
-    protected String correctAnswer;
-    private List<String> wordList;
+    private Label scoreLabel;
+    @FXML
+    private Label highScoreLabel;
+    @FXML
+    private Label warningLabel;
+
+    private DictionaryManagement dictionary;
+    private int DICTIONARY_SIZE;
     private int score = 0;
     private int highScore = 0;
 
-    public static final String PATH_SHUFFLE_GAME_TXT = System.getProperty("user.dir")
-            + File.separator + "src"
-            + File.separator + "main"
-            + File.separator + "resources"
-            + File.separator + "guessGame.txt";
     public static final String PATH_SHUFFLE_GAME_HIGH_SCORE = System.getProperty("user.dir")
             + File.separator + "src"
             + File.separator + "main"
             + File.separator + "resources"
             + File.separator + "shuffleGameHighScore.txt";
+    public static final Pattern INVALID_CHARACTERS = Pattern.compile(
+            "[^a-zA-Z]"
+    );
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.wordList = generateWordList(PATH_SHUFFLE_GAME_TXT);
+        this.dictionary = new DictionaryManagement();
+
+        try {
+            this.dictionary.readFromFile(DictionaryManagement.PATH_DICTIONARY_FILE);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        DICTIONARY_SIZE = this.dictionary.getDictionary().getWordList().size();
+
         loadNextQuestion();
         scoreLabel.setText("0");
         updateHighScoreIfNeeded();
@@ -58,7 +71,57 @@ public class GameShuffleController implements Initializable {
         });
     }
 
-    public static String generateRandomCharacter(String s) {
+    public void onHintLabelClicked() {
+        if (!hintLabel.getText().isEmpty()) {
+            return;
+        }
+
+        hintLabel.getStyleClass().add("clicked");
+        hintLabel.setText(generateHintWord(correctAnswer));
+    }
+
+    public void onAnswerFieldTyped() {
+        String userAnswer = answerField.getText().trim();
+        if (INVALID_CHARACTERS.matcher(userAnswer).find()) {
+            warningLabel.setVisible(true);
+            answerField.setOnKeyPressed(null);
+        } else {
+            warningLabel.setVisible(false);
+            answerField.setOnKeyPressed(event -> {
+                if (event.getCode() == KeyCode.ENTER && !answerField.getText().trim().isEmpty()) {
+                    checkAnswer();
+                }
+            });
+        }
+    }
+
+    private String generateHintWord(String word) {
+        int numReplacement = word.length() / 2;
+        if (word.length() > 7) {
+            numReplacement--;
+        }
+        if (word.length() > 11) {
+            numReplacement--;
+        }
+
+        Random random = new Random();
+        Set<Integer> randomIndices = new HashSet<>();
+        while (randomIndices.size() < numReplacement) {
+            int r = random.nextInt(word.length());
+            randomIndices.add(r);
+        }
+
+        StringBuilder hint = new StringBuilder(word);
+        char[] hintWord = word.toCharArray();
+        for (int index : randomIndices) {
+            hintWord[index] = '_';
+            hint.setCharAt(index, '_');
+        }
+
+        return hint.toString();
+    }
+
+    public String generateRandomCharacter(String s) {
         int n = s.length();
         Random random = new Random();
         StringBuilder shuffled = new StringBuilder();
@@ -75,51 +138,52 @@ public class GameShuffleController implements Initializable {
         return shuffled.substring(0, shuffled.length() - 3);
     }
 
-    private List<String> generateWordList(String filePath) {
-        List<String> words = new ArrayList<>();
-
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                words.add(line.trim());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return words;
-    }
-
     private void loadNextQuestion() {
         Random random = new Random();
-        int index = random.nextInt(wordList.size());
-        correctAnswer = wordList.get(index);
 
-        List<String> tempWordList = new ArrayList<>(wordList);
-        tempWordList.remove(correctAnswer);
-        String ques = generateRandomCharacter(correctAnswer);
-        questionField.setText(ques);
+        int index;
+        do {
+            index = random.nextInt(DICTIONARY_SIZE);
+            correctAnswer = this.dictionary.getDictionary().getWordList().get(index).getTarget();
+        } while (
+                correctAnswer.length() < 4
+                || INVALID_CHARACTERS.matcher(correctAnswer).find()
+                || DictionaryApplication.dictionary.dictionaryLookupDesc(correctAnswer) == null
+        );
+
+        String shuffled = generateRandomCharacter(correctAnswer);
+        questionLabel.setText(shuffled);
+        descLabel.setText(DictionaryApplication.dictionary.dictionaryLookupDesc(correctAnswer));
         answerField.setText("");
         updateHighScoreIfNeeded();
     }
 
     private void checkAnswer() {
         String userAnswer = answerField.getText();
+        double delay;
 
         if (userAnswer.trim().equalsIgnoreCase(correctAnswer)) {
             score++;
+            delay = 0.75;
+
             scoreLabel.setText(String.valueOf(score));
-            questionField.setStyle("-fx-background-color: green;");
-            questionField.setText("Correct");
+            questionLabel.getStyleClass().add("right");
         } else {
             score = 0;
+            delay = 3;
+
             scoreLabel.setText(String.valueOf(score));
-            questionField.setStyle("-fx-background-color: red;");
-            questionField.setText(correctAnswer);
+            questionLabel.getStyleClass().add("wrong");
         }
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> {
+
+        questionLabel.setText(correctAnswer);
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(delay), e -> {
             loadNextQuestion();
-            questionField.setStyle("-fx-background-color: white;");
+            questionLabel.getStyleClass().removeAll("right");
+            questionLabel.getStyleClass().removeAll("wrong");
+            hintLabel.setText("");
+            hintLabel.getStyleClass().removeAll("clicked");
         }));
         timeline.play();
     }
@@ -147,7 +211,7 @@ public class GameShuffleController implements Initializable {
                 writer.close();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
     }
 

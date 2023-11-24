@@ -1,37 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.*?>
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="705.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.nora.dictionary.controllers.GameShuffleController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="630.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.nora.dictionary.controllers.GameShuffleController">
    <center>
       <AnchorPane prefHeight="705.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="questionField" alignment="CENTER" layoutX="279.0" layoutY="151.0" prefHeight="96.0" prefWidth="547.0">
-               <font>
-                  <Font size="25.0" />
-               </font></TextField>
-            <TextField fx:id="answerField" alignment="CENTER" layoutX="275.0" layoutY="402.0" prefHeight="154.0" prefWidth="550.0" promptText="Type your answer here">
+            <TextField fx:id="answerField" alignment="CENTER" layoutX="290.0" layoutY="417.0" onKeyTyped="#onAnswerFieldTyped" prefHeight="100.0" prefWidth="520.0" promptText="Type your answer here" styleClass="answer-field" stylesheets="@css/text-fields.css">
                <font>
                   <Font size="30.0" />
                </font></TextField>
-            <Label fx:id="scoreLabel" alignment="CENTER" layoutX="382.0" layoutY="46.0" prefHeight="41.0" prefWidth="82.0" text="Label">
+            <Label fx:id="scoreLabel" alignment="CENTER" layoutX="367.0" layoutY="14.0" prefHeight="45.0" prefWidth="120.0" styleClass="combo-count-label" stylesheets="@css/labels.css" text="Label">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="20.0" />
+               </font>
+               <padding>
+                  <Insets left="35.0" />
+               </padding>
+            </Label>
+            <Label fx:id="highScoreLabel" alignment="CENTER" layoutX="615.0" layoutY="14.0" prefHeight="45.0" prefWidth="120.0" styleClass="highest-combo-count-label" stylesheets="@css/labels.css" text="Label" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+               <padding>
+                  <Insets left="35.0" />
+               </padding>
+            </Label>
+            <Label fx:id="questionLabel" alignment="CENTER" layoutX="250.0" layoutY="95.0" prefHeight="70.0" prefWidth="600.0" styleClass="shuffle-question-label" stylesheets="@css/labels.css" text="Label">
+               <font>
+                  <Font name="System Bold" size="26.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="240.0" layoutY="34.0" prefHeight="64.0" prefWidth="102.0" text="SCORE:" textAlignment="CENTER" textOverrun="WORD_ELLIPSIS" wrapText="true">
+            <Label fx:id="descLabel" alignment="CENTER" layoutX="191.0" layoutY="228.0" prefHeight="125.0" prefWidth="450.0" styleClass="shuffle-desc-label" stylesheets="@css/labels.css" text="Label" textFill="#252525" wrapText="true">
                <font>
-                  <Font name="System Bold Italic" size="18.0" />
+                  <Font name="System Bold Italic" size="20.0" />
+               </font>
+               <padding>
+                  <Insets left="90.0" right="30.0" />
+               </padding>
+            </Label>
+            <Label fx:id="hintLabel" alignment="CENTER" layoutX="685.0" layoutY="228.0" onMouseClicked="#onHintLabelClicked" prefHeight="125.0" prefWidth="250.0" styleClass="hint-label" stylesheets="@css/labels.css">
+               <font>
+                  <Font size="22.0" />
                </font>
             </Label>
-            <Label fx:id="highScoreLabel" alignment="CENTER" layoutX="798.0" layoutY="51.0" prefHeight="31.0" prefWidth="83.0" text="Label">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="553.0" layoutY="50.0" prefHeight="33.0" prefWidth="198.0" text="WINNING STREAK:">
+            <Label fx:id="warningLabel" alignment="CENTER" layoutX="325.0" layoutY="546.0" prefHeight="27.0" prefWidth="451.0" text="WARNING: Invalid characters found in your answer" textFill="RED" visible="false">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>

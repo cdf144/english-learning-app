@@ -101,6 +101,23 @@ public class DictionaryManagementSQLite implements IDictionaryManagement {
         return new Word(wordTarget, explain);
     }
 
+    public String dictionaryLookupDesc(String wordTarget) {
+        String sql = "SELECT description FROM av WHERE word = ? COLLATE NOCASE";
+
+        String desc;
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, wordTarget);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            desc = resultSet.getString("description");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return desc;
+    }
+
     @Override
     public void dictionarySearcher(String wordTarget) {
         searchResultList.clear();
