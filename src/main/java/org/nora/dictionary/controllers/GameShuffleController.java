@@ -153,7 +153,7 @@ public class GameShuffleController implements Initializable {
             questionLabel.getStyleClass().add("right");
         } else {
             score = 0;
-            delay = 1.5;
+            delay = 3;
 
             scoreLabel.setText(String.valueOf(score));
             questionLabel.getStyleClass().add("wrong");

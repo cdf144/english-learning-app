@@ -1,6 +1,6 @@
 package org.nora.dictionary.controllers;
 
-import javafx.scene.control.Alert;
+import javafx   .scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import org.nora.dictionary.DictionaryApplication;
 import org.nora.dictionary.management.FavoriteWords;

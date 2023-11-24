@@ -39,7 +39,7 @@ public class GameGuessWordController implements Initializable {
     private String correctAnswer;
 
     private final List<Integer> recentlyUsedQuestions = new ArrayList<>();
-    private static final int MINIMUM_GAP = 30;
+    private static final int MINIMUM_GAP = 100;
 
     public static final String PATH_GUESS_GAME_TXT = System.getProperty("user.dir")
             + File.separator + "src"
