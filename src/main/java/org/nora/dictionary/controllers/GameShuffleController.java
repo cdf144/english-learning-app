@@ -13,10 +13,7 @@ import org.nora.dictionary.management.DictionaryManagement;
 
 import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class GameShuffleController implements Initializable {
@@ -78,7 +75,33 @@ public class GameShuffleController implements Initializable {
         }
 
         hintLabel.getStyleClass().add("clicked");
-        hintLabel.setText(correctAnswer);
+        hintLabel.setText(generateHintWord(correctAnswer));
+    }
+
+    private String generateHintWord(String word) {
+        int numReplacement = word.length() / 2;
+        if (word.length() > 7) {
+            numReplacement--;
+        }
+        if (word.length() > 11) {
+            numReplacement--;
+        }
+
+        Random random = new Random();
+        Set<Integer> randomIndices = new HashSet<>();
+        while (randomIndices.size() < numReplacement) {
+            int r = random.nextInt(word.length());
+            randomIndices.add(r);
+        }
+
+        StringBuilder hint = new StringBuilder(word);
+        char[] hintWord = word.toCharArray();
+        for (int index : randomIndices) {
+            hintWord[index] = '_';
+            hint.setCharAt(index, '_');
+        }
+
+        return hint.toString();
     }
 
     public String generateRandomCharacter(String s) {
