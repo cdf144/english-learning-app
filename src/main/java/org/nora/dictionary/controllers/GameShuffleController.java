@@ -131,6 +131,7 @@ public class GameShuffleController implements Initializable {
         } while (
                 correctAnswer.length() < 4
                 || INVALID_CHARACTERS.matcher(correctAnswer).find()
+                || DictionaryApplication.dictionary.dictionaryLookupDesc(correctAnswer) == null
         );
 
         String shuffled = generateRandomCharacter(correctAnswer);
