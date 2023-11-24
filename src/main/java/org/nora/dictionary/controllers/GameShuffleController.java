@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
 import org.nora.dictionary.DictionaryApplication;
+import org.nora.dictionary.game.Shuffle.ShuffleCore;
 import org.nora.dictionary.management.DictionaryManagement;
 
 import java.io.*;
@@ -16,7 +17,7 @@ import java.net.URL;
 import java.util.*;
 import java.util.regex.Pattern;
 
-public class GameShuffleController implements Initializable {
+public class GameShuffleController extends ShuffleCore implements Initializable {
     @FXML
     private Label questionLabel;
     @FXML
@@ -29,10 +30,11 @@ public class GameShuffleController implements Initializable {
     private Label scoreLabel;
     @FXML
     private Label highScoreLabel;
+    @FXML
+    private Label warningLabel;
 
     private DictionaryManagement dictionary;
     private int DICTIONARY_SIZE;
-    private String correctAnswer;
     private int score = 0;
     private int highScore = 0;
 
@@ -42,7 +44,7 @@ public class GameShuffleController implements Initializable {
             + File.separator + "resources"
             + File.separator + "shuffleGameHighScore.txt";
     public static final Pattern INVALID_CHARACTERS = Pattern.compile(
-            "[-.'\\s]"
+            "[^a-zA-Z]"
     );
 
     @Override
@@ -76,6 +78,21 @@ public class GameShuffleController implements Initializable {
 
         hintLabel.getStyleClass().add("clicked");
         hintLabel.setText(generateHintWord(correctAnswer));
+    }
+
+    public void onAnswerFieldTyped() {
+        String userAnswer = answerField.getText().trim();
+        if (INVALID_CHARACTERS.matcher(userAnswer).find()) {
+            warningLabel.setVisible(true);
+            answerField.setOnKeyPressed(null);
+        } else {
+            warningLabel.setVisible(false);
+            answerField.setOnKeyPressed(event -> {
+                if (event.getCode() == KeyCode.ENTER && !answerField.getText().trim().isEmpty()) {
+                    checkAnswer();
+                }
+            });
+        }
     }
 
     private String generateHintWord(String word) {

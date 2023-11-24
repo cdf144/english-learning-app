@@ -39,11 +39,11 @@ public class AddController {
         if (word.isEmpty()) {
             clearFields();
         } else if (m.find() || m2.find()) {
-            warningLabel.setText("Warning: Invalid English Word!");
+            warningLabel.setText("WARNING: Invalid English Word!");
             warningLabel.setTextFill(Color.RED);
             disableAddInfoFields();
         } else if (DictionaryApplication.dictionary.wordExist(word)) {
-            warningLabel.setText("Warning: Word already exist in Dictionary!");
+            warningLabel.setText("WARNING: Word already exist in Dictionary!");
             warningLabel.setTextFill(Color.RED);
             disableAddInfoFields();
         } else {

@@ -9,7 +9,7 @@
    <center>
       <AnchorPane prefHeight="705.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="answerField" alignment="CENTER" layoutX="290.0" layoutY="417.0" prefHeight="100.0" prefWidth="520.0" promptText="Type your answer here" styleClass="answer-field" stylesheets="@css/text-fields.css">
+            <TextField fx:id="answerField" alignment="CENTER" layoutX="290.0" layoutY="417.0" onKeyTyped="#onAnswerFieldTyped" prefHeight="100.0" prefWidth="520.0" promptText="Type your answer here" styleClass="answer-field" stylesheets="@css/text-fields.css">
                <font>
                   <Font size="30.0" />
                </font></TextField>
@@ -45,6 +45,11 @@
             <Label fx:id="hintLabel" alignment="CENTER" layoutX="685.0" layoutY="228.0" onMouseClicked="#onHintLabelClicked" prefHeight="125.0" prefWidth="250.0" styleClass="hint-label" stylesheets="@css/labels.css">
                <font>
                   <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="warningLabel" alignment="CENTER" layoutX="325.0" layoutY="546.0" prefHeight="27.0" prefWidth="451.0" text="WARNING: Invalid characters found in your answer" textFill="RED" visible="false">
+               <font>
+                  <Font name="System Bold Italic" size="18.0" />
                </font>
             </Label>
          </children></AnchorPane>

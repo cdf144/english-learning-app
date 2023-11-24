@@ -1,7 +1,6 @@
 package org.nora.dictionary.commandline;
 
 import org.nora.dictionary.entities.Word;
-import org.nora.dictionary.game.CommandLineShuffle.CommandLineGame;
 import org.nora.dictionary.management.DictionaryManagement;
 
 import java.io.File;
