@@ -9,7 +9,7 @@
    <center>
       <AnchorPane prefHeight="705.0" prefWidth="1100.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="answerField" alignment="CENTER" layoutX="290.0" layoutY="401.0" prefHeight="100.0" prefWidth="520.0" promptText="Type your answer here" styleClass="answer-field" stylesheets="@css/text-fields.css">
+            <TextField fx:id="answerField" alignment="CENTER" layoutX="290.0" layoutY="417.0" prefHeight="100.0" prefWidth="520.0" promptText="Type your answer here" styleClass="answer-field" stylesheets="@css/text-fields.css">
                <font>
                   <Font size="30.0" />
                </font></TextField>
@@ -34,13 +34,18 @@
                   <Font name="System Bold" size="26.0" />
                </font>
             </Label>
-            <Label fx:id="descLabel" alignment="CENTER" layoutX="325.0" layoutY="225.0" prefHeight="125.0" prefWidth="450.0" styleClass="shuffle-desc-label" stylesheets="@css/labels.css" text="Label" textFill="#252525" wrapText="true">
+            <Label fx:id="descLabel" alignment="CENTER" layoutX="191.0" layoutY="228.0" prefHeight="125.0" prefWidth="450.0" styleClass="shuffle-desc-label" stylesheets="@css/labels.css" text="Label" textFill="#252525" wrapText="true">
                <font>
                   <Font name="System Bold Italic" size="20.0" />
                </font>
                <padding>
                   <Insets left="90.0" right="30.0" />
                </padding>
+            </Label>
+            <Label fx:id="hintLabel" alignment="CENTER" layoutX="685.0" layoutY="228.0" onMouseClicked="#onHintLabelClicked" prefHeight="125.0" prefWidth="250.0" styleClass="hint-label" stylesheets="@css/labels.css">
+               <font>
+                  <Font size="22.0" />
+               </font>
             </Label>
          </children></AnchorPane>
    </center>

@@ -25,6 +25,8 @@ public class GameShuffleController implements Initializable {
     @FXML
     private Label descLabel;
     @FXML
+    private Label hintLabel;
+    @FXML
     private TextField answerField;
     @FXML
     private Label scoreLabel;
@@ -70,7 +72,16 @@ public class GameShuffleController implements Initializable {
         });
     }
 
-    public static String generateRandomCharacter(String s) {
+    public void onHintLabelClicked() {
+        if (!hintLabel.getText().isEmpty()) {
+            return;
+        }
+
+        hintLabel.getStyleClass().add("clicked");
+        hintLabel.setText(correctAnswer);
+    }
+
+    public String generateRandomCharacter(String s) {
         int n = s.length();
         Random random = new Random();
         StringBuilder shuffled = new StringBuilder();
@@ -95,7 +106,7 @@ public class GameShuffleController implements Initializable {
             index = random.nextInt(DICTIONARY_SIZE);
             correctAnswer = this.dictionary.getDictionary().getWordList().get(index).getTarget();
         } while (
-                correctAnswer.length() < 3
+                correctAnswer.length() < 4
                 || INVALID_CHARACTERS.matcher(correctAnswer).find()
         );
 
@@ -130,6 +141,8 @@ public class GameShuffleController implements Initializable {
             loadNextQuestion();
             questionLabel.getStyleClass().removeAll("right");
             questionLabel.getStyleClass().removeAll("wrong");
+            hintLabel.setText("");
+            hintLabel.getStyleClass().removeAll("clicked");
         }));
         timeline.play();
     }

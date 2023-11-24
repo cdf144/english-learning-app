@@ -29,13 +29,15 @@ public class GameChooseController {
 
     private final String guessWordRule = "Guess Word: You will be given a picture and 4 words "
             + "(answers). Choose the appropiate word that accurately describes the picture given.\n"
-            + "Scoring in this game is \"Combo\" based, meaning your score will be how many "
+            + "\nScoring in this game is \"Combo\" based, meaning your score will be how many "
             + "questions you have answered correctly in a row. If you answer a question wrong, "
             + "your score will be resetted to 0.";
 
     private final String shuffleRule = "Shuffle: You will be given characters separated by forward "
             + "slashes (\"/\") that originally form a word. Type the original word in the box "
-            + "(case insensitive) and press the ENTER key on your keyboard to answer.";
+            + "(case insensitive) and press the ENTER key on your keyboard to answer.\n"
+            + "\nYour score will be how many words you have gotten correctly in a row. If you "
+            + "get a word wrong, your score will be resetted to 0.";
 
     @FXML
     public void onGuessGameButtonClick() {
