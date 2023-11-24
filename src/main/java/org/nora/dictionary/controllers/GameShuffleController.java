@@ -18,11 +18,9 @@ import java.util.ResourceBundle;
 
 public class GameShuffleController implements Initializable {
     @FXML
-    protected TextField questionField;
+    private Label questionLabel;
     @FXML
     protected TextField answerField;
-    @FXML
-    protected TextField correctField;
     @FXML
     protected Label scoreLabel;
     @FXML
@@ -84,7 +82,7 @@ public class GameShuffleController implements Initializable {
                 words.add(line.trim());
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
 
         return words;
@@ -98,28 +96,34 @@ public class GameShuffleController implements Initializable {
         List<String> tempWordList = new ArrayList<>(wordList);
         tempWordList.remove(correctAnswer);
         String ques = generateRandomCharacter(correctAnswer);
-        questionField.setText(ques);
+        questionLabel.setText(ques);
         answerField.setText("");
         updateHighScoreIfNeeded();
     }
 
     private void checkAnswer() {
         String userAnswer = answerField.getText();
+        double delay;
 
         if (userAnswer.trim().equalsIgnoreCase(correctAnswer)) {
             score++;
+            delay = 0.75;
+
             scoreLabel.setText(String.valueOf(score));
-            questionField.setStyle("-fx-background-color: green;");
-            questionField.setText("Correct");
+            questionLabel.setStyle("-fx-background-color: green;");
+            questionLabel.setText("Correct");
         } else {
             score = 0;
+            delay = 1.5;
+
             scoreLabel.setText(String.valueOf(score));
-            questionField.setStyle("-fx-background-color: red;");
-            questionField.setText(correctAnswer);
+            questionLabel.setStyle("-fx-background-color: red;");
+            questionLabel.setText(correctAnswer);
         }
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), e -> {
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(delay), e -> {
             loadNextQuestion();
-            questionField.setStyle("-fx-background-color: white;");
+            questionLabel.setStyle("-fx-background-color: white;");
         }));
         timeline.play();
     }
@@ -147,7 +151,7 @@ public class GameShuffleController implements Initializable {
                 writer.close();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
     }
 

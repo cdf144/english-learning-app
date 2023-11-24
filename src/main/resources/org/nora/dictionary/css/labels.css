@@ -44,7 +44,7 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: 10% 50%;
     -fx-background-color: white;
-    -fx-background-radius: 2px;
+    -fx-background-radius: 3px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.4, 0, 1);
     background-color: #2e2e2e;
 }
@@ -55,7 +55,14 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: 10% 50%;
     -fx-background-color: #2e2e2e;
-    -fx-background-radius: 2px;
+    -fx-background-radius: 3px;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.4, 0, 1);
     background-color: #2e2e2e;
+}
+
+.shuffle-question-label {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0.4, 0, 1);
+    background-color: white;
 }

@@ -101,6 +101,25 @@ public class DictionaryManagementSQLite implements IDictionaryManagement {
         return new Word(wordTarget, explain);
     }
 
+    public Word dictionaryLookupId(int id) {
+        String sql = "SELECT word, description FROM av WHERE id = ?";
+
+        String target;
+        String explain;
+        PreparedStatement preparedStatement;
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            target = resultSet.getString("word");
+            explain = resultSet.getString("description");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return new Word(target, explain);
+    }
+
     @Override
     public void dictionarySearcher(String wordTarget) {
         searchResultList.clear();
