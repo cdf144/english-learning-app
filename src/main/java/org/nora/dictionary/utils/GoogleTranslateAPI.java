@@ -53,7 +53,7 @@ public class GoogleTranslateAPI {
 
         final String finalQuery = query.replace("\n", " ");
 
-        Future<String> future = executorService.submit(new Callable<String>() {
+        Future<String> future = executorService.submit(new Callable<>() {
             @Override
             public String call() throws IOException {
                 String strUrl = generateTransURL(srcLang.toString(), destLang.toString(), finalQuery);

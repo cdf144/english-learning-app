@@ -31,8 +31,8 @@ public class GoogleTranslateController implements Initializable {
     @FXML
     private Label charCountLabel;
 
-    String[] sourceLangs = {"English", "Vietnamese", "Auto"};
-    String[] destLangs = {"English", "Vietnamese"};
+    final String[] sourceLangs = {"English", "Vietnamese", "Auto"};
+    final String[] destLangs = {"English", "Vietnamese"};
     GoogleTranslateAPI.LANGUAGE sourceLang;
     GoogleTranslateAPI.LANGUAGE destLang;
 

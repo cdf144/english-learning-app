@@ -71,7 +71,7 @@ public class DictionaryCommandline extends DictionaryManagement {
         System.out.println("  [9] Export to file");
     }
 
-    public void dictionaryAdvanced() throws IOException {
+    public void dictionaryAdvanced() {
         printMenu();
         boolean exit = false;
         while (!exit) {
