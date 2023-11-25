@@ -152,7 +152,13 @@ public class GameShuffleController extends ShuffleCore implements Initializable 
             }
         }
 
-        return shuffled.substring(0, shuffled.length() - 3);
+        for (int i = 1; i < charIndexList.size(); i++) {
+            if (charIndexList.get(i).compareTo(charIndexList.get(i - 1)) < 0) {
+                return shuffled.substring(0, shuffled.length() - 3);
+            }
+        }
+
+        return generateRandomCharacter(s);
     }
 
     private void loadNextQuestion() {
