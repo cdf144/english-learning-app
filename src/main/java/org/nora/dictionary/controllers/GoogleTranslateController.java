@@ -71,7 +71,7 @@ public class GoogleTranslateController extends UtilsController implements Initia
     }
 
     @FXML
-    private void translateButtonClicked() {
+    public void onTranslateButtonClicked() {
         String inputText = inputTextArea.getText();
 
         if (sourceLangChoiceBox.getValue().equals(sourceLangs[0])) {

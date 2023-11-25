@@ -137,6 +137,7 @@ public class GameShuffleController extends ShuffleCore implements Initializable 
         return hint.toString();
     }
 
+    @Override
     public String generateRandomCharacter(String s) {
         int n = s.length();
         Random random = new Random();
@@ -221,7 +222,7 @@ public class GameShuffleController extends ShuffleCore implements Initializable 
         timeline.play();
     }
 
-    public void checkAndUpdateHighScore(int currentScore) {
+    private void checkAndUpdateHighScore(int currentScore) {
         try {
             File highScoreFile = new File(PATH_SHUFFLE_GAME_HIGH_SCORE);
             if (!highScoreFile.exists()) {
@@ -248,7 +249,7 @@ public class GameShuffleController extends ShuffleCore implements Initializable 
         }
     }
 
-    public void updateHighScoreIfNeeded() {
+    private void updateHighScoreIfNeeded() {
         checkAndUpdateHighScore(score);
         highScoreLabel.setText(Integer.toString(highScore));
     }

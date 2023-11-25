@@ -57,14 +57,14 @@ public class AddController extends UtilsController {
         }
     }
 
-    public void disableAddInfoFields() {
+    private void disableAddInfoFields() {
         addButton.setDisable(true);
         explainField.setDisable(true);
         pronunciationField.setDisable(true);
         shortDescArea.setDisable(true);
     }
 
-    public void enableAddInfoFields() {
+    private void enableAddInfoFields() {
         addButton.setDisable(false);
         explainField.setDisable(false);
         pronunciationField.setDisable(false);
@@ -96,7 +96,7 @@ public class AddController extends UtilsController {
         clearFields();
     }
 
-    public void clearFields() {
+    private void clearFields() {
         wordField.setText("");
         explainField.setHtmlText("");
         pronunciationField.setText("");

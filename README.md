@@ -11,9 +11,11 @@ Thành viên nhóm:
 ## Build từ source
 
 - Tải và cài đặt [IntelliJ IDEA](https://www.jetbrains.com/idea/download)
-- Tạo môi trường lập trình (project) Java từ source qua *Get from VCS* và GitHub  
-**Hoặc** Tải mã nguồn về máy qua *Download ZIP* hoặc
-```
-git clone https://github.com/cdf144/english-learning-app.git "[<directory to clone to>]"
-```
-- Bấm chạy và mã nguồn sẽ được tự động biên dịch bởi IntelliJ IDEA
+- Tạo môi trường lập trình (project) Java từ source bằng **một trong những cách sau**:
+  - *Get from VCS* và GitHub
+  - Tải mã nguồn về máy qua *Download ZIP*
+  - Sử dụng `git clone`
+    ```
+    git clone https://github.com/cdf144/english-learning-app.git "[<directory to clone to>]"
+    ```
+- Bấm chạy 1 trong 2 Run Configuration sẵn có (_DictionaryApplication_ hoặc _DictionaryCommandLine_)
