@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.util.Duration;
 import org.nora.dictionary.DictionaryApplication;
 import org.nora.dictionary.game.Shuffle.ShuffleCore;
@@ -37,6 +38,9 @@ public class GameShuffleController extends ShuffleCore implements Initializable 
     private int DICTIONARY_SIZE;
     private int score = 0;
     private int highScore = 0;
+
+    private final List<String> recentlyUsedQuestions = new ArrayList<>();
+    private static final int MINIMUM_GAP = 50;
 
     public static final String PATH_SHUFFLE_GAME_HIGH_SCORE = System.getProperty("user.dir")
             + File.separator + "src"
@@ -69,6 +73,7 @@ public class GameShuffleController extends ShuffleCore implements Initializable 
                 checkAnswer();
             }
         });
+        answerField.setOnKeyTyped(this::onAnswerFieldTyped);
     }
 
     public void onHintLabelClicked() {
@@ -80,15 +85,15 @@ public class GameShuffleController extends ShuffleCore implements Initializable 
         hintLabel.setText(generateHintWord(correctAnswer));
     }
 
-    public void onAnswerFieldTyped() {
+    public void onAnswerFieldTyped(KeyEvent event) {
         String userAnswer = answerField.getText().trim();
         if (INVALID_CHARACTERS.matcher(userAnswer).find()) {
             warningLabel.setVisible(true);
             answerField.setOnKeyPressed(null);
         } else {
             warningLabel.setVisible(false);
-            answerField.setOnKeyPressed(event -> {
-                if (event.getCode() == KeyCode.ENTER && !answerField.getText().trim().isEmpty()) {
+            answerField.setOnKeyPressed(e -> {
+                if (e.getCode() == KeyCode.ENTER && !answerField.getText().trim().isEmpty()) {
                     checkAnswer();
                 }
             });
@@ -141,6 +146,10 @@ public class GameShuffleController extends ShuffleCore implements Initializable 
     private void loadNextQuestion() {
         Random random = new Random();
 
+        if (recentlyUsedQuestions.size() > MINIMUM_GAP) {
+            recentlyUsedQuestions.remove(0);
+        }
+
         int index;
         do {
             index = random.nextInt(DICTIONARY_SIZE);
@@ -149,7 +158,10 @@ public class GameShuffleController extends ShuffleCore implements Initializable 
                 correctAnswer.length() < 4
                 || INVALID_CHARACTERS.matcher(correctAnswer).find()
                 || DictionaryApplication.dictionary.dictionaryLookupDesc(correctAnswer) == null
+                || recentlyUsedQuestions.contains(correctAnswer)
         );
+
+        recentlyUsedQuestions.add(correctAnswer);
 
         String shuffled = generateRandomCharacter(correctAnswer);
         questionLabel.setText(shuffled);
@@ -177,9 +189,19 @@ public class GameShuffleController extends ShuffleCore implements Initializable 
         }
 
         questionLabel.setText(correctAnswer);
+        answerField.setOnKeyPressed(null);
+        answerField.setOnKeyTyped(null);
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(delay), e -> {
             loadNextQuestion();
+
+            answerField.setOnKeyPressed(event -> {
+                if (event.getCode() == KeyCode.ENTER && !answerField.getText().trim().isEmpty()) {
+                    checkAnswer();
+                }
+            });
+            answerField.setOnKeyTyped(this::onAnswerFieldTyped);
+
             questionLabel.getStyleClass().removeAll("right");
             questionLabel.getStyleClass().removeAll("wrong");
             hintLabel.setText("");
