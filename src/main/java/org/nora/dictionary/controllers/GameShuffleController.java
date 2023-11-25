@@ -36,11 +36,15 @@ public class GameShuffleController extends ShuffleCore implements Initializable 
 
     private DictionaryManagement dictionary;
     private int DICTIONARY_SIZE;
+
+    private UtilsController utils;
+
     private int score = 0;
     private int highScore = 0;
 
     private final List<String> recentlyUsedQuestions = new ArrayList<>();
     private static final int MINIMUM_GAP = 50;
+    private static final int CHAR_LIMIT = 30;
 
     public static final String PATH_SHUFFLE_GAME_HIGH_SCORE = System.getProperty("user.dir")
             + File.separator + "src"
@@ -54,6 +58,7 @@ public class GameShuffleController extends ShuffleCore implements Initializable 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.dictionary = new DictionaryManagement();
+        this.utils = new UtilsController();
 
         try {
             this.dictionary.readFromFile(DictionaryManagement.PATH_DICTIONARY_FILE);
@@ -86,7 +91,13 @@ public class GameShuffleController extends ShuffleCore implements Initializable 
     }
 
     public void onAnswerFieldTyped(KeyEvent event) {
-        String userAnswer = answerField.getText().trim();
+        String userAnswer = answerField.getText();
+        if (userAnswer.length() > CHAR_LIMIT) {
+            utils.showNotification("Warning", "Answer character limit reached (50 characters)");
+            answerField.setText(userAnswer.substring(0, CHAR_LIMIT));
+        }
+
+        userAnswer = userAnswer.trim();
         if (INVALID_CHARACTERS.matcher(userAnswer).find()) {
             warningLabel.setVisible(true);
             answerField.setOnKeyPressed(null);

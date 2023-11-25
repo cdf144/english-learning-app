@@ -1,7 +1,10 @@
 package org.nora.dictionary.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.web.HTMLEditor;
 import org.nora.dictionary.DictionaryApplication;
@@ -9,7 +12,7 @@ import org.nora.dictionary.DictionaryApplication;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class AddController {
+public class AddController extends UtilsController {
     @FXML
     private TextArea wordField;
     @FXML
@@ -101,13 +104,5 @@ public class AddController {
         warningLabel.setText("");
 
         disableAddInfoFields();
-    }
-
-    public void showNotification(String title, String content) {
-        Alert notification = new Alert(Alert.AlertType.INFORMATION);
-        notification.setTitle(title);
-        notification.setHeaderText(content);
-        notification.setContentText(null);
-        notification.showAndWait();
     }
 }

@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SearcherController implements Initializable {
+public class SearcherController extends UtilsController implements Initializable {
     @FXML
     protected TextField searchField;
     @FXML
@@ -280,13 +280,5 @@ public class SearcherController implements Initializable {
             wordTargetLabel.setText("");
             wordExplainView.getEngine().loadContent("");
         }
-    }
-
-    protected void showNotification(String title, String content) {
-        Alert notification = new Alert(Alert.AlertType.INFORMATION);
-        notification.setTitle(title);
-        notification.setHeaderText(content);
-        notification.setContentText(null);
-        notification.showAndWait();
     }
 }
