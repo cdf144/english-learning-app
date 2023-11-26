@@ -93,7 +93,7 @@ public class GameShuffleController extends ShuffleCore implements Initializable 
     public void onAnswerFieldTyped(KeyEvent event) {
         String userAnswer = answerField.getText();
         if (userAnswer.length() > CHAR_LIMIT) {
-            utils.showNotification("Warning", "Answer character limit reached (50 characters)");
+            utils.showNotification("Warning", "Answer character limit reached (30 characters)");
             answerField.setText(userAnswer.substring(0, CHAR_LIMIT));
         }
 
