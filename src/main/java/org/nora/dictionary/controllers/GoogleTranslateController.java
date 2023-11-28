@@ -1,5 +1,7 @@
 package org.nora.dictionary.controllers;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -48,6 +50,28 @@ public class GoogleTranslateController extends UtilsController implements Initia
 
         destLangChoiceBox.getItems().addAll(destLangs);
         destLangChoiceBox.setValue(destLangs[1]);
+
+        sourceLangChoiceBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
+                if (sourceLangChoiceBox.getItems().get((Integer) number2).equals(sourceLangs[0])) {
+                    destLangChoiceBox.setValue(destLangs[1]);
+                } else if (sourceLangChoiceBox.getItems().get((Integer) number2).equals(sourceLangs[1])) {
+                    destLangChoiceBox.setValue(destLangs[0]);
+                }
+            }
+        });
+
+        destLangChoiceBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
+                if (destLangChoiceBox.getItems().get((Integer) number2).equals(destLangs[0])) {
+                    sourceLangChoiceBox.setValue(sourceLangs[1]);
+                } else if (destLangChoiceBox.getItems().get((Integer) number2).equals(destLangs[1])) {
+                    sourceLangChoiceBox.setValue(sourceLangs[0]);
+                }
+            }
+        });
 
         sourceLang = GoogleTranslateAPI.LANGUAGE.ENGLISH;
         destLang = GoogleTranslateAPI.LANGUAGE.VIETNAMESE;
