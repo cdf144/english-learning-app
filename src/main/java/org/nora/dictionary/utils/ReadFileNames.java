@@ -1,4 +1,4 @@
-package org.nora.dictionary.game.GuessWord;
+package org.nora.dictionary.utils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -27,13 +27,6 @@ public class ReadFileNames {
     public static void listFilesInFolder(File folder, List<String> pathList) {
         for (File file : Objects.requireNonNull(folder.listFiles())) {
             pathList.add(file.getAbsolutePath());
-        }
-    }
-
-    public static void main(String[] args) {
-        listFilesInFolder(new File(PATH_GUESS_GAME_IMAGE));
-        for (String file : filePaths) {
-            System.out.println(file);
         }
     }
 }

@@ -2,7 +2,10 @@ package org.nora.dictionary.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javazoom.jl.decoder.JavaLayerException;
 import org.nora.dictionary.utils.GoogleTranslateAPI;
@@ -13,7 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GoogleTranslateController implements Initializable {
+public class GoogleTranslateController extends UtilsController implements Initializable {
     @FXML
     private ChoiceBox<String> sourceLangChoiceBox;
     @FXML
@@ -31,8 +34,8 @@ public class GoogleTranslateController implements Initializable {
     @FXML
     private Label charCountLabel;
 
-    String[] sourceLangs = {"English", "Vietnamese", "Auto"};
-    String[] destLangs = {"English", "Vietnamese"};
+    final String[] sourceLangs = {"English", "Vietnamese", "Auto"};
+    final String[] destLangs = {"English", "Vietnamese"};
     GoogleTranslateAPI.LANGUAGE sourceLang;
     GoogleTranslateAPI.LANGUAGE destLang;
 
@@ -58,9 +61,9 @@ public class GoogleTranslateController implements Initializable {
     private void updateCharCountLabel() {
         String inputText = inputTextArea.getText();
 
-        if (inputText.length() > 9999) {
+        if (inputText.length() > CHAR_LIMIT) {
             showNotification("Warning!", "Translate word limit reached!");
-            inputText = inputText.substring(0, 9999);
+            inputText = inputText.substring(0, CHAR_LIMIT);
             inputTextArea.setText(inputText);
         }
 
@@ -68,7 +71,7 @@ public class GoogleTranslateController implements Initializable {
     }
 
     @FXML
-    private void translateButtonClicked() {
+    public void onTranslateButtonClicked() {
         String inputText = inputTextArea.getText();
 
         if (sourceLangChoiceBox.getValue().equals(sourceLangs[0])) {
@@ -132,13 +135,5 @@ public class GoogleTranslateController implements Initializable {
             System.err.println("Failed to play Audio from Google, fallback to FreeTTS");
             TextToSpeech.speak(resultTextArea.getText());
         }
-    }
-
-    public void showNotification(String title, String content) {
-        Alert notification = new Alert(Alert.AlertType.INFORMATION);
-        notification.setTitle(title);
-        notification.setHeaderText(content);
-        notification.setContentText(null);
-        notification.showAndWait();
     }
 }

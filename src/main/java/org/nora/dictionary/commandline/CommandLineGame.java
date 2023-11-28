@@ -1,23 +1,16 @@
-package org.nora.dictionary.game.CommandLineShuffle;
+package org.nora.dictionary.commandline;
 
 import org.nora.dictionary.entities.Word;
+import org.nora.dictionary.game.Shuffle.ShuffleCore;
 
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
-public class CommandLineGame {
+public class CommandLineGame extends ShuffleCore {
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static void printChars(List<Character> list) {
-        for (char c : list) {
-            System.out.print(" / " + c);
-        }
-        System.out.println();
-    }
-
     public static void startGame(List<Word> wordList) {
+        CommandLineGame cmdGame = new CommandLineGame();
+
         System.out.println("Welcome to Dictionary Command Line game!");
         printMenu();
         Random random = new Random();
@@ -38,10 +31,11 @@ public class CommandLineGame {
                 return;
             } else {
                 int r = random.nextInt(wordList.size());
-                String target = wordList.get(r).getTarget();
+
+                cmdGame.setCorrectAnswer(wordList.get(r).getTarget());
                 String explain = wordList.get(r).getExplain();
 
-                printChars(Core.shuffle(target));
+                printChars(cmdGame.generateRandomCharacter(cmdGame.correctAnswer));
                 System.out.println("Word meaning: " + explain);
                 System.out.print("Your answer: ");
                 scanner.nextLine();
@@ -49,7 +43,7 @@ public class CommandLineGame {
                 int tries = 3;
                 while (tries > 0) {
                     String answer = scanner.nextLine();
-                    if (answer.equals(target)) {
+                    if (answer.equals(cmdGame.correctAnswer)) {
                         System.out.println("Correct!");
                         break;
                     } else {
@@ -57,7 +51,7 @@ public class CommandLineGame {
                         tries--;
 
                         if (tries == 0) {
-                            System.out.println("The correct word is '" + target + "'");
+                            System.out.println("The correct word is '" + cmdGame.correctAnswer + "'");
                             System.out.println("You have failed!");
                         }
                     }
@@ -68,8 +62,31 @@ public class CommandLineGame {
         }
     }
 
+    public static void printChars(String s) {
+        for (char c : s.toCharArray()) {
+            System.out.print(" / " + c);
+        }
+        System.out.println();
+    }
+
     public static void printMenu() {
         System.out.println("  [0] Exit");
         System.out.println("  [1] Play");
+    }
+
+    @Override
+    public String generateRandomCharacter(String s) {
+        List<Character> list = new ArrayList<>();
+        for (char c : s.toCharArray()) {
+            list.add(c);
+        }
+
+        Collections.shuffle(list);
+        StringBuilder shuffled = new StringBuilder();
+        for (char c : list) {
+            shuffled.append(c);
+        }
+
+        return shuffled.toString();
     }
 }

@@ -1,7 +1,10 @@
 package org.nora.dictionary.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.web.HTMLEditor;
 import org.nora.dictionary.DictionaryApplication;
@@ -9,7 +12,7 @@ import org.nora.dictionary.DictionaryApplication;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class AddController {
+public class AddController extends UtilsController {
     @FXML
     private TextArea wordField;
     @FXML
@@ -39,11 +42,11 @@ public class AddController {
         if (word.isEmpty()) {
             clearFields();
         } else if (m.find() || m2.find()) {
-            warningLabel.setText("Warning: Invalid English Word!");
+            warningLabel.setText("WARNING: Invalid English Word!");
             warningLabel.setTextFill(Color.RED);
             disableAddInfoFields();
         } else if (DictionaryApplication.dictionary.wordExist(word)) {
-            warningLabel.setText("Warning: Word already exist in Dictionary!");
+            warningLabel.setText("WARNING: Word already exist in Dictionary!");
             warningLabel.setTextFill(Color.RED);
             disableAddInfoFields();
         } else {
@@ -54,14 +57,14 @@ public class AddController {
         }
     }
 
-    public void disableAddInfoFields() {
+    private void disableAddInfoFields() {
         addButton.setDisable(true);
         explainField.setDisable(true);
         pronunciationField.setDisable(true);
         shortDescArea.setDisable(true);
     }
 
-    public void enableAddInfoFields() {
+    private void enableAddInfoFields() {
         addButton.setDisable(false);
         explainField.setDisable(false);
         pronunciationField.setDisable(false);
@@ -93,7 +96,7 @@ public class AddController {
         clearFields();
     }
 
-    public void clearFields() {
+    private void clearFields() {
         wordField.setText("");
         explainField.setHtmlText("");
         pronunciationField.setText("");
@@ -101,13 +104,5 @@ public class AddController {
         warningLabel.setText("");
 
         disableAddInfoFields();
-    }
-
-    public void showNotification(String title, String content) {
-        Alert notification = new Alert(Alert.AlertType.INFORMATION);
-        notification.setTitle(title);
-        notification.setHeaderText(content);
-        notification.setContentText(null);
-        notification.showAndWait();
     }
 }

@@ -55,7 +55,7 @@ public class GoogleVoiceAPI {
     }
 
     public void playAudio(InputStream sound) throws JavaLayerException {
-        Future<String> future = executorService.submit(new Callable<String>() {
+        Future<String> future = executorService.submit(new Callable<>() {
             @Override
             public String call() throws JavaLayerException {
                 new Player(sound).play();

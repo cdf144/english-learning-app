@@ -11,8 +11,8 @@ import java.util.Scanner;
 
 public class GuessWordGame {
 
-    private List<String> wordList;
-    private List<String> imageList;
+    private final List<String> wordList;
+    private final List<String> imageList;
     private int score;
 
     public static final String PATH_GUESS_GAME_TXT = System.getProperty("user.dir")
@@ -28,31 +28,31 @@ public class GuessWordGame {
             + File.separator + "GuessGameImage";
 
     public GuessWordGame() {
-        this.wordList = generateWordList(PATH_GUESS_GAME_TXT);
-        this.imageList = generateImageList(PATH_GUESS_GAME_IMAGE, this.wordList);
+        this.wordList = generateWordList();
+        this.imageList = generateImageList(this.wordList);
         this.score = 0;
     }
 
-    private List<String> generateWordList(String filePath) {
+    private List<String> generateWordList() {
         List<String> words = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(PATH_GUESS_GAME_TXT))) {
             String line;
             while ((line = br.readLine()) != null) {
                 words.add(line.trim());
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
 
         return words;
     }
 
-    private List<String> generateImageList(String folderPath, List<String> wordList) {
+    private List<String> generateImageList(List<String> wordList) {
         List<String> images = new ArrayList<>();
 
         for (String word : wordList) {
-            String imagePath = folderPath + "/" + word + ".jpg";
+            String imagePath = PATH_GUESS_GAME_IMAGE + "/" + word + ".jpg";
             images.add(imagePath);
         }
 

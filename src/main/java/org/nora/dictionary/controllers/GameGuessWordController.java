@@ -154,7 +154,7 @@ public class GameGuessWordController implements Initializable {
             }
         } else {
             combo = 0;
-            delay = 1.25;
+            delay = 1.5;
 
             clickedButton.getStyleClass().add("wrong");
 
