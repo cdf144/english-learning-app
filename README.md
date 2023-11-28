@@ -56,15 +56,15 @@ For the current version of the application, we will have the following functions
 ### 3. Preview
 
 <p float="left" align="middle">
-  <img src="pictures/search.png" width="250" />
-  <img src="pictures/translate.png" width="250" />
-  <img src="pictures/add.png" width="250" />
+  <img src="pictures/search.png" width="350" />
+  <img src="pictures/translate.png" width="350" />
+  <img src="pictures/add.png" width="350" />
 </p>
 
 <p float="left" align="middle">
-  <img src="pictures/game-choose.png" width="250" />
-  <img src="pictures/game-shuffle.png" width="250" />
-  <img src="pictures/game-guess.png" width="250" />
+  <img src="pictures/game-choose.png" width="350" />
+  <img src="pictures/game-shuffle.png" width="350" />
+  <img src="pictures/game-guess.png" width="350" />
 </p>
 
 ## III. CONTACT US
