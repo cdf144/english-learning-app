@@ -17,6 +17,7 @@ import org.nora.dictionary.utils.TextToSpeech;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeoutException;
 
 public class GoogleTranslateController extends UtilsController implements Initializable {
     @FXML
@@ -65,10 +66,12 @@ public class GoogleTranslateController extends UtilsController implements Initia
         destLangChoiceBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
-                if (destLangChoiceBox.getItems().get((Integer) number2).equals(destLangs[0])) {
-                    sourceLangChoiceBox.setValue(sourceLangs[1]);
-                } else if (destLangChoiceBox.getItems().get((Integer) number2).equals(destLangs[1])) {
-                    sourceLangChoiceBox.setValue(sourceLangs[0]);
+                if (!sourceLangChoiceBox.getValue().equals(sourceLangs[2])) {
+                    if (destLangChoiceBox.getItems().get((Integer) number2).equals(destLangs[0])) {
+                        sourceLangChoiceBox.setValue(sourceLangs[1]);
+                    } else if (destLangChoiceBox.getItems().get((Integer) number2).equals(destLangs[1])) {
+                        sourceLangChoiceBox.setValue(sourceLangs[0]);
+                    }
                 }
             }
         });
@@ -116,6 +119,8 @@ public class GoogleTranslateController extends UtilsController implements Initia
             ));
         } catch (IOException e) {
             resultTextArea.setText("ERROR: Cannot connect to Google Translate.");
+        } catch (TimeoutException e) {
+            resultTextArea.setText("ERROR: Took too long to get query result from Google Translate");
         }
     }
 

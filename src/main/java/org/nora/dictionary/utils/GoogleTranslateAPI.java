@@ -46,7 +46,7 @@ public class GoogleTranslateAPI {
     private static ExecutorService executorService;
     private static String translatedWord = "";
 
-    public static String translate(String query, LANGUAGE srcLang, LANGUAGE destLang) throws IOException {
+    public static String translate(String query, LANGUAGE srcLang, LANGUAGE destLang) throws IOException, TimeoutException {
         if (executorService == null) {
             executorService = Executors.newFixedThreadPool(1);
         }
@@ -98,10 +98,10 @@ public class GoogleTranslateAPI {
          */
         try {
             String completed = future.get(3, TimeUnit.SECONDS);
-        } catch (TimeoutException e) {
-            translatedWord = "ERROR: Took too long to get query result from Google Translate";
         } catch (InterruptedException | ExecutionException e) {
             throw new IOException(e);
+        } catch (TimeoutException e) {
+            throw new TimeoutException();
         }
 
         return translatedWord;
@@ -110,6 +110,8 @@ public class GoogleTranslateAPI {
     public static String translateWithInternetCheck(String textToTranslate) {
         try {
             return GoogleTranslateAPI.translate(textToTranslate, LANGUAGE.ENGLISH, LANGUAGE.VIETNAMESE);
+        } catch (TimeoutException e) {
+            throw new RuntimeException(e);
         } catch (IOException e) {
             System.out.println("No Internet");
             return "Error during translation";

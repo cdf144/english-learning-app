@@ -38,7 +38,7 @@
                   <Font size="16.0" />
                </font>
             </TextField>
-            <TextArea fx:id="shortDescArea" disable="true" layoutX="683.0" layoutY="330.0" onKeyTyped="#updateExplainFieldTemplate" prefHeight="190.0" prefWidth="210.0" promptText="Short description for word" styleClass="text-area" stylesheets="@css/text-areas.css" wrapText="true">
+            <TextArea fx:id="shortDescArea" disable="true" layoutX="683.0" layoutY="330.0" prefHeight="190.0" prefWidth="210.0" promptText="Short description for word" styleClass="text-area" stylesheets="@css/text-areas.css" wrapText="true">
                <font>
                   <Font size="16.0" />
                </font>

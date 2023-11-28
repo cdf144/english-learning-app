@@ -25,8 +25,7 @@ public class FavoritesController extends SearcherController {
                 Alert.AlertType.CONFIRMATION,
                 "Remove '" + wordTargetLabel.getText() + "' from Favorites?",
                 ButtonType.YES,
-                ButtonType.NO,
-                ButtonType.CANCEL
+                ButtonType.NO
         );
         alert.showAndWait();
 

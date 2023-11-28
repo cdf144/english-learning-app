@@ -9,7 +9,7 @@
 * The current version has about 100.000 vocabulary words, each vocabulary will include both English and Vietnamese
   meanings, and users can add words themselves.
 
-## II. PROJECT DESCRIPTION
+## III. PROJECT DESCRIPTION
 
 ### 1. Basic features
 
@@ -38,7 +38,34 @@ For the current version of the application, we will have the following functions
 
 ### 2. Installation
 
+- Download and install [IntelliJ IDEA](https://www.jetbrains.com/idea/download) (either _Community Edition_ or _Ultimate Edition_ will work)
+- Open IntelliJ IDEA and create a development environment
+  - Click on _Projects > Get from VCS_
+  ![install-get-from-vcs.png](pictures/install-get-from-vcs.png)
+  - Paste the [repository URL](https://github.com/cdf144/english-learning-app.git) into the _URL_ field and click _Clone_ in the bottom right corner
+  ![install-git.png](pictures/install-git.png)
+  - Wait for the cloning process to complete, then click on the project to open
+  ![install-open.png](pictures/install-open.png)
+  - Wait for IntelliJ IDEA's processing to complete, then open the _Project Structure_ window by clicking on _File > Project Structure_ or press _Ctrl + Alt + Shift + S_. In the window, click on _SDK_ field and select any Java 21 JDK. If no SDK is available on your machine, click _Add SDK > Download JDK_ and then download any Java 21 JDK. When all is done, click _OK_
+  ![install-sdk.png](pictures/install-sdk.png)
+  - Open Maven tab in the top right corner and click _Reload All Maven Projects_
+  ![install-maven.png](pictures/install-maven.png)
+- With the development environment set-up, Build and Run the project using the pre-configured Run configurations. There are 2 versions of the app, a *Command Line* version (_DictionaryCommandline_) and a *GUI* version (_DictionaryApplication_)  
+![install-run.png](pictures/install-run.png)
+
 ### 3. Preview
+
+<p float="left" align="middle">
+  <img src="pictures/search.png" width="250" />
+  <img src="pictures/translate.png" width="250" />
+  <img src="pictures/add.png" width="250" />
+</p>
+
+<p float="left" align="middle">
+  <img src="pictures/game-choose.png" width="250" />
+  <img src="pictures/game-shuffle.png" width="250" />
+  <img src="pictures/game-guess.png" width="250" />
+</p>
 
 ## III. CONTACT US
 
@@ -59,14 +86,7 @@ have any suggestions please contact us
   - Nguyễn Nhật Quang - 22028307@vnu.edu.vn
   - Nguyễn Mạnh Quân - 22028171@vnu.edu.vn
 
-## Build từ source
+## IV. ACKNOWLEDGEMENTS
 
-- Tải và cài đặt [IntelliJ IDEA](https://www.jetbrains.com/idea/download)
-- Tạo môi trường lập trình (project) Java từ source bằng **một trong những cách sau**:
-  - *Get from VCS* và GitHub
-  - Tải mã nguồn về máy qua *Download ZIP*
-  - Sử dụng `git clone`
-    ```
-    git clone https://github.com/cdf144/english-learning-app.git "[<directory to clone to>]"
-    ```
-- Bấm chạy 1 trong 2 Run Configuration sẵn có (_DictionaryApplication_ hoặc _DictionaryCommandLine_)
+- All icons are from [Google's Material Symbols](https://fonts.google.com/icons)
+- SQLite database source taken from [yenthanh132](https://github.com/yenthanh132/avdict-database-sqlite-converter)
